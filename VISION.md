@@ -12,7 +12,7 @@ A systematic markdown document flowdown that structures every stage of project d
 - **Project-type-agnostic.** Same flowdown applies to software, hardware, social, and hybrid projects.
 - **AI-optimized by default.** Files are written for an AI primary reader: directive voice, bullets, no filler. MOTIVATION.md is the prose exception, intended for shared human-AI reading.
 - **Concision over explanation.** Files state what is, not what they are about. Reasoning lives in MOTIVATION.md (why) and DECISIONS.md (rationale), not embedded in specs.
-- **HUMAN.md sits outside the flowdown.** Captures the human perspective on the collaboration and explicit human responsibilities. A reference doc in `reference/`, optional and not required for downstream projects; not referenced by INIT.md. Read by AI for workflow context, by humans as self-reminder.
+- **HUMAN.md sits outside the flowdown.** Captures the human perspective on the collaboration and explicit human responsibilities. An optional companion in `ancillary/`, not required for downstream projects; not referenced by INIT.md. Read by AI for workflow context, by humans as self-reminder.
 - **Schema longevity is an experiment.** AI capability is advancing fast enough that this schema could be obsolete in months. The framework's survival, modification, or replacement under rapid AI advancement is itself the experiment's outcome.
 
 ## Objectives

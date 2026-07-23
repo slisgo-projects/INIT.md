@@ -133,5 +133,5 @@ Convergent evolution across the field, visible in INIT.md:
 INIT.md's distinguishing claims relative to peers:
 - **Project-type-agnostic.** Most peers are software-only.
 - **Explicit team-of-one targeting.** Most peers assume teams; RFDs explicitly require them.
-- **HUMAN.md companion.** No peer addresses individual sustainability over multi-year solo work. (HUMAN.md is an optional reference doc, not required for downstream projects.)
+- **HUMAN.md companion.** No peer addresses individual sustainability over multi-year solo work. (HUMAN.md is an optional companion in `ancillary/`, not required for downstream projects.)
 - **Schema-longevity-as-experiment self-awareness.** Most peers assert their structure as final.

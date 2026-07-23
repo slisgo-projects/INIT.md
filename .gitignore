@@ -3,9 +3,9 @@
 !*.md
 !/.gitignore
 
-# Allow the reference/ directory and its markdown files
-!reference/
-!reference/*.md
+# Allow the ancillary/ directory and its markdown files
+!ancillary/
+!ancillary/*.md
 
 # Keep .claude local config out of version control
 .claude/
