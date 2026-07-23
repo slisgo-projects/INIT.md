@@ -1,0 +1,7 @@
+# Ignore everything, then allow only markdown files
+*
+!*.md
+!/.gitignore
+
+# Keep .claude local config out of version control
+.claude/
