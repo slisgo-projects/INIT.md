@@ -12,7 +12,8 @@ Five file groups plus a companion tier:
 - **Sequential** (drafted in order) — `INSPIRATIONS.md`, `ARCHITECTURE.md`, `USE_CASES.md`, `VALIDATION.md`, `IMPLEMENTATION.md`
 - **Cross-cutting** — `GLOSSARY.md`, `CONSTRAINTS.md`, `INTERFACES.md`, `DECISIONS.md`
 - **Scaffolding** — phase-specific working files (see `INIT.md`)
-- **Reference** — seed documents and AI topic reports in `reference/`
+- **Reference** — externally generated seed documents in `reference/`
+- **Reports** — AI-authored topic reports in `reports/`
 
 Companion files (`INIT.md`, `USE_CASE_INIT.md`, `CODING_PRACTICES.md`, `CLAUDE.md`) sit outside the flowdown and govern or accompany it. `HUMAN.md` is an optional companion kept in `ancillary/` to keep the root clean.
 
@@ -32,5 +33,5 @@ Companion files (`INIT.md`, `USE_CASE_INIT.md`, `CODING_PRACTICES.md`, `CLAUDE.m
 
 - **File Updates** — touch the requested file, then propagate logically related updates to maintain self-consistency. Cap propagation at one hop; full consistency sweeps are a separate deliberate act.
 - **Inconsistency Handling** — flag contradictions during drafting and review; do not silently resolve them.
-- **Context refresh** — load foundational + cross-cutting files by default; scaffolding only when implementing the relevant phase; reference only when the session touches the file's topic.
+- **Context refresh** — load foundational + cross-cutting files by default; scaffolding only when implementing the relevant phase; reference and reports only when the session touches the file's topic.
 - **Versioning** — `INIT.md` carries a date-based version stamp; bump on substantive change, not typo fixes.

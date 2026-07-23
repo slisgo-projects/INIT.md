@@ -20,11 +20,12 @@ Five flowdown groups plus a companion tier (per INIT.md §"Project Markdown File
 - **Sequential**: INSPIRATIONS.md, ARCHITECTURE.md, USE_CASES.md, VALIDATION.md, IMPLEMENTATION.md. VALIDATION.md and IMPLEMENTATION.md deliberately skipped for this recursive project (see DECISIONS.md 2026-05-10).
 - **Cross-cutting**: GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md.
 - **Scaffolding**: none in this project.
-- **Reference**: none yet in this project (`reference/`; seed documents + AI topic reports).
+- **Reference**: none yet in this project (`reference/`; seed documents — externally generated inputs).
+- **Reports**: none yet in this project (`reports/`; AI-authored topic reports from mini-investigations).
 - **Companion**: INIT.md, USE_CASE_INIT.md, CODING_PRACTICES.md, CLAUDE.md. (HUMAN.md is an optional companion living in `ancillary/HUMAN.md`, not at root.)
 - **Ancillary**: `ancillary/HUMAN.md` — optional sustainability companion (companion group; registered here per §"Project Markdown Files" Directory layout).
 
-**Context-refresh rule:** load foundational + cross-cutting by default. Scaffolding only when implementing the relevant phase. Reference only when the session touches the file's topic. Companion files load on demand (CLAUDE.md auto-loaded; INIT.md when schema questions arise; HUMAN.md when workflow context is needed; USE_CASE_INIT.md when a use case is being formulated or refined, inline or extracted).
+**Context-refresh rule:** load foundational + cross-cutting by default. Scaffolding only when implementing the relevant phase. Reference and reports only when the session touches the file's topic. Companion files load on demand (CLAUDE.md auto-loaded; INIT.md when schema questions arise; HUMAN.md when workflow context is needed; USE_CASE_INIT.md when a use case is being formulated or refined, inline or extracted).
 
 INIT.md is authoritative for required content per file.
 
