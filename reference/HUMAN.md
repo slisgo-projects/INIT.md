@@ -4,9 +4,9 @@
 
 The homo sapien perspective on AI-human collaboration in this project schema.
 
-Companion to INIT.md. INIT.md specifies what the AI does. HUMAN.md specifies why the human participates in a particular way, and what conditions keep that participation sustainable.
+A reference companion to INIT.md. INIT.md specifies what the AI does. HUMAN.md specifies why the human participates in a particular way, and what conditions keep that participation sustainable.
 
-Not referenced directly by INIT.md. Read by the human (periodically, as a self-reminder) and by the AI (when the user wants context on workflow preferences).
+Not referenced directly by INIT.md and not a required part of the flowdown. Read by the human (periodically, as a self-reminder) and by the AI (when the user wants context on workflow preferences). Optional — downstream projects may omit it.
 
 # Context
 

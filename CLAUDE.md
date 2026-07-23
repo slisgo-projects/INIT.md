@@ -20,10 +20,10 @@ Five flowdown groups plus a companion tier (per INIT.md §"Project Markdown File
 - **Sequential**: INSPIRATIONS.md, ARCHITECTURE.md, USE_CASES.md, VALIDATION.md, IMPLEMENTATION.md. VALIDATION.md and IMPLEMENTATION.md deliberately skipped for this recursive project (see DECISIONS.md 2026-05-10).
 - **Cross-cutting**: GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md.
 - **Scaffolding**: none in this project.
-- **Reference**: none yet in this project (`reference/`; seed documents + AI topic reports).
-- **Companion**: INIT.md, USE_CASE_INIT.md, HUMAN.md, CODING_PRACTICES.md, CLAUDE.md.
+- **Reference**: `reference/HUMAN.md` (optional sustainability companion; seed documents + AI topic reports not yet present in this project).
+- **Companion**: INIT.md, USE_CASE_INIT.md, CODING_PRACTICES.md, CLAUDE.md.
 
-**Context-refresh rule:** load foundational + cross-cutting by default. Scaffolding only when implementing the relevant phase. Reference only when the session touches the file's topic. Companion files load on demand (CLAUDE.md auto-loaded; INIT.md when schema questions arise; HUMAN.md when workflow context is needed; USE_CASE_INIT.md when a use case is being formulated or refined, inline or extracted).
+**Context-refresh rule:** load foundational + cross-cutting by default. Scaffolding only when implementing the relevant phase. Reference only when the session touches the file's topic (HUMAN.md loads when workflow context is needed). Companion files load on demand (CLAUDE.md auto-loaded; INIT.md when schema questions arise; USE_CASE_INIT.md when a use case is being formulated or refined, inline or extracted).
 
 INIT.md is authoritative for required content per file.
 
@@ -31,7 +31,7 @@ INIT.md is authoritative for required content per file.
 
 **Deliverable files** (the spec being authored):
 - **INIT.md** — authoritative spec for the project markdown hierarchy. Read first.
-- **HUMAN.md** — companion to INIT.md. Human side of the collaboration and sustainability rationale. Not referenced by INIT.md.
+- **HUMAN.md** — optional reference companion to INIT.md (lives in `reference/`). Human side of the collaboration and sustainability rationale. Not referenced by INIT.md; not a required part of the flowdown.
 - **CODING_PRACTICES.md** — behavioral guidelines copied into downstream projects' CLAUDE.md per INIT.md §"CLAUDE.md Bootstrap."
 - **USE_CASE_INIT.md** — universal use-case formulation protocol. Governs every use case specification: formulated inline in `USE_CASES.md` by default; extracted to its own `USE_CASE_<identifier>.md` only when an individual case grows unwieldy (length-triggered; protocol identical either way). Defines universal foundational elements plus a section per category (A–F); AI selects primary and optional secondary category from the user's description and applies the corresponding structure.
 
@@ -46,7 +46,7 @@ INIT.md is authoritative for required content per file.
 **Edits follow the rules INIT.md itself defines.** Specifically:
 
 - AI-optimized files (everything except MOTIVATION.md): directive voice, bullets over prose, no embedded rationale, no filler. See INIT.md §"Writing Style for AI-Optimized Files."
-- HUMAN.md is prose for a human reader and exempt from the AI-optimization rules, except for the "Human Responsibilities" list near its top.
+- `reference/HUMAN.md` is prose for a human reader and exempt from the AI-optimization rules, except for the "Human Responsibilities" list near its top.
 
 **File Updates rule** (INIT.md §"File Updates"): when changing one file, propagate logically related updates to other files. Cap propagation at one hop. Report what was propagated. Full consistency sweeps are a separate deliberate act.
 

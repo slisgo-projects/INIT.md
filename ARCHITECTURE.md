@@ -43,7 +43,7 @@ Auto-load entry point per project: CODING_PRACTICES contents + taxonomy stub inj
 
 ### 6. Human companion (HUMAN.md)
 
-Sustainability framing, human responsibilities list, prose argument for team-of-one solo work over multi-year timeframes. Sits outside the flowdown — not referenced from INIT.md.
+Sustainability framing, human responsibilities list, prose argument for team-of-one solo work over multi-year timeframes. A reference doc in `reference/`, optional — not required for downstream projects. Sits outside the flowdown — not referenced from INIT.md.
 
 - **Depends on:** team-of-one targeting in VISION.md.
 - **Risk:** obsolete if team-of-one assumption breaks. Otherwise the most enduring element — sustainability concerns persist regardless of AI capability shifts.
