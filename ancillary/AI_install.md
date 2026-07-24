@@ -66,7 +66,7 @@ Pull the cloud model stub so your local Ollama knows how to route requests to th
 
 ```bash
 ollama pull glm-5.2:cloud
-ollama pull 
+ollama pull gemma4:31b-cloud
 ```
 
 This downloads only a small routing stub — not a multi-gigabyte model file — because the actual model runs on Ollama's cloud.
