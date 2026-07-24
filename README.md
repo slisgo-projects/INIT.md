@@ -6,7 +6,7 @@ A meta-specification for AI–human collaboration on a project.
 
 The files are primarily optimized for an AI assistant to read, with the deliberate exception of `MOTIVATION.md` (prose for the human).
 
-This repository is also structured recursively per its own schema: the spec is the deliverable and also a project defined by the spec.
+This repository is structured recursively per its own schema: the spec is the deliverable and also a project defined by the spec.
 
 ## The document flowdown
 
