@@ -1,27 +1,34 @@
 # INIT.md
 
-A meta-specification for AI–human collaboration on a project. `INIT.md` defines a markdown hierarchy that captures a project's scope, objectives, architecture, and rationale as a coherent "flowdown" — structured files drafted in order, optimized primarily for an AI assistant to re-ingest in future sessions, with the deliberate exception of `MOTIVATION.md` (prose for the human).
+A meta-specification for AI–human collaboration on a project. 
 
-This repository is also structured per its own schema: the spec is the deliverable and the first project applying it. There is no code, build, or tests — the deliverables are these markdown files.
+`INIT.md` defines a markdown hierarchy that captures a project's scope, objectives, architecture, and rationale as a coherent "flowdown" — structured files drafted in a specified order. 
 
-## The flowdown
+The files are primarily optimized for an AI assistant to read, with the deliberate exception of `MOTIVATION.md` (prose for the human).
 
-Five file groups plus a companion tier:
+This repository is also structured recursively per its own schema: the spec is the deliverable and also a project defined by the spec.
+
+## The document flowdown
+
+Seven file groups and a companion tier:
 
 - **Foundational** — `VISION.md`, `MOTIVATION.md`
 - **Sequential** (drafted in order) — `INSPIRATIONS.md`, `ARCHITECTURE.md`, `USE_CASES.md`, `VALIDATION.md`, `IMPLEMENTATION.md`
 - **Cross-cutting** — `GLOSSARY.md`, `CONSTRAINTS.md`, `INTERFACES.md`, `DECISIONS.md`
-- **Scaffolding** — phase-specific working files (see `INIT.md`)
+- **Scaffolding** — phase-specific working files (see `INIT.md`) in scaffolding/
 - **Reference** — externally generated seed documents in `reference/`
 - **Reports** — AI-authored topic reports in `reports/`
+- **Ancillary** — All project files that do not fit into the above scheme live in `ancillary/`
 
-Companion files (`INIT.md`, `USE_CASE_INIT.md`, `CODING_PRACTICES.md`, `CLAUDE.md`) sit outside the flowdown and govern or accompany it. 
+Companion files (`INIT.md`, `USE_CASE_INIT.md`, `CODING_PRACTICES.md`, `CLAUDE.md`, `README.md`) sit outside the flowdown and govern or accompany it. 
 
 ## Initializing a new project
 
 > **The only files from this repo that you need: `INIT.md`, `USE_CASE_INIT.md`, and `CODING_PRACTICES.md`.** 
 
-`INIT.md` is authoritative and controls the document flowdown. Steps:
+`INIT.md` is authoritative and controls the document flowdown. 
+
+Steps:
 
 1. **Copy in the spec.** Put `INIT.md`, `USE_CASE_INIT.md`, and `CODING_PRACTICES.md` into the new project's directory. 
 2. **Set the AI tool to "auto" mode.** Otherwise, you have to answer endless premission requests. For Claude Code in a Linux terminal, press SHIFT+TAB until it says "auto mode on" at the bottom of the window.
@@ -34,3 +41,7 @@ Companion files (`INIT.md`, `USE_CASE_INIT.md`, `CODING_PRACTICES.md`, `CLAUDE.m
 - **Inconsistency Handling** — flag contradictions during drafting and review; do not silently resolve them.
 - **Context refresh** — load foundational + cross-cutting files by default; scaffolding only when implementing the relevant phase; reference and reports only when the session touches the file's topic.
 - **Versioning** — `INIT.md` carries a date-based version stamp; bump on substantive change, not typo fixes.
+
+## AI installation
+
+Instructions for installing and executing the AI are in `ancillary/AI_install.md`.
