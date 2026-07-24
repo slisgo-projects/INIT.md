@@ -32,16 +32,18 @@ Steps:
 
 1. **Copy in the spec.** Put `INIT.md`, `USE_CASE_INIT.md`, and `CODING_PRACTICES.md` into the new project's directory. 
 2. **Set the AI tool to "auto" mode.** Otherwise, you have to answer endless premission requests. For Claude Code in a Linux terminal, press SHIFT+TAB until it says "auto mode on" at the bottom of the window.
-3. **Provide a vision.** Give intialization instructions to the AI: "Please read INIT.md in the current directory. I would like to create a new project because: (1) ... (2) ... (3) ... . The following are the desired deliverables: (a) ... (b) ... (c) ... ." Alternatively, you can put the seed information in a file in `reference/` and ask the AI to read it. If you don't want to provide a project description beforehand, the AI leads a structured interview before drafting anything.
-4. **Draft one sequential file at a time.** The AI will lead the user through the INIT.md project specification, first proposing a draft of `INSPIRATIONS.md` ("prior art" from its training data or a web search) for review; and then advancing one file at a time for the document flowdown, confirming satisfaction before proceeding.  The AI is instructed to ask about (don't ghost-write) judgment-heavy content; flagging inconsistencies rather than silently resolving them.
+3. **Provide a vision.** Give intialization instructions to the AI: "Please read INIT.md in the current directory. I would like to create a new project because: (1) ... (2) ... (3) ... . The following are the desired deliverables: (a) ... (b) ... (c) ... ." Alternatively, you can put the seed information in a file in `reference/` and ask the AI to read it. If you don't want to provide a project description beforehand, the AI will lead a structured interview (untested).
+4. **One sequential file is drafted at a time.** The AI will lead the user through the INIT.md project specification, first proposing a draft of `INSPIRATIONS.md` ("prior art" from its training data or a web search) for review; and then advancing one file at a time for the document flowdown, confirming satisfaction before proceeding.  The AI is instructed to ask about (don't ghost-write) judgment-heavy content; flagging inconsistencies rather than silently resolving them.
 
-## Working rules
+For a complex and ambitious project with steady back-and-forth between the human and the AI, the setup process can take several hours. 
 
-- **File Updates** — touch the requested file, then propagate logically related updates to maintain self-consistency. Cap propagation at one hop; full consistency sweeps are a separate deliberate act.
+## Document scheme working rules for the AI
+
+- **File Updates** — touch the requested file, then propagate logically related updates to maintain self-consistency. Cap propagation at one hop; full consistency sweeps are a separate deliberate act initiated by the user, i.e. "Please read all project files and check for self-consistency".
 - **Inconsistency Handling** — flag contradictions during drafting and review; do not silently resolve them.
 - **Context refresh** — load foundational + cross-cutting files by default; scaffolding only when implementing the relevant phase; reference and reports only when the session touches the file's topic.
-- **Versioning** — `INIT.md` carries a date-based version stamp; bump on substantive change, not typo fixes.
+- **Versioning** — `INIT.md` carries author information and a date-based version stamp; bump on substantive change, not typo fixes.
 
 ## AI installation
 
-Instructions for installing and executing the AI are in `ancillary/AI_install.md`.
+Instructions for installing and executing an AI are in `ancillary/AI_install.md`.
