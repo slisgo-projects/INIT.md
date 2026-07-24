@@ -15,7 +15,7 @@ Seven file groups and a companion tier:
 - **Foundational** — `VISION.md`, `MOTIVATION.md`
 - **Sequential** (drafted in order) — `INSPIRATIONS.md`, `ARCHITECTURE.md`, `USE_CASES.md`, `VALIDATION.md`, `IMPLEMENTATION.md`
 - **Cross-cutting** — `GLOSSARY.md`, `CONSTRAINTS.md`, `INTERFACES.md`, `DECISIONS.md`
-- **Scaffolding** — phase-specific working files (see `INIT.md`) in scaffolding/
+- **Scaffolding** — phase/stage-specific working files (see `INIT.md`) in scaffolding/
 - **Reference** — externally generated seed documents in `reference/`
 - **Reports** — AI-authored topic reports in `reports/`
 - **Ancillary** — All project files that do not fit into the above scheme live in `ancillary/`
