@@ -11,24 +11,31 @@ This guide uses a **cloud** model (`glm-5.2:cloud`). Cloud models run on Ollama'
 ## 1. Install Ollama
 
 ### Windows
+
 1. Download the installer from <https://ollama.com/download> and run it.
 2. Ollama installs as a background service (`Ollama.exe`) and starts automatically. Confirm it is running — an Ollama icon appears in the system tray.
 3. Open a terminal (PowerShell or Command Prompt) and verify:
+   
    ```powershell
    ollama --version
    ```
 
 ### Linux
+
 1. Install with the official script:
+   
    ```bash
    curl -fsSL https://ollama.com/install.sh | sh
    ```
 2. Start the Ollama server (most installs start it automatically; if not):
+   
    ```bash
    ollama serve
    ```
+   
    (Run this in its own terminal, or as a background service per your distro's conventions.)
-4. Verify in a second terminal:
+3. Verify in a second terminal:
+   
    ```bash
    ollama --version
    ```
@@ -42,6 +49,7 @@ Ollama needs version **0.14.0 or later** for Anthropic-API compatibility (requir
 Ollama accounts are free.
 
 1. In your terminal, run:
+   
    ```bash
    ollama signin
    ```
@@ -52,26 +60,31 @@ To confirm later, run `ollama signin` again — it will report you are already c
 
 ---
 
-## 3. Pull the `glm-5.2:cloud` model
+## 3. Pull the Ollama models
 
 Pull the cloud model stub so your local Ollama knows how to route requests to the cloud:
 
 ```bash
 ollama pull glm-5.2:cloud
+ollama pull 
 ```
 
 This downloads only a small routing stub — not a multi-gigabyte model file — because the actual model runs on Ollama's cloud.
 
 > **If the pull fails with "model not found":** the exact tag may differ. List available tags from the cloud registry and adjust:
+> 
 > ```bash
 > curl -s https://ollama.com/api/tags
 > ```
+> 
 > Look for a `glm-5.2` entry with a `cloud` tag and use that exact name in place of `glm-5.2:cloud` throughout this guide.
 
 Verify the model is available locally:
+
 ```bash
 ollama list
 ```
+
 You should see `glm-5.2:cloud` in the list.
 
 ---
@@ -79,19 +92,25 @@ You should see `glm-5.2:cloud` in the list.
 ## 4. Install Claude Code
 
 ### Linux
+
 ```bash
 curl -fsSL https://claude.ai/install.sh | bash
 ```
+
 Then verify:
+
 ```bash
 claude --version
 ```
 
 ### Windows (PowerShell)
+
 ```powershell
 irm https://claude.ai/install.ps1 | iex
 ```
+
 Then verify:
+
 ```powershell
 claude --version
 ```
@@ -119,6 +138,7 @@ claude
 This is the invocation used to run Claude Code for this project (with the base URL on Ollama's default port). It requires Ollama running and reachable at `http://localhost:11434`, and both models pulled (see step 3 — pull `gemma4:31b-cloud` the same way if it is not already present: `ollama pull gemma4:31b-cloud`).
 
 What each variable does:
+
 - `ANTHROPIC_BASE_URL=http://localhost:11434` — routes Claude Code's requests to the local Ollama server, which forwards cloud-model requests to Ollama's cloud.
 - `ANTHROPIC_AUTH_TOKEN=ollama` — a bearer token Ollama ignores but Claude Code requires, so it does not fall back to a paid Anthropic subscription login.
 - `ANTHROPIC_MODEL=glm-5.2:cloud` — the primary model Claude Code uses for your requests.
@@ -127,9 +147,11 @@ What each variable does:
 ### Method B — `ollama launch` (fallback if you have a recent Ollama)
 
 From your project directory:
+
 ```bash
 ollama launch claude --model glm-5.2:cloud
 ```
+
 This starts Ollama (if not already running), points Claude Code at it, and sets the model in one command. It does not set the small/fast model separately, so background tasks will use the default — Method A is preferred for that reason.
 
 ### Method C — manual environment variables, exported (fallback)
@@ -137,6 +159,7 @@ This starts Ollama (if not already running), points Claude Code at it, and sets 
 Use this if you prefer to export the variables rather than pass them inline (Method A). Set the variables that route Claude Code at Ollama and map it to the cloud model, then run `claude`.
 
 **Linux / macOS (bash):**
+
 ```bash
 export ANTHROPIC_BASE_URL="http://localhost:11434"
 export ANTHROPIC_AUTH_TOKEN="ollama"
@@ -149,6 +172,7 @@ claude
 ```
 
 **Windows (PowerShell):**
+
 ```powershell
 $env:ANTHROPIC_BASE_URL = "http://localhost:11434"
 $env:ANTHROPIC_AUTH_TOKEN = "ollama"
@@ -161,6 +185,7 @@ claude
 ```
 
 Additional variables (Method C only):
+
 - `ANTHROPIC_API_KEY` — explicitly emptied to avoid "model not found" errors from subscription precedence.
 - `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` — prevents "unexpected beta header" errors when using a non-Anthropic backend.
 

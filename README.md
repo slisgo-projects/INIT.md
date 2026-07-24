@@ -15,19 +15,18 @@ Five file groups plus a companion tier:
 - **Reference** — externally generated seed documents in `reference/`
 - **Reports** — AI-authored topic reports in `reports/`
 
-Companion files (`INIT.md`, `USE_CASE_INIT.md`, `CODING_PRACTICES.md`, `CLAUDE.md`) sit outside the flowdown and govern or accompany it. `HUMAN.md` is an optional companion kept in `ancillary/` to keep the root clean.
+Companion files (`INIT.md`, `USE_CASE_INIT.md`, `CODING_PRACTICES.md`, `CLAUDE.md`) sit outside the flowdown and govern or accompany it. 
 
 ## Initializing a new project
 
-> **The artifacts to copy or follow into a downstream project are `INIT.md`, `USE_CASE_INIT.md`, and `CODING_PRACTICES.md`.** These three files are the spec. A downstream project sets itself up by taking them and filling in its own flowdown files. (`HUMAN.md` is optional — it lives in `ancillary/` as a sustainability companion, not a required part of the flowdown.)
+> **The only files from this repo that you need: `INIT.md`, `USE_CASE_INIT.md`, and `CODING_PRACTICES.md`.** 
 
-`INIT.md` is authoritative. The summary below captures the entry protocol; read `INIT.md` itself before drafting.
+`INIT.md` is authoritative and controls the document flowdown. Steps:
 
-1. **Copy in the spec.** Take `INIT.md`, `USE_CASE_INIT.md`, and `CODING_PRACTICES.md` into the new project's directory. Optionally also copy `ancillary/HUMAN.md` if you want the sustainability framing.
-2. **Provide a vision.** On first invocation ("Let's set up a project") supply `VISION.md` (as a file or prompt content), initial suggestions on inspirations/architecture/implementation, and optionally seed documents in `reference/`. If you arrive without `VISION.md`, the AI elicits it by structured interview before drafting anything.
-3. **Bootstrap `CLAUDE.md`.** Populate it with (a) the coding behavioral guidelines from `CODING_PRACTICES.md`, (b) a markdown-hierarchy stub listing the file groups and the context-refresh rule, and (c) a version stamp: `Initialized against INIT.md version: YYYY-MM-DD`.
-4. **Create placeholders.** Create empty placeholder files for the cross-cutting files (`GLOSSARY.md`, `CONSTRAINTS.md`, `INTERFACES.md`, `DECISIONS.md`) and `MOTIVATION.md`, to be populated as the project progresses.
-5. **Draft one sequential file at a time.** The AI proposes a draft of `INSPIRATIONS.md` first for review; advance one file at a time, confirming satisfaction before proceeding. Do not generate all sequential files at once. Elicit (don't ghost-write) judgment-heavy content; flag inconsistencies rather than silently resolving them.
+1. **Copy in the spec.** Put `INIT.md`, `USE_CASE_INIT.md`, and `CODING_PRACTICES.md` into the new project's directory. 
+2. **Set the AI tool to "auto" mode.** Otherwise, you have to answer endless premission requests. For Claude Code in a Linux terminal, press SHIFT+TAB until it says "auto mode on" at the bottom of the window.
+3. **Provide a vision.** Give intialization instructions to the AI: "Please read INIT.md in the current directory. I would like to create a new project because: (1) ... (2) ... (3) ... . The following are the desired deliverables: (a) ... (b) ... (c) ... ." Alternatively, you can put the seed information in a file in `reference/` and ask the AI to read it. If you don't want to provide a project description beforehand, the AI leads a structured interview before drafting anything.
+4. **Draft one sequential file at a time.** The AI will lead the user through the INIT.md project specification, first proposing a draft of `INSPIRATIONS.md` ("prior art" from its training data or a web search) for review; and then advancing one file at a time for the document flowdown, confirming satisfaction before proceeding.  The AI is instructed to ask about (don't ghost-write) judgment-heavy content; flagging inconsistencies rather than silently resolving them.
 
 ## Working rules
 
