@@ -1,6 +1,6 @@
 # INIT.md
 
-A meta-specification for AI–human collaboration on project setup. `INIT.md` defines a markdown hierarchy that captures a project's scope, objectives, architecture, and rationale as a coherent "flowdown" — structured files drafted in order, optimized primarily for an AI assistant to re-ingest in future sessions, with the deliberate exception of `MOTIVATION.md` (prose for the human).
+A meta-specification for AI–human collaboration on a project. `INIT.md` defines a markdown hierarchy that captures a project's scope, objectives, architecture, and rationale as a coherent "flowdown" — structured files drafted in order, optimized primarily for an AI assistant to re-ingest in future sessions, with the deliberate exception of `MOTIVATION.md` (prose for the human).
 
 This repository is also structured per its own schema: the spec is the deliverable and the first project applying it. There is no code, build, or tests — the deliverables are these markdown files.
 
