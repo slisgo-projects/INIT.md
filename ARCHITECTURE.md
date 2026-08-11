@@ -6,16 +6,16 @@ Logical breakdown of INIT.md-as-a-project. The "elements" are the conceptual bui
 
 Each element with its interdependencies (→ depends on) and element-specific risks. Interface contracts at the boundaries between elements live in INTERFACES.md and are not duplicated here.
 
-### 1. File taxonomy (five-group classification)
+### 1. File taxonomy (seven-group classification)
 
-Foundational / sequential / cross-cutting / scaffolding / reference. Each group has a distinct loading pattern: always-on / loaded-in-order during setup / consulted-on-demand throughout / phase-only-during-implementation / topic-triggered.
+Foundational / sequential / cross-cutting / scaffolding / reference / reports / continuity. Each group has a distinct loading pattern: always-on / loaded-in-order during setup / consulted-on-demand throughout / phase-only-during-implementation / topic-triggered / topic-triggered / user-pulled for the work area being resumed.
 
 - **Depends on:** nothing. Top of the architecture.
-- **Risk:** if AI context windows become effectively unlimited and lost-in-the-middle degradation disappears, the loading-pattern argument weakens. Taxonomy collapses to "everything always loaded."
+- **Risk:** if AI context windows become effectively unlimited and lost-in-the-middle degradation disappears, the loading-pattern argument weakens. Taxonomy collapses to "everything always loaded." Partial exception: the continuity group is motivated by sessions ending, not by window size, and survives that collapse.
 
 ### 2. Per-file specifications
 
-Required-content templates for each file in the taxonomy (VISION, MOTIVATION, INSPIRATIONS, ARCHITECTURE, USE_CASES, USE_CASE_INIT, VALIDATION, IMPLEMENTATION, GLOSSARY, CONSTRAINTS, INTERFACES, DECISIONS, scaffolding, reference).
+Required-content templates for each file in the taxonomy (VISION, MOTIVATION, INSPIRATIONS, ARCHITECTURE, USE_CASES, USE_CASE_INIT, VALIDATION, IMPLEMENTATION, GLOSSARY, CONSTRAINTS, OPERATIONS, INTERFACES, DECISIONS, scaffolding, reference, reports, continuity).
 
 - **Depends on:** taxonomy (1).
 - **Risk:** if AI improves at inferring required content from minimal seeds, detailed specs become overhead. Currently load-bearing because consistency across projects depends on them.

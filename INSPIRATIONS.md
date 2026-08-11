@@ -88,7 +88,7 @@ Older structures that organize project knowledge for human readers. Categorical 
 - **What:** Four-quadrant taxonomy of technical documentation: tutorials (learning), how-to guides (problem-solving), reference (information), explanation (understanding). Adopted by Canonical, Django.
 - **Borrow:** Categorical sorting by reader need rather than subject matter; explicit acknowledgment that one document cannot serve all purposes.
 - **Avoid:** Software-documentation-specific framing; quadrants map onto AI-optimized files imperfectly.
-- **Relevance:** Inspired INIT.md's group classification (foundational / sequential / cross-cutting / scaffolding / reference) — purposes differ but the category-by-role idea is the same.
+- **Relevance:** Inspired INIT.md's group classification (§"Project Markdown Files") — purposes differ but the category-by-role idea is the same.
 
 ### arc42
 - **Link:** [arc42.org](https://arc42.org/)

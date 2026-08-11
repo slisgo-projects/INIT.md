@@ -1,8 +1,8 @@
 # INIT.md
 
-**Authors:** S. Lisgo, Opus 4.7, Fable 5
+**Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5
 
-**Version:** 2026-07-23 (date of last substantive change; see §"Versioning")
+**Version:** 2026-08-10 (date of last substantive change; see §"Versioning")
 
 Guidance for the AI assistant on drafting and maintaining the markdown files that define a project.
 
@@ -53,10 +53,12 @@ When the user requests a change mid-project: touch the requested file, then prop
 - VALIDATION.md — V&V criteria affected.
 - GLOSSARY.md — terms that gain, lose, or shift meaning.
 - CONSTRAINTS.md — constraints added, relaxed, or now violated.
+- OPERATIONS.md — hosts, access paths, runtime environments, or deploy steps affected.
 - DECISIONS.md — when the edit is a choice with alternatives worth recording.
 - VISION.md / MOTIVATION.md — guideposts or rationale affected.
 - INSPIRATIONS.md — rarely a propagation target; include only if an inspiration's borrow / avoid / relevance assessment is materially affected.
 - `reports/` topic reports — rarely a propagation target; mark a report superseded when an edit overturns its findings.
+- `handover/` continuity files — the file for the affected work area, when the edit changes its current state or roadmap.
 
 Skip unchanged candidates silently. Surface uncertain cases per §"Inconsistency Handling."
 
@@ -79,11 +81,13 @@ Date-based, not semantic. Per-change rationale lives in DECISIONS.md; downstream
 
 When the user asks for a re-read to refresh context, also re-read by default:
 - All **foundational files** (VISION.md, MOTIVATION.md), as these establish what the project is and why it is worth doing.
-- All **cross-cutting files** (GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md), as these apply everywhere.
+- All **cross-cutting files** (GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md, and OPERATIONS.md where the project has one), as these apply everywhere.
 
 **Do NOT** read scaffolding files on context refresh. They are working artifacts. Read them only when implementing the relevant phase. After a phase completes, the scaffolding file is moved to `scaffolding/integrated/` per §"Scaffolding Files," not deleted.
 
 **Do NOT** read reference or report files on context refresh. Load a seed document or topic report only when the session touches its topic (see §"Reference Files" and §"Report Files").
+
+**Do NOT** read continuity files on context refresh. The user pulls the `handover/` file for the work area being resumed into context; loading every area's file defeats the group's purpose (see §"Continuity Files").
 
 # Stopping Criteria
 
@@ -102,7 +106,7 @@ Repeatable operational procedures — executing a software package, accessing a 
 - **Trigger:** when a session works out, or re-derives, such a procedure, capture it as a skill in the same session. Do not wait to be asked. Re-derivation is a mandatory trigger.
 - **Location:** `.claude/skills/<name>/SKILL.md` in the project directory. Project-scoped, not `$HOME/.claude/`.
 - **Content:** imperative how-to — commands, parameters, prerequisites, failure modes encountered. No secrets; point to credential locations instead.
-- **Boundary:** skills hold procedures (how to do); `reports/` topic reports hold findings (what was learned). See §"Report Files."
+- **Boundary:** skills hold procedures (how to do); `reports/` topic reports hold findings (what was learned); OPERATIONS.md holds standing facts (what exists, where, who reaches it). A skill for reaching a host cites OPERATIONS.md for the host's identity and access rules rather than restating them. See §"Report Files" and §"OPERATIONS.md."
 - **Coupling:** vendor-coupled to the Claude Code skills convention, as with §"CLAUDE.md Bootstrap."
 
 # Writing Style for AI-Optimized Files
@@ -143,8 +147,9 @@ CLAUDE.md is auto-loaded every session. Populate it once during project setup wi
 1. **Coding behavioral guidelines.** Copy the contents of CODING_PRACTICES.md (separate file), merging with any project-specific guidance.
 
 2. **Markdown hierarchy stub.** A short index of the project's markdown files so the AI knows the schema without re-reading INIT.md every session. The stub contains:
-   - The five file groups (foundational, sequential, cross-cutting, scaffolding, reference) and which files belong to each.
-   - The context-refresh rule (foundational + cross-cutting by default; scaffolding only when implementing the relevant phase; reference only when the session touches the topic).
+   - The seven file groups (foundational, sequential, cross-cutting, scaffolding, reference, reports, continuity) and which files belong to each.
+   - The context-refresh rule (foundational + cross-cutting by default; scaffolding only when implementing the relevant phase; reference and reports only when the session touches the topic; continuity only for the work area being resumed, pulled in by the user).
+   - The names of the active `handover/` continuity files and the work area each covers, so a session knows which one to ask for.
    - A pointer to INIT.md as the authoritative source for required content per file.
 
 3. **INIT.md version stamp.** One line near the top of CLAUDE.md: `Initialized against INIT.md version: YYYY-MM-DD`. Records the version of INIT.md the project was bootstrapped against. Updated when the project is re-bootstrapped against a newer INIT.md (see §"Versioning").
@@ -153,16 +158,17 @@ Keep the stub to names, groups, and the refresh rule. Per-file required content 
 
 # Project Markdown Files
 
-Six flowdown groups plus a companion tier:
+Seven flowdown groups plus a companion tier:
 - **Foundational files** anchor the human side of the project. Read by AI on context refresh because they establish what the project is and why it is worth doing. VISION.md is AI-optimized and compressed; MOTIVATION.md is prose for the human reader and not AI-optimized. Rare — most projects need at most one or two.
 - **Sequential files** follow the flowdown, general to specific. Drafted in order during project setup. AI-optimized.
-- **Cross-cutting files** are consulted and updated throughout the project lifecycle. Not part of the linear flowdown. AI-optimized.
+- **Cross-cutting files** are consulted and updated throughout the project lifecycle. Not part of the linear flowdown. AI-optimized. OPERATIONS.md joins the group once the project has deployed hosts or physical devices.
 - **Scaffolding files** capture implementation-detail design work (concepts, open questions, code templates) for a phase or subsystem. Markdown files that grow from concept to code during the planning phase. Moved to `scaffolding/integrated/` once implementation begins, preserved as historical record (as-designed state, not current truth). Not read on context refresh — only when implementing the relevant phase.
 - **Reference files** hold externally generated background material in `reference/`: seed documents gathered around project inception (inputs to VISION.md and MOTIVATION.md). Stored as-is. Loaded when a session touches the relevant topic; not read on context refresh.
 - **Report files** hold AI-authored write-ups of mini-studies or investigations in `reports/`: topic reports from mini-investigations during project execution. Self-updating, status-tracked, cited from the flowdown file where load-bearing. Loaded when a session touches the relevant topic; not read on context refresh.
+- **Continuity files** hold per-work-area session-continuity records in `handover/`: the state a new session needs to resume a work area that spans many context windows. Current state, roadmap with per-job status, dated session log, traps. Self-updating; drained to the governed files as work lands; retired to `handover/closed/`. Loaded when the user pulls the file for the area being resumed; not read on context refresh.
 - **Companion files** sit outside the flowdown. Schema-level artifacts that govern or accompany the flowdown rather than participate in it: INIT.md (this spec), USE_CASE_INIT.md (universal use-case formulation protocol; governs USE_CASES.md content inline and in any extracted daughter file), HUMAN.md (optional sustainability companion; lives in `ancillary/` when present, not a required part of the flowdown), CODING_PRACTICES.md (downstream coding-behavior template), CLAUDE.md (auto-load bootstrap stub). Not subject to the flowdown's loading patterns; loaded on demand or per the auto-load convention of the host AI tool.
 
-Additional project files may be defined and classified into one of the five flowdown groups. The companion tier is reserved for schema-level companions, not for per-project content.
+Additional project files may be defined and classified into one of the seven flowdown groups. The companion tier is reserved for schema-level companions, not for per-project content.
 
 **Directory layout.** Classification determines a file's flowdown group and therefore its loading and context-refresh behavior; it is independent of physical path. Flowdown and companion files live at the project root by default. Classified files that would clutter the root may instead live in an `ancillary/` subdirectory — they keep their flowdown group and all its rules (a cross-cutting file in `ancillary/` is still re-read on context refresh). Every `ancillary/` file is registered in the CLAUDE.md markdown-hierarchy stub with its group and path; cross-doc references are path-qualified so they resolve. INIT.md governs only flowdown, companion, and `ancillary/` files; files that are none of these are handled by per-project direction, not this spec.
 
@@ -286,6 +292,26 @@ Cross-cutting constraints and project-wide risks that do not belong to any singl
 - Regulatory boundaries that apply project-wide.
 - Cybersecurity strategy.
 - Project-wide risks: vendor dependencies, supply chain, technology obsolescence, funding/staffing cliffs.
+
+### OPERATIONS.md
+
+Deployed topology and the rules for reaching it. The standing facts a session needs before it touches anything real: what exists, where it runs, how it is reached, how a change gets there.
+
+Created when the project acquires its first deployed host, device, or account — not at Entry Protocol. Projects with nothing deployed have no OPERATIONS.md.
+
+- **Resource inventory.** Per host, device, or account: name, address, role, and what runs on it.
+- **Access.** How a session reaches each resource: alias, user, auth mode. Divergences from the obvious (a login name that differs from the operator's, a host reachable only from one machine) are load-bearing — state them.
+- **Runtime environments.** Interpreter, environment, and service-manager units per resource, where they differ across resources.
+- **Change path.** The write point, how a change propagates to each resource, what restarts it, how it is rolled back.
+- **Physical facts that bind a session.** Exclusive devices, power and thermal limits, throttling, storage that cannot be relied on.
+- **Credential locations.** Paths and key names only. Never values.
+- **Prohibitions.** Actions a session must not take against a resource, and why.
+
+Rules:
+- Cross-cutting: re-read on context refresh alongside GLOSSARY/CONSTRAINTS/INTERFACES/DECISIONS.
+- **Self-updating.** When a session changes topology, access, environment, or change path, update the entry in the same edit batch. Do not wait to be asked. Mirrors the self-updating rule in §"IMPLEMENTATION.md."
+- **Boundary.** CONSTRAINTS.md holds project-wide limits and risks; INTERFACES.md holds contracts between elements; a skill holds an executable procedure; OPERATIONS.md holds the standing facts those three refer to. A fact recorded here is not restated in a skill — the skill cites it.
+- **Divergence is an inconsistency.** If a resource behaves differently from what is recorded, surface it per §"Inconsistency Handling." Do not silently rewrite the entry to match.
 
 ### INTERFACES.md
 
@@ -450,3 +476,32 @@ Rules:
 - Report files persist; they do not move or integrate. When findings are overturned, mark the report superseded with a pointer — do not delete.
 - Durable decisions arising from a report go to DECISIONS.md. The report supplements DECISIONS.md, does not replace it.
 - **Self-updating:** when a session completes an investigation worth reusing, write the topic report without being asked. Mirrors the self-updating rule in §"IMPLEMENTATION.md."
+
+## Continuity Files
+
+Files in `handover/` carrying the state a new session needs to resume a work area that outlives a single context window. One file per active work area, named `handover/<area>.md`.
+
+The governed files record what the project decided and what it is. A continuity file records where the work got to — the running state between them.
+
+Per continuity file:
+- **Area and scope.** What this file owns, and which sibling areas it does not.
+- **Current state.** What is done, what is live, what is deferred. The first thing a resuming session reads.
+- **Roadmap.** Remaining jobs in dependency order, each with a status: pending / blocked (on what) / done (with the commit or artifact reference).
+- **Session log.** Dated entries: what was attempted, what landed, what was learned.
+- **Traps.** Failure modes that cost a session's time and are not visible in the code or the governed files. Stated as the check to run, not the story.
+- **Pointers.** The governed files this area's work updates.
+
+Rules:
+- Not read on context refresh. The user pulls in the file for the area being resumed. A session that needs one and has not been given it asks by name rather than loading every area.
+- Spawn a new file when a work area separates out; cross-reference siblings rather than duplicating their content. Standing operational fact belongs in OPERATIONS.md, cited from here.
+- **Drain rule.** As each session closes, promote durable content to the file that owns it: rationale → DECISIONS.md, phase status → IMPLEMENTATION.md, contracts → INTERFACES.md, topology and access → OPERATIONS.md. Compact the drained session-log entry to a one-line pointer. The continuity file supplements the governed files; it does not replace them, and unbounded growth means the drain is not happening.
+- **Self-updating.** Write the session entry and advance the roadmap statuses at the end of a working session, unprompted. Mirrors the self-updating rule in §"IMPLEMENTATION.md."
+- **Retirement.** When the area closes, drain, then move the file to `handover/closed/` and prepend: `→ historical: continuity record for a closed work area; current truth is the governed files and the code.` Not deleted.
+- AI-optimized per §"Writing Style for AI-Optimized Files," with one bounded exception: session-log entries may carry the narrative needed to reconstruct a state — what was tried, what it looked like, why it was wrong. A wrong diagnosis that cost a session is content here, not rationale in the wrong file.
+
+### What does NOT go in continuity files
+
+- Decisions with alternatives worth preserving (→ DECISIONS.md).
+- Standing topology, access, and deploy facts (→ OPERATIONS.md).
+- Repeatable procedures (→ a skill, per §"Skills").
+- Pre-implementation design and code templates (→ `scaffolding/`).

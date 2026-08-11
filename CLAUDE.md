@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-**Initialized against INIT.md version:** 2026-07-12
+**Initialized against INIT.md version:** 2026-08-10
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
@@ -14,18 +14,19 @@ The working directory is named `INIT.md` (a directory, not a file). Targeted at 
 
 ## Markdown hierarchy
 
-Five flowdown groups plus a companion tier (per INIT.md §"Project Markdown Files"):
+Seven flowdown groups plus a companion tier (per INIT.md §"Project Markdown Files"):
 
 - **Foundational**: VISION.md, MOTIVATION.md.
 - **Sequential**: INSPIRATIONS.md, ARCHITECTURE.md, USE_CASES.md, VALIDATION.md, IMPLEMENTATION.md. VALIDATION.md and IMPLEMENTATION.md deliberately skipped for this recursive project (see DECISIONS.md 2026-05-10).
-- **Cross-cutting**: GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md.
+- **Cross-cutting**: GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md. No OPERATIONS.md — this project deploys nothing.
 - **Scaffolding**: none in this project.
 - **Reference**: none yet in this project (`reference/`; seed documents — externally generated inputs).
 - **Reports**: none yet in this project (`reports/`; AI-authored topic reports from mini-investigations).
+- **Continuity**: none in this project (`handover/`; per-work-area session-continuity records). Schema edits are single-session and land in DECISIONS.md.
 - **Companion**: INIT.md, USE_CASE_INIT.md, CODING_PRACTICES.md, CLAUDE.md. (HUMAN.md is an optional companion living in `ancillary/HUMAN.md`, not at root.)
-- **Ancillary**: `ancillary/HUMAN.md` — optional sustainability companion (companion group; registered here per §"Project Markdown Files" Directory layout).
+- **Ancillary**: `ancillary/HUMAN.md` — optional sustainability companion (companion group; registered here per §"Project Markdown Files" Directory layout). `ancillary/` is a path, not a flowdown group.
 
-**Context-refresh rule:** load foundational + cross-cutting by default. Scaffolding only when implementing the relevant phase. Reference and reports only when the session touches the file's topic. Companion files load on demand (CLAUDE.md auto-loaded; INIT.md when schema questions arise; HUMAN.md when workflow context is needed; USE_CASE_INIT.md when a use case is being formulated or refined, inline or extracted).
+**Context-refresh rule:** load foundational + cross-cutting by default. Scaffolding only when implementing the relevant phase. Reference and reports only when the session touches the file's topic. Continuity only for the work area being resumed, pulled in by the user. Companion files load on demand (CLAUDE.md auto-loaded; INIT.md when schema questions arise; HUMAN.md when workflow context is needed; USE_CASE_INIT.md when a use case is being formulated or refined, inline or extracted).
 
 INIT.md is authoritative for required content per file.
 
