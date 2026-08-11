@@ -1,5 +1,7 @@
 # AI_install.md
 
+> **Document status — unclassified.** This guide is no part of the INIT.md flowdown. It carries no flowdown group, is not registered in the CLAUDE.md markdown-hierarchy stub, and is governed by per-project direction rather than the spec. It lives in `ancillary/` purely to keep the project root clean. See INIT.md §"Project Markdown Files" (Directory layout). Skip the rest of this note if you are here to install something.
+
 Getting started with AI for a new user of this project: install Ollama, set up a free Ollama account, pull the `glm-5.2:cloud` model, install Claude Code, and run Claude Code through Ollama using that model.
 
 This guide uses a **cloud** model (`glm-5.2:cloud`). Cloud models run on Ollama's servers, so you do **not** need a powerful GPU or large amounts of RAM — the local Ollama process proxies your requests to Ollama's cloud. This is the easiest path for a new user. (A fully local model would instead need a 64k+ context window and sufficient local hardware; not covered here.)
