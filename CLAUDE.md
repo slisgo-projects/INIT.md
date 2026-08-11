@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-**Initialized against INIT.md version:** 2026-08-10
+**Initialized against INIT.md version:** 2026-08-11
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 

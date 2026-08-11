@@ -2,7 +2,7 @@
 
 **Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5
 
-**Version:** 2026-08-10 (date of last substantive change; see §"Versioning")
+**Version:** 2026-08-11 (date of last substantive change; see §"Versioning")
 
 Guidance for the AI assistant on drafting and maintaining the markdown files that define a project.
 
@@ -170,7 +170,7 @@ Seven flowdown groups plus a companion tier:
 
 Additional project files may be defined and classified into one of the seven flowdown groups. The companion tier is reserved for schema-level companions, not for per-project content.
 
-**Directory layout.** Classification determines a file's flowdown group and therefore its loading and context-refresh behavior; it is independent of physical path. Flowdown and companion files live at the project root by default. Classified files that would clutter the root may instead live in an `ancillary/` subdirectory — they keep their flowdown group and all its rules (a cross-cutting file in `ancillary/` is still re-read on context refresh). Every `ancillary/` file is registered in the CLAUDE.md markdown-hierarchy stub with its group and path; cross-doc references are path-qualified so they resolve. INIT.md governs only flowdown, companion, and `ancillary/` files; files that are none of these are handled by per-project direction, not this spec.
+**Directory layout.** Classification determines a file's flowdown group and therefore its loading and context-refresh behavior; it is independent of physical path. Flowdown and companion files live at the project root by default. Classified files that would clutter the root may instead live in an `ancillary/` subdirectory — they keep their flowdown group and all its rules (a cross-cutting file in `ancillary/` is still re-read on context refresh). Every classified `ancillary/` file is registered in the CLAUDE.md markdown-hierarchy stub with its group and path; cross-doc references are path-qualified so they resolve. `ancillary/` may also hold unclassified files that are no part of the flowdown; these carry no group, are not registered in the stub, and are governed by per-project direction rather than this spec. INIT.md governs only flowdown and companion files, plus classified files placed in `ancillary/`.
 
 Each entry below: one-line purpose, then required content.
 
