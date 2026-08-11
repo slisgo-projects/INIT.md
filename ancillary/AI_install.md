@@ -2,9 +2,9 @@
 
 > **Document status — unclassified.** This guide is no part of the INIT.md flowdown. It carries no flowdown group, is not registered in the CLAUDE.md markdown-hierarchy stub, and is governed by per-project direction rather than the spec. It lives in `ancillary/` purely to keep the project root clean. See INIT.md §"Project Markdown Files" (Directory layout). Skip the rest of this note if you are here to install something.
 
-Getting started with AI for a new user of this project: install Ollama, set up a free Ollama account, pull the `glm-5.2:cloud` model, install Claude Code, and run Claude Code through Ollama using that model.
+Getting started with AI for a new user of this project: install Ollama, set up a free Ollama account, pull the `kimi-k2.6:cloud` model, install Claude Code, and run Claude Code through Ollama using that model.
 
-This guide uses a **cloud** model (`glm-5.2:cloud`). Cloud models run on Ollama's servers, so you do **not** need a powerful GPU or large amounts of RAM — the local Ollama process proxies your requests to Ollama's cloud. This is the easiest path for a new user. (A fully local model would instead need a 64k+ context window and sufficient local hardware; not covered here.)
+This guide uses a **cloud** model (`kimi-k2.6:cloud`). Cloud models run on Ollama's servers, so you do **not** need a powerful GPU or large amounts of RAM — the local Ollama process proxies your requests to Ollama's cloud. This is the easiest path for a new user. (A fully local model would instead need a 64k+ context window and sufficient local hardware; not covered here.)
 
 **Prerequisite:** a modern web browser (for the one-time Ollama sign-in) and an internet connection.
 
@@ -17,7 +17,9 @@ This guide uses a **cloud** model (`glm-5.2:cloud`). Cloud models run on Ollama'
 ### Windows
 
 1. Download the installer from <https://ollama.com/download> and run it.
+
 2. Ollama installs as a background service (`Ollama.exe`) and starts automatically. Confirm it is running — an Ollama icon appears in the system tray.
+
 3. Open a terminal (PowerShell or Command Prompt) and verify:
    
    ```powershell
@@ -31,6 +33,7 @@ This guide uses a **cloud** model (`glm-5.2:cloud`). Cloud models run on Ollama'
    ```bash
    curl -fsSL https://ollama.com/install.sh | sh
    ```
+
 2. Start the Ollama server (most installs start it automatically; if not):
    
    ```bash
@@ -38,6 +41,7 @@ This guide uses a **cloud** model (`glm-5.2:cloud`). Cloud models run on Ollama'
    ```
    
    (Run this in its own terminal, or as a background service per your distro's conventions.)
+
 3. Verify in a second terminal:
    
    ```bash
@@ -57,7 +61,9 @@ Ollama accounts are free.
    ```bash
    ollama signin
    ```
+
 2. This opens your browser at <https://ollama.com/connect>. Create an account (or sign in if you already have one) and authorize the CLI.
+
 3. Return to the terminal; it confirms you are signed in.
 
 To confirm later, run `ollama signin` again — it will report you are already connected, or let you switch accounts.
@@ -69,13 +75,13 @@ To confirm later, run `ollama signin` again — it will report you are already c
 Pull the cloud model stub so your local Ollama knows how to route requests to the cloud:
 
 ```bash
-ollama pull glm-5.2:cloud
+ollama pull kimi-k2.6:cloud
 ollama pull gemma4:31b-cloud
 ```
 
 This downloads only a small routing stub — not a multi-gigabyte model file — because the actual model runs on Ollama's cloud.
 
-> **If the pull fails with "model not found":** the exact tag has probably moved. See §3.1 below to find the current tag, then use that name in place of `glm-5.2:cloud` throughout this guide.
+> **If the pull fails with "model not found":** the exact tag has probably moved. See §3.1 below to find the current tag, then use that name in place of `kimi-k2.6:cloud` throughout this guide.
 
 Verify the model is available locally:
 
@@ -83,7 +89,7 @@ Verify the model is available locally:
 ollama list
 ```
 
-You should see `glm-5.2:cloud` in the list.
+You should see `kimi-k2.6:cloud` in the list.
 
 ---
 
@@ -107,7 +113,7 @@ The search page filters by capability (Cloud, Embedding, Vision, Tools, Thinking
 curl -s https://ollama.com/api/tags
 ```
 
-> **Trap:** this endpoint returns base names **without** the cloud suffix — you will see `glm-5.2` and `gemma4:31b`, not `glm-5.2:cloud` and `gemma4:31b-cloud`. Add the suffix yourself per the naming rule below, or confirm the tag on the model's library page.
+> **Trap:** this endpoint returns base names **without** the cloud suffix — you will see `kimi-k2.6` and `gemma4:31b`, not `kimi-k2.6:cloud` and `gemma4:31b-cloud`. Add the suffix yourself per the naming rule below, or confirm the tag on the model's library page.
 
 > **Windows PowerShell:** `curl` is an alias for `Invoke-WebRequest` in Windows PowerShell 5.1 and the flags above will fail. Use `irm` instead — see §6.4.
 
@@ -115,10 +121,10 @@ curl -s https://ollama.com/api/tags
 
 Cloud variants append `-cloud` to the size tag, or use a bare `:cloud` tag when the model has no size variants:
 
-| Model page shows | Pull as |
-| --- | --- |
-| a size tag (`31b`) | `gemma4:31b-cloud` |
-| no size variants | `glm-5.2:cloud` |
+| Model page shows            | Pull as              |
+| --------------------------- | -------------------- |
+| a size tag (`31b`)          | `gemma4:31b-cloud`   |
+| no size variants            | `kimi-k2.6:cloud`    |
 | a size tag, largest default | `gpt-oss:120b-cloud` |
 
 ### Pull and verify
@@ -130,7 +136,7 @@ ollama show <model>:<tag>     # context window, capabilities, parameters
 ollama run <model>:<tag>      # quick interactive smoke test; /bye to exit
 ```
 
-`ollama show` is worth running before you commit to a model as your primary: check the context window is large enough for Claude Code (64k or more; `glm-5.2:cloud` offers far more).
+`ollama show` is worth running before you commit to a model as your primary: check the context window is large enough for Claude Code (64k or more; `kimi-k2.6:cloud` offers far more).
 
 ### Using a different model with Claude Code
 
@@ -190,7 +196,7 @@ claude --version
 
 ---
 
-## 5. Run Claude Code through Ollama using `glm-5.2:cloud`
+## 5. Run Claude Code through Ollama using `kimi-k2.6:cloud`
 
 There are three methods. **Method A is the working setup used by this project** — a single CLI invocation. Methods B and C are fallbacks if Method A does not apply (different Ollama version, prefer not to set vars inline).
 
@@ -205,7 +211,7 @@ Run Claude Code with the environment variables inline. From your project directo
 ```bash
 ANTHROPIC_BASE_URL=http://localhost:11434 \
 ANTHROPIC_AUTH_TOKEN=ollama \
-ANTHROPIC_MODEL=glm-5.2:cloud \
+ANTHROPIC_MODEL=kimi-k2.6:cloud \
 ANTHROPIC_SMALL_FAST_MODEL=gemma4:31b-cloud \
 claude
 ```
@@ -216,7 +222,7 @@ What each variable does:
 
 - `ANTHROPIC_BASE_URL=http://localhost:11434` — routes Claude Code's requests to the local Ollama server, which forwards cloud-model requests to Ollama's cloud.
 - `ANTHROPIC_AUTH_TOKEN=ollama` — a bearer token Ollama ignores but Claude Code requires, so it does not fall back to a paid Anthropic subscription login.
-- `ANTHROPIC_MODEL=glm-5.2:cloud` — the primary model Claude Code uses for your requests.
+- `ANTHROPIC_MODEL=kimi-k2.6:cloud` — the primary model Claude Code uses for your requests.
 - `ANTHROPIC_SMALL_FAST_MODEL=gemma4:31b-cloud` — the model Claude Code uses for small, fast background tasks (session titles, summaries, etc.). Mapped to a **separate, lighter cloud model** so background work runs cheaper/faster and does not try to call Anthropic's servers. This split is the key practical detail: the primary model and the background model need not be the same.
 
 ### Method B — `ollama launch` (fallback if you have a recent Ollama)
@@ -224,7 +230,7 @@ What each variable does:
 From your project directory:
 
 ```bash
-ollama launch claude --model glm-5.2:cloud
+ollama launch claude --model kimi-k2.6:cloud
 ```
 
 This starts Ollama (if not already running), points Claude Code at it, and sets the model in one command. It does not set the small/fast model separately, so background tasks will use the default — Method A is preferred for that reason.
@@ -239,7 +245,7 @@ Use this if you prefer to export the variables rather than pass them inline (Met
 export ANTHROPIC_BASE_URL="http://localhost:11434"
 export ANTHROPIC_AUTH_TOKEN="ollama"
 export ANTHROPIC_API_KEY=""
-export ANTHROPIC_MODEL="glm-5.2:cloud"
+export ANTHROPIC_MODEL="kimi-k2.6:cloud"
 export ANTHROPIC_SMALL_FAST_MODEL="gemma4:31b-cloud"
 export CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS="1"
 
@@ -252,7 +258,7 @@ claude
 $env:ANTHROPIC_BASE_URL = "http://localhost:11434"
 $env:ANTHROPIC_AUTH_TOKEN = "ollama"
 $env:ANTHROPIC_API_KEY = ""
-$env:ANTHROPIC_MODEL = "glm-5.2:cloud"
+$env:ANTHROPIC_MODEL = "kimi-k2.6:cloud"
 $env:ANTHROPIC_SMALL_FAST_MODEL = "gemma4:31b-cloud"
 $env:CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS = "1"
 
@@ -273,7 +279,7 @@ To avoid typing the Method A command every session, add the variables to `~/.cla
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:11434",
     "ANTHROPIC_AUTH_TOKEN": "ollama",
-    "ANTHROPIC_MODEL": "glm-5.2:cloud",
+    "ANTHROPIC_MODEL": "kimi-k2.6:cloud",
     "ANTHROPIC_SMALL_FAST_MODEL": "gemma4:31b-cloud"
   }
 }
@@ -334,7 +340,7 @@ Your browser opens at <https://ollama.com/connect>. Create the free account or s
 ### 6.4 Pull the models
 
 ```powershell
-ollama pull glm-5.2:cloud
+ollama pull kimi-k2.6:cloud
 ollama pull gemma4:31b-cloud
 ollama list
 ```
@@ -345,7 +351,7 @@ To browse for other models, use the website links in §3.1. If you want the term
 (irm https://ollama.com/api/tags).models.name
 ```
 
-Remember the suffix rule from §3.1: that listing prints `glm-5.2`, but you pull `glm-5.2:cloud`.
+Remember the suffix rule from §3.1: that listing prints `kimi-k2.6`, but you pull `kimi-k2.6:cloud`.
 
 (In PowerShell 7+ the `curl` alias was removed, so `curl.exe -s https://ollama.com/api/tags` works there. `irm` works in both.)
 
@@ -379,7 +385,7 @@ Set the variables, then launch. From your project directory:
 $env:ANTHROPIC_BASE_URL = "http://localhost:11434"
 $env:ANTHROPIC_AUTH_TOKEN = "ollama"
 $env:ANTHROPIC_API_KEY = ""
-$env:ANTHROPIC_MODEL = "glm-5.2:cloud"
+$env:ANTHROPIC_MODEL = "kimi-k2.6:cloud"
 $env:ANTHROPIC_SMALL_FAST_MODEL = "gemma4:31b-cloud"
 $env:CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS = "1"
 
@@ -408,7 +414,7 @@ Paste, save, close:
   "env": {
     "ANTHROPIC_BASE_URL": "http://localhost:11434",
     "ANTHROPIC_AUTH_TOKEN": "ollama",
-    "ANTHROPIC_MODEL": "glm-5.2:cloud",
+    "ANTHROPIC_MODEL": "kimi-k2.6:cloud",
     "ANTHROPIC_SMALL_FAST_MODEL": "gemma4:31b-cloud"
   }
 }
@@ -427,7 +433,7 @@ Then `claude` alone works from any directory.
 ```powershell
 [Environment]::SetEnvironmentVariable("ANTHROPIC_BASE_URL", "http://localhost:11434", "User")
 [Environment]::SetEnvironmentVariable("ANTHROPIC_AUTH_TOKEN", "ollama", "User")
-[Environment]::SetEnvironmentVariable("ANTHROPIC_MODEL", "glm-5.2:cloud", "User")
+[Environment]::SetEnvironmentVariable("ANTHROPIC_MODEL", "kimi-k2.6:cloud", "User")
 [Environment]::SetEnvironmentVariable("ANTHROPIC_SMALL_FAST_MODEL", "gemma4:31b-cloud", "User")
 ```
 
@@ -436,9 +442,11 @@ These apply to **new** terminals only. To undo any of them, set the value to `$n
 ### 6.8 Windows-specific notes
 
 - **Model storage.** Cloud stubs are tiny, but local models land in `%USERPROFILE%\.ollama\models` on your system drive. To move them to another drive, set `OLLAMA_MODELS`:
+  
   ```powershell
   [Environment]::SetEnvironmentVariable("OLLAMA_MODELS", "D:\ollama\models", "User")
   ```
+  
   Restart Ollama from the tray afterwards.
 - **Paths in `settings.json`** need doubled backslashes (`"C:\\Program Files\\Git\\bin\\bash.exe"`) — JSON treats a single backslash as an escape character.
 - **WSL is an alternative, not a requirement.** If your projects already live in WSL, install Ollama and Claude Code inside the WSL distribution and follow the Linux instructions in §§1–5 instead. Do not mix: a Claude Code running in WSL reaching a Windows-side Ollama needs a different host address than `localhost`.
