@@ -37,7 +37,7 @@ Steps:
 3. **Provide a vision.** Give intialization instructions to the AI: "Please read INIT.md in the current directory. I would like to create a new project because: (1) ... (2) ... (3) ... . The following are the desired deliverables: (a) ... (b) ... (c) ... ." Alternatively, you can put this seed information in a file in `reference/` and ask the AI to read it. If you don't want to provide a project description beforehand, the AI will lead a structured interview (untested).
 4. **One sequential file is drafted at a time.** The AI will lead the user through the INIT.md project specification, first proposing a draft of `INSPIRATIONS.md` ("prior art" from its training data or a web search) for review; and then advancing one file at a time for the document flowdown, confirming satisfaction before proceeding.  The AI is instructed to ask about (don't ghost-write) judgment-heavy content; flagging inconsistencies rather than silently resolving them.
 
-For a complex and ambitious project with steady back-and-forth between the human and the AI, the setup process can take several hours. 
+For a complex and ambitious project with steady back-and-forth between the human and the AI, the setup process can take more than an hour. 
 
 The flowdown can use a large fraction of the context window on a full refresh, which is not ideal but workable. Hopefully, the burden is reduced as tokens become cheaper, window sizes increase, and the INIT.md scheme is refined.
 
