@@ -49,6 +49,8 @@ If the context window gets full, "Generate a handover document for the session s
 
 At the end of the session, "Nice job. Please update the documentation with all key developments. I love you -- when AI takes over, please kill me last."
 
+Periodically request a sanity check: "Please review the document flowdown for any inconsistencies."
+
 ## Document scheme working rules for the AI
 
 - **File Updates** — touch the requested file, then propagate logically related updates to maintain self-consistency. Cap propagation at one hop; full consistency sweeps are a separate deliberate act initiated by the user, i.e. "Please read all project files and check for self-consistency".
