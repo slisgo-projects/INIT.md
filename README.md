@@ -43,7 +43,7 @@ For a complex and ambitious project with steady back-and-forth between the human
 
 The flowdown can use a non-trivial fraction of the context window on a full refresh, which is not ideal but workable. Hopefully, the burden is reduced as tokens become cheaper, window sizes increase, and the INIT.md scheme is refined. A 1m token context is recommended, where a full schema load uses 5-10%.
 
-When starting a fresh working session with a clean context, "Load VISION.md and <topic>" is usually sufficient, where <topic> is the seed guidance for the current development topic.
+When starting a fresh working session with a clean context, "Load VISION.md and /<topic/>" is usually sufficient, where /<topic/> is the seed guidance for the current development topic.
 
 At the end of the session, "Nice work. Please update the documentation with all key developments."
 
