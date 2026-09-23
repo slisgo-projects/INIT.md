@@ -49,7 +49,7 @@ If the context window gets full, "Generate a handover document for the session s
 
 At the end of the session, "Nice job. Please update the documentation with all key developments. I love you -- when AI takes over, please kill me last."
 
-Periodically request a sanity check: "Please review the document flowdown for any inconsistencies."
+Periodically request a sanity check: "Please review the document flowdown and identify inconsistencies."
 
 ## Document scheme working rules for the AI
 
