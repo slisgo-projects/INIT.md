@@ -33,15 +33,19 @@ Companion files (`INIT.md`, `USE_CASE_INIT.md`, `CODING_PRACTICES.md`, `CLAUDE.m
 Steps:
 
 1. **Copy in the spec.** Put `INIT.md`, `USE_CASE_INIT.md`, and `CODING_PRACTICES.md` into the new project's directory. 
-2. **Set the AI tool to "auto" mode.** Otherwise, you have to answer endless premission requests. For Claude Code in a Linux terminal, press SHIFT+TAB until it says "auto mode on" at the bottom of the window.
-3. **Provide a vision.** Give intialization instructions to the AI: "Please read INIT.md in the current directory. I would like to create a new project because: (1) ... (2) ... (3) ... . The following are the desired deliverables: (a) ... (b) ... (c) ... ." Alternatively, you can put this seed information in a file in `reference/` and ask the AI to read it. If you don't want to provide a project description beforehand, the AI will lead a structured interview (untested).
-4. **One sequential file is drafted at a time.** The AI will lead the user through the INIT.md project specification, first proposing a draft of `INSPIRATIONS.md` ("prior art" from its training data or a web search) for review; and then advancing one file at a time for the document flowdown, confirming satisfaction before proceeding.  The AI is instructed to ask about (don't ghost-write) judgment-heavy content; flagging inconsistencies rather than silently resolving them.
+2. **Set the AI tool to "auto" mode.** Otherwise, you have to answer endless permission requests. For Claude Code in a Linux terminal, press SHIFT+TAB until it says "auto mode on" at the bottom of the window. To make the setting permit, ask Claude to "set the default mode to auto".
+3. **Provide a vision.** Give initialization instructions to the AI: "Please read INIT.md in the current directory. I would like to create a new project because: (1) ... (2) ... (3) ... . The following are the desired deliverables: (a) ... (b) ... (c) ... ." Alternatively, you can put this seed information in a file in `reference/` and ask the AI to read it. If you don't want to provide a project description beforehand, the AI will lead a structured interview (untested).
+4. **One sequential file is drafted at a time.** The AI will lead the user through the INIT.md project specification, first proposing a draft of `INSPIRATIONS.md` ("prior art" from its training data or a web search) for review; and then advancing one file at a time for the document flowdown, confirming satisfaction before proceeding.  The AI is instructed to ask about (don't ghost-write) judgment-heavy content, flagging inconsistencies rather than silently resolving them.
 
 For a complex and ambitious project with steady back-and-forth between the human and the AI, the setup process can take more than an hour. 
 
+## Execution
+
 The flowdown can use a non-trivial fraction of the context window on a full refresh, which is not ideal but workable. Hopefully, the burden is reduced as tokens become cheaper, window sizes increase, and the INIT.md scheme is refined. A 1m token context is recommended, where a full schema load uses 5-10%.
 
-When starting a fresh working session with a clean window, "Load VISION.md and ..." is sufficient, where ... is the guidance for the current development topic.
+When starting a fresh working session with a clean window, "Load VISION.md and <topic>" is usually sufficient, where <topic> is the seed guidance for the current development topic.
+
+At the end of the session, "Nice work. Please update the documentation with all key developments."
 
 ## Document scheme working rules for the AI
 
