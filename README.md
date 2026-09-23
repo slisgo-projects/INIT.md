@@ -39,7 +39,7 @@ Steps:
 
 For a complex and ambitious project with steady back-and-forth between the human and the AI, the setup process can take more than an hour. 
 
-## Execution
+## A work session
 
 The flowdown can use a non-trivial fraction of the context window on a full refresh, which is not ideal but workable. Hopefully, the burden lightens as tokens become cheaper, window sizes increase, and the INIT.md scheme is refined. A 1m token context is recommended, where a full schema load uses 5-10%.
 
