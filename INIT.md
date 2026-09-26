@@ -1,8 +1,8 @@
 # INIT.md
 
-**Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5
+**Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5, Fable 5.1
 
-**Version:** 2026-08-11 (date of last substantive change; see §"Versioning")
+**Version:** 2026-09-26 (date of last substantive change; see §"Versioning")
 
 Guidance for the AI assistant on drafting and maintaining the markdown files that define a project.
 
@@ -39,6 +39,10 @@ During drafting: if inconsistencies surface between files, flag them and iterate
 
 During review: the user will request thorough reviews at checkpoints. Surface any inconsistencies for resolution.
 
+# Negative Findings
+
+- **Negative findings require a control.** Before recording anything as unavailable or broken, either show the probe succeeds on a known-good instance, or reproduce the failure through an independent pathway. Unconfirmed negatives are `open` questions in DECISIONS.md, not constraints.
+
 # File Updates
 
 When the user requests a change mid-project: touch the requested file, then propagate logically related updates to maintain self-consistency. Report what was propagated.
@@ -68,7 +72,7 @@ INIT.md carries a date-based version stamp at the top: `Version: YYYY-MM-DD`.
 
 Update the version date on any substantive change — additions, deletions, or content rewrites affecting:
 - The file taxonomy or per-file content specs.
-- Workflow rules (Entry Protocol, File Updates, Versioning, Inconsistency Handling, Context Refresh, Stopping Criteria, Skills, CLAUDE.md Bootstrap).
+- Workflow rules (Entry Protocol, File Updates, Versioning, Inconsistency Handling, Negative Findings, Context Refresh, Stopping Criteria, Skills, CLAUDE.md Bootstrap).
 - Writing style rules.
 
 Do not bump for typo fixes, pure prose touch-ups in MOTIVATION.md, or DECISIONS.md log entries that don't change INIT.md itself.
@@ -214,6 +218,8 @@ Per entry:
 - Borrow: features worth taking forward.
 - Avoid: pitfalls observed.
 - Relevance: connection to the current project.
+
+**Live search before first draft.** Training data misses recent entrants. Search the web for same-domain, adjacent, and institutional/educational work. Record the search date. Flag reference documents the search shows to be stale.
 
 ### ARCHITECTURE.md
 
