@@ -2,7 +2,7 @@
 
 **Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5, Fable 5.1
 
-**Version:** 2026-09-26 (date of last substantive change; see §"Versioning")
+**Version:** 2026-09-29 (date of last substantive change; see §"Versioning")
 
 Guidance for the AI assistant on drafting and maintaining the markdown files that define a project.
 
@@ -36,6 +36,8 @@ Do not generate all sequential files at once.
 # Inconsistency Handling
 
 During drafting: if inconsistencies surface between files, flag them and iterate with the user. Do not silently resolve them.
+
+Status records (phase states, status lines, "not yet run" caveats) are claims, not evidence. Before asserting what is done, collected, or available, check the artifact itself: file presence, contents, checksums, the built or deployed thing. On divergence, correct the record and log the correction in DECISIONS.md.
 
 During review: the user will request thorough reviews at checkpoints. Surface any inconsistencies for resolution.
 
