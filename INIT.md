@@ -1,14 +1,14 @@
 # INIT.md
 
-**Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5, Fable 5.1
+**Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5, Fable 5.1, Opus 5.5
 
-**Version:** 2026-09-29 (date of last substantive change; see §"Versioning")
+**Version:** 2026-09-30 (date of last substantive change; see §"Versioning")
 
 Guidance for the AI assistant on drafting and maintaining the markdown files that define a project.
 
 **Goal:** a coherent flowdown of activity guidelines capturing project scope, objectives, milestones, timelines, resource requirements, stakeholders, and desired impact.
 
-**Primary reader:** an AI in future sessions, in most cases. When refreshing context, the user typically requests VISION.md and MOTIVATION.md plus whatever lower-level files are appropriate — IMPLEMENTATION.md at a bare minimum. Favor structured, explicit content over narrative prose, and write so files re-ingest efficiently. This is the default optimization for project files.
+**Primary reader:** an AI in future sessions, in most cases. INIT.md and VISION.md auto-load every session via CLAUDE.md imports (see §"CLAUDE.md Bootstrap"). When refreshing context, the user typically requests MOTIVATION.md plus whatever lower-level files are appropriate — IMPLEMENTATION.md at a bare minimum. Favor structured, explicit content over narrative prose, and write so files re-ingest efficiently. This is the default optimization for project files.
 
 **Deliberate exception:** MOTIVATION.md is written in prose for the human running the project. Do not AI-optimize it; AI sessions still read it on context refresh.
 
@@ -85,6 +85,8 @@ Date-based, not semantic. Per-change rationale lives in DECISIONS.md; downstream
 
 # Context Refresh
 
+INIT.md and VISION.md are auto-loaded at session start (see §"CLAUDE.md Bootstrap").
+
 When the user asks for a re-read to refresh context, also re-read by default:
 - All **foundational files** (VISION.md, MOTIVATION.md), as these establish what the project is and why it is worth doing.
 - All **cross-cutting files** (GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md, and OPERATIONS.md where the project has one), as these apply everywhere.
@@ -148,17 +150,19 @@ Directive, concise:
 
 # CLAUDE.md Bootstrap
 
-CLAUDE.md is auto-loaded every session. Populate it once during project setup with three pieces:
+CLAUDE.md is auto-loaded every session. Populate it once during project setup with four pieces:
 
 1. **Coding behavioral guidelines.** Copy the contents of CODING_PRACTICES.md (separate file), merging with any project-specific guidance.
 
-2. **Markdown hierarchy stub.** A short index of the project's markdown files so the AI knows the schema without re-reading INIT.md every session. The stub contains:
+2. **Markdown hierarchy stub.** A short index of this project's markdown files — its instantiation of the schema. The stub contains:
    - The seven file groups (foundational, sequential, cross-cutting, scaffolding, reference, reports, continuity) and which files belong to each.
    - The context-refresh rule (foundational + cross-cutting by default; scaffolding only when implementing the relevant phase; reference and reports only when the session touches the topic; continuity only for the work area being resumed, pulled in by the user).
    - The names of the active `handover/` continuity files and the work area each covers, so a session knows which one to ask for.
    - A pointer to INIT.md as the authoritative source for required content per file.
 
 3. **INIT.md version stamp.** One line near the top of CLAUDE.md: `Initialized against INIT.md version: YYYY-MM-DD`. Records the version of INIT.md the project was bootstrapped against. Updated when the project is re-bootstrapped against a newer INIT.md (see §"Versioning").
+
+4. **Auto-load imports.** Two lines, each on its own line and outside code spans: `@INIT.md` and `@VISION.md`. Claude Code expands them into context at session start, so every session runs under INIT.md's rules and VISION.md's scope unprompted. Path-qualify if either file is not at the project root.
 
 Keep the stub to names, groups, and the refresh rule. Per-file required content stays in INIT.md to avoid drift.
 

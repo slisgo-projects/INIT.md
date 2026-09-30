@@ -36,10 +36,10 @@ AI-optimization rules (directive voice, bullets, no embedded rationale, no fille
 
 ### 5. Bootstrap mechanism (CLAUDE.md injection)
 
-Auto-load entry point per project: CODING_PRACTICES contents + taxonomy stub injected into CLAUDE.md so future sessions reload schema with zero per-session friction.
+Auto-load entry point per project: CODING_PRACTICES contents + taxonomy stub + `@INIT.md` / `@VISION.md` imports in CLAUDE.md so future sessions reload schema with zero per-session friction.
 
 - **Depends on:** taxonomy (1) for stub content; CODING_PRACTICES.md (7) for coding rules.
-- **Risk:** tied to Anthropic's CLAUDE.md convention. Vendor-specific. Equivalent slots in other tools (AGENTS.md, `.cursor/rules/`, `.kiro/steering/`) vary in semantics; a portable schema requires per-tool adapters or surrender of auto-load. The skills-capture rule (INIT.md §"Skills") carries the same coupling via `.claude/skills/`.
+- **Risk:** tied to Anthropic's CLAUDE.md convention. Vendor-specific. Equivalent slots in other tools (AGENTS.md, `.cursor/rules/`, `.kiro/steering/`) vary in semantics; a portable schema requires per-tool adapters or surrender of auto-load. `@` import syntax is Claude Code-specific; a tool that does not expand it runs sessions without INIT.md's rules. The skills-capture rule (INIT.md §"Skills") carries the same coupling via `.claude/skills/`.
 
 ### 6. Human companion (HUMAN.md)
 
