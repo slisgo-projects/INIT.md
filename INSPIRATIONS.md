@@ -4,6 +4,8 @@ Adjacent projects, conventions, and frameworks that inform INIT.md. Everything i
 
 Per entry: name + link, borrow, avoid, relevance.
 
+**Search date:** not recorded. Drafted before the live-search rule (INIT.md §"INSPIRATIONS.md", 2026-09-26).
+
 ## AI coding agent context conventions
 
 Files auto-loaded by AI coding tools to instruct behavior in a specific codebase.
@@ -13,7 +15,7 @@ Files auto-loaded by AI coding tools to instruct behavior in a specific codebase
 - **What:** Multi-vendor open convention. Single markdown file at repo root with build/test commands, conventions, security notes, agent boundaries. Adopted by Codex, Cursor, Windsurf, Kilo, Factory, Builder, Augment, ~2,500+ public repos.
 - **Borrow:** Single predictable location; tool-agnostic markdown; simplicity (one file, no schema enforcement).
 - **Avoid:** Grows into a junk drawer mixing build commands with code style; lacks subdivision once large.
-- **Relevance:** Direct ancestor of CLAUDE.md Bootstrap (§"CLAUDE.md Bootstrap"). INIT.md adds explicit subdivision (foundational / sequential / cross-cutting / scaffolding) so growth is structured rather than monolithic.
+- **Relevance:** Direct ancestor of CLAUDE.md Bootstrap (§"CLAUDE.md Bootstrap"). INIT.md adds explicit subdivision (foundational / sequential / cross-cutting / scaffolding / reference / reports / continuity) so growth is structured rather than monolithic.
 
 ### CLAUDE.md (Anthropic Claude Code)
 - **Link:** [docs.claude.com/en/docs/claude-code/memory](https://docs.claude.com/en/docs/claude-code/memory)

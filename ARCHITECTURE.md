@@ -22,7 +22,7 @@ Required-content templates for each file in the taxonomy (VISION, MOTIVATION, IN
 
 ### 3. Workflow rules
 
-Entry Protocol, File Updates (one-hop propagation), Inconsistency Handling, Context Refresh, Stopping Criteria, Skills.
+Entry Protocol, File Updates (one-hop propagation), Inconsistency Handling, Negative Findings, Versioning, Context Refresh, Stopping Criteria, Skills. CLAUDE.md Bootstrap is element (5).
 
 - **Depends on:** taxonomy (1) for which-files-load-when; per-file specifications (2) for what each file contains.
 - **Risk:** tightly coupled to current AI's tendencies (single-pass response habits, evaluation fatigue, manual-load friction). May not survive AI architectural shifts toward persistent project-scoped memory.

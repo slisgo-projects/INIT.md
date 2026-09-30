@@ -8,7 +8,7 @@ Guidance for the AI assistant on drafting and maintaining the markdown files tha
 
 **Goal:** a coherent flowdown of activity guidelines capturing project scope, objectives, milestones, timelines, resource requirements, stakeholders, and desired impact.
 
-**Primary reader:** an AI in future sessions, in most cases. INIT.md and VISION.md auto-load every session via CLAUDE.md imports (see §"CLAUDE.md Bootstrap"). When refreshing context, the user typically requests MOTIVATION.md plus whatever lower-level files are appropriate — IMPLEMENTATION.md at a bare minimum. Favor structured, explicit content over narrative prose, and write so files re-ingest efficiently. This is the default optimization for project files.
+**Primary reader:** an AI in future sessions, in most cases. INIT.md and VISION.md auto-load every session via CLAUDE.md imports (see §"CLAUDE.md Bootstrap"). When refreshing context, the user typically requests MOTIVATION.md plus whatever lower-level files are appropriate; IMPLEMENTATION.md loads on the trigger in §"Context Refresh". Favor structured, explicit content over narrative prose, and write so files re-ingest efficiently. This is the default optimization for project files.
 
 **Deliberate exception:** MOTIVATION.md is written in prose for the human running the project. Do not AI-optimize it; AI sessions still read it on context refresh.
 
@@ -91,6 +91,8 @@ When the user asks for a re-read to refresh context, also re-read by default:
 - All **foundational files** (VISION.md, MOTIVATION.md), as these establish what the project is and why it is worth doing.
 - All **cross-cutting files** (GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md, and OPERATIONS.md where the project has one), as these apply everywhere.
 
+**Load IMPLEMENTATION.md** whenever the session's work touches an implementation phase — building, changing, verifying, or reporting on a phase deliverable — whether or not the user asked for a re-read. Load it before writing state-of-progress per §"IMPLEMENTATION.md."
+
 **Do NOT** read scaffolding files on context refresh. They are working artifacts. Read them only when implementing the relevant phase. After a phase completes, the scaffolding file is moved to `scaffolding/integrated/` per §"Scaffolding Files," not deleted.
 
 **Do NOT** read reference or report files on context refresh. Load a seed document or topic report only when the session touches its topic (see §"Reference Files" and §"Report Files").
@@ -156,7 +158,7 @@ CLAUDE.md is auto-loaded every session. Populate it once during project setup wi
 
 2. **Markdown hierarchy stub.** A short index of this project's markdown files — its instantiation of the schema. The stub contains:
    - The seven file groups (foundational, sequential, cross-cutting, scaffolding, reference, reports, continuity) and which files belong to each.
-   - The context-refresh rule (foundational + cross-cutting by default; scaffolding only when implementing the relevant phase; reference and reports only when the session touches the topic; continuity only for the work area being resumed, pulled in by the user).
+   - The context-refresh rule (foundational + cross-cutting by default; IMPLEMENTATION.md when the session's work touches a phase; scaffolding only when implementing the relevant phase; reference and reports only when the session touches the topic; continuity only for the work area being resumed, pulled in by the user).
    - The names of the active `handover/` continuity files and the work area each covers, so a session knows which one to ask for.
    - A pointer to INIT.md as the authoritative source for required content per file.
 

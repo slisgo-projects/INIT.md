@@ -31,7 +31,7 @@ Seven flowdown groups plus a companion tier (per INIT.md §"Project Markdown Fil
 - **Companion**: INIT.md, USE_CASE_INIT.md, CODING_PRACTICES.md, CLAUDE.md. (HUMAN.md is an optional companion living in `ancillary/HUMAN.md`, not at root.)
 - **Ancillary**: `ancillary/HUMAN.md` — optional sustainability companion (companion group; registered here per §"Project Markdown Files" Directory layout). `ancillary/` is a path, not a flowdown group.
 
-**Context-refresh rule:** load foundational + cross-cutting by default. Scaffolding only when implementing the relevant phase. Reference and reports only when the session touches the file's topic. Continuity only for the work area being resumed, pulled in by the user. Companion files load on demand (CLAUDE.md and INIT.md auto-loaded; HUMAN.md when workflow context is needed; USE_CASE_INIT.md when a use case is being formulated or refined, inline or extracted).
+**Context-refresh rule:** load foundational + cross-cutting by default. IMPLEMENTATION.md when the session's work touches a phase (none in this project). Scaffolding only when implementing the relevant phase. Reference and reports only when the session touches the file's topic. Continuity only for the work area being resumed, pulled in by the user. Companion files load on demand (CLAUDE.md and INIT.md auto-loaded; HUMAN.md when workflow context is needed; USE_CASE_INIT.md when a use case is being formulated or refined, inline or extracted).
 
 INIT.md is authoritative for required content per file.
 
