@@ -4,7 +4,7 @@ Adjacent projects, conventions, and frameworks that inform INIT.md. Everything i
 
 Per entry: name + link, borrow, avoid, relevance.
 
-**Search date:** not recorded. Drafted before the live-search rule (INIT.md §"INSPIRATIONS.md", 2026-09-26).
+**Search date:** 2026-09-30 (live search per INIT.md §"INSPIRATIONS.md": same-domain, adjacent, institutional/educational). Entries predating this search: date not recorded.
 
 ## AI coding agent context conventions
 
@@ -45,6 +45,13 @@ Files auto-loaded by AI coding tools to instruct behavior in a specific codebase
 - **Avoid:** Tool-specific naming locks projects to Kiro.
 - **Relevance:** Reinforces conventions-as-files-on-disk pattern. INIT.md is deliberately tool-agnostic (markdown only, no special directory required).
 
+### Agent Skills open standard (SKILL.md)
+- **Link:** [agentskills.io](https://agentskills.io/)
+- **What:** Folder per skill with a `SKILL.md` (name + description frontmatter, instructions) plus optional scripts and references. Progressive disclosure: descriptions load at discovery, full body on activation. Released by Anthropic as an open standard 2025-12-18; supported by 27+ agents.
+- **Borrow:** Progressive disclosure — cheap index always loaded, body on demand.
+- **Avoid:** Skill sprawl without an index or ownership.
+- **Relevance:** Format behind INIT.md §"Skills". Multi-vendor adoption narrows the coupling in §"Skills" to the directory path.
+
 ## Spec-driven development
 
 Specs as durable artifact; code is derived. Phased flowdown of definition → plan → tasks.
@@ -62,6 +69,52 @@ Specs as durable artifact; code is derived. Phased flowdown of definition → pl
 - **Borrow:** Tight phase quality gates (requirements lock before design); EARS notation for unambiguous requirements.
 - **Avoid:** Tool-coupled (only works inside Kiro IDE); EARS adds rigor at the cost of human readability.
 - **Relevance:** Validates INIT.md's Entry Protocol staging ("Advance one sequential file at a time. Confirm satisfaction before proceeding."). spec-kit and Kiro converge on similar staging from independent designs, suggesting the pattern generalizes.
+
+### OpenSpec
+- **Link:** [github.com/Fission-AI/OpenSpec](https://github.com/Fission-AI/OpenSpec)
+- **What:** Repo-resident CLI layer: `openspec/specs/` (current requirements), `changes/` (in-flight proposals as delta specs), `archive/` (completed changes). Propose → apply → archive loop; agent-agnostic.
+- **Borrow:** Delta specs recording only what a change adds, modifies, or removes; archive-on-completion.
+- **Avoid:** Per-change software framing; no foundational or rationale layer.
+- **Relevance:** `changes/` → `archive/` lifecycle parallels scaffolding → `scaffolding/integrated/` and continuity → `handover/closed/`.
+
+### GSD (Get Shit Done)
+- **Link:** [github.com/open-gsd/gsd-core](https://github.com/open-gsd/gsd-core) (moved from `gsd-build/get-shit-done`), [docs](https://www.mintlify.com/gsd-build/get-shit-done)
+- **What:** Context-engineering and spec-driven layer for Claude Code, OpenCode, Gemini CLI, Codex, aimed at solo developers. `.planning/` holds PROJECT.md (vision + requirements), REQUIREMENTS.md, ROADMAP.md (phases), STATE.md (project memory), research/. Targets context rot.
+- **Borrow:** Explicit STATE.md separate from the roadmap; phase-mapped requirements.
+- **Avoid:** Software-only; slash-command machinery couples the workflow to the tool.
+- **Relevance:** Closest same-domain peer for team-of-one. PROJECT/ROADMAP/STATE map onto VISION/IMPLEMENTATION/continuity files.
+
+### Tessl
+- **Link:** [tessl.io](https://tessl.io/), [spec-driven-development tile](https://tessl.io/registry/tessl-labs/spec-driven-development)
+- **What:** Spec-as-source platform. `.spec.md` files with frontmatter naming target files and linking tests per requirement; registry of versioned library usage specs and methodology tiles (agent interviews one question at a time before specifying).
+- **Borrow:** Requirement-to-verification links inside the spec.
+- **Avoid:** Commercial registry dependency; code-generation premise.
+- **Relevance:** Per-requirement test links echo INTERFACES.md verification field and VALIDATION.md.
+
+## Session continuity and agent memory
+
+Files an agent reads at session start and rewrites as work lands, so work survives context resets.
+
+### Cline Memory Bank
+- **Link:** [docs.cline.bot/prompting/cline-memory-bank](https://docs.cline.bot/prompting/cline-memory-bank)
+- **What:** `memory-bank/` of six markdown files: projectbrief, productContext, activeContext, systemPatterns, techContext, progress. Agent reads all at task start, updates as it works.
+- **Borrow:** Hierarchy rooted in one brief; explicit active-context vs. progress split.
+- **Avoid:** Load-everything-every-task; no drain rule, so files grow into a shadow spec.
+- **Relevance:** projectbrief ≈ VISION.md, systemPatterns ≈ ARCHITECTURE.md, activeContext/progress ≈ continuity files + IMPLEMENTATION.md status.
+
+### Anthropic long-running agent harness
+- **Link:** [anthropic.com/engineering/effective-harnesses-for-long-running-agents](https://anthropic.com/engineering/effective-harnesses-for-long-running-agents)
+- **What:** Initializer agent writes `claude-progress.txt` (per-session log), `feature_list.json` (requirements with pass flags), `init.sh`, first commit. Each later session reads progress + git log, verifies the app works, implements one feature, commits.
+- **Borrow:** Verify current state against the artifact before new work; git history as part of the handoff.
+- **Avoid:** Single-app software premise.
+- **Relevance:** Independent validation of continuity files and the §"Inconsistency Handling" status-record rule (records are claims; check the artifact).
+
+### planning-with-files (Manus-style)
+- **Link:** [mdskills.ai/skills/planning-with-files](https://www.mdskills.ai/skills/planning-with-files)
+- **What:** Skill creating task_plan.md, findings.md, progress.md for multi-step tasks and research. Context window = RAM, filesystem = disk.
+- **Borrow:** Findings kept separate from plan and log.
+- **Avoid:** Task-scoped only; no project-level hierarchy.
+- **Relevance:** findings.md ≈ `reports/`; progress.md ≈ continuity session log.
 
 ## Elicitation-driven definition
 
@@ -106,6 +159,29 @@ Older structures that organize project knowledge for human readers. Categorical 
 - **Avoid:** Single-document scope (README only); doesn't address what comes after project start.
 - **Relevance:** Direct philosophical ancestor of VISION.md as the entry point. INIT.md generalizes "write the README first" to "write the flowdown first."
 
+### NASA Systems Engineering Handbook — Interface Management
+- **Link:** [NASA SP-2016-6105 Rev2](https://www.nasa.gov/sites/default/files/atoms/files/nasa_systems_engineering_handbook_0.pdf)
+- **What:** Interface management as a crosscutting technical-management process; Interface Control Documents under change control — no unilateral changes once agreed.
+- **Borrow:** Crosscutting placement; bilateral change control.
+- **Avoid:** Multi-center institutional ceremony (boards, signatures).
+- **Relevance:** Institutional source of the ICD pattern behind INTERFACES.md fields and its cross-cutting placement.
+
+## Empirical research on context files
+
+### Evaluating AGENTS.md (Gloaguen et al.)
+- **Link:** [arxiv.org/abs/2602.11988](https://arxiv.org/abs/2602.11988) (v3 2026-09-29)
+- **What:** Four coding agents on SWE-bench and CTXBENCH. Context files do not generally improve task success and raise inference cost by 20%+; repository overviews unhelpful; instructions in context files are followed.
+- **Borrow:** Auto-loaded content should carry instructions, not overviews of what the agent can discover.
+- **Avoid:** Treating the result as general — measured on single-issue code fixes, not multi-session project work.
+- **Relevance:** Supports a lean CLAUDE.md stub and auto-loading INIT.md's behavioral rules; cautions against auto-loading overview files. Bears on the 2026-09-30 import decision and the open INIT.md split row.
+
+### Context Engineering for AI Agents in Open-Source Software
+- **Link:** [arxiv.org/abs/2510.21413](https://arxiv.org/abs/2510.21413)
+- **What:** Survey of AGENTS.md / CLAUDE.md / Copilot / GEMINI.md files in open-source repos. No established content structure; wide variation in style (descriptive, prescriptive, prohibitive, conditional).
+- **Borrow:** Style taxonomy as a lens on directive voice.
+- **Avoid:** Descriptive only; no outcome measure.
+- **Relevance:** Confirms the gap INIT.md §"CLAUDE.md Bootstrap" fills: no agreed structure for auto-loaded files.
+
 ## Decision and discussion records
 
 Artifacts for capturing *why* choices were made.
@@ -131,6 +207,8 @@ Convergent evolution across the field, visible in INIT.md:
 - **Markdown as source of truth.** Every entry above uses plain markdown. INIT.md follows the herd deliberately — markdown survives tool churn.
 - **Phased flowdown.** spec-kit (spec→plan→tasks), Kiro (requirements→design→tasks), arc42 (12 sections in canonical order), INIT.md (VISION→...→IMPLEMENTATION) — all converge on staged refinement.
 - **Decisions captured separately from code.** ADRs, RFDs, arc42 §9, INIT.md DECISIONS.md — the genre is well-established.
+- **Session-state files.** Memory Bank (activeContext, progress), Anthropic harness (claude-progress.txt), GSD (STATE.md), planning-with-files (progress.md), INIT.md continuity files — independent convergence on a rewritten state file separate from the spec.
+- **Load cost scrutinized.** Auto-loaded context now measured empirically (Gloaguen et al.); lean, instruction-only auto-load favored.
 
 INIT.md's distinguishing claims relative to peers:
 - **Project-type-agnostic.** Most peers are software-only.

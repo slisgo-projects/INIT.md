@@ -117,7 +117,7 @@ Repeatable operational procedures — executing a software package, accessing a 
 - **Location:** `.claude/skills/<name>/SKILL.md` in the project directory. Project-scoped, not `$HOME/.claude/`.
 - **Content:** imperative how-to — commands, parameters, prerequisites, failure modes encountered. No secrets; point to credential locations instead.
 - **Boundary:** skills hold procedures (how to do); `reports/` topic reports hold findings (what was learned); OPERATIONS.md holds standing facts (what exists, where, who reaches it). A skill for reaching a host cites OPERATIONS.md for the host's identity and access rules rather than restating them. See §"Report Files" and §"OPERATIONS.md."
-- **Coupling:** vendor-coupled to the Claude Code skills convention, as with §"CLAUDE.md Bootstrap."
+- **Coupling:** `SKILL.md` follows the Agent Skills open standard (agentskills.io), supported across vendors. Only the `.claude/skills/` path is Claude Code-specific; other agents use their own skill directory.
 
 # Writing Style for AI-Optimized Files
 
