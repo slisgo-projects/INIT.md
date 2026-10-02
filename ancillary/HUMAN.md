@@ -1,6 +1,6 @@
 # HUMAN.md
 
-**Authors:** S. Lisgo, Opus 4.7
+**Authors:** S. Lisgo, Opus 4.7, Opus 5.5
 
 The homo sapien perspective on AI-human collaboration in this project schema.
 
@@ -119,6 +119,32 @@ Most published writing on AI-assisted development addresses team contexts where:
 None of those pressures apply here. The pacing must come from intrinsic motivation, the accountability is only to the user's own standards, and velocity is actively counterproductive if it outruns the user's capacity for engagement.
 
 The most honest recent writing on the phenomenological side of AI coding fatigue comes from Boschi and Khare (cited above), plus Mark Chen's *[AI Fatigue: When the Human Falls Behind the Machine](https://medium.com/@markchen69/ai-fatigue-when-the-human-falls-behind-the-machine-b2cec90c6e7a)* (December 2025). Each touches on pieces of what this document describes but none addresses sustainable solo work over multi-year timeframes directly. That gap is why this file had to be written rather than linked.
+
+# Learning Curve
+
+Dated observations from the user's experience with INIT.md, and with AI generally, as the experiment runs. Entries are added, not rewritten; a later entry may contradict an earlier one, and that is the point of keeping them.
+
+## 2026-10-02 — Ambition rises to meet capacity
+
+The team-of-one experiment is not going as expected — "typical of life, so no real surprise there." The expectation was that AI productivity would lighten the load. Instead, increased productivity has led to an increase in ambition, raising rather than decreasing cognitive stress. The user calls it a "drug of realizable potential," and finds it hard to turn off.
+
+This is not idiosyncratic. It is the individual-scale version of a pattern now being documented at the scale of firms and labor markets: in a competitive marketplace, efficiency gains do not let companies shed workers; they raise the game, and output rises as each company keeps pace with its peers. The Berkeley Haas study reported in Harvard Business Review (*[AI Doesn't Reduce Work—It Intensifies It](https://hbr.org/2026/02/ai-doesnt-reduce-work-it-intensifies-it)*, February 2026) found workers broadening their own scope and extending their hours, mostly unasked, because AI made doing more feel possible and rewarding. The wider literature is collected in `reports/ai_work_intensification.md` (drawn from web-search summaries, not the articles themselves; this paragraph and the next inherit that caveat); the seed documents in `reference/` frame the same thing as an absorption bottleneck — the constraint moves from producing work to judging it.
+
+What distinguishes the user's experience from much of that literature is the reward. Many developers describe agentic coding as a slot machine — a dopamine hit on success, an adrenaline jolt on failure (Steve Yegge, "The AI Vampire," February 2026). The user does not experience a dopamine kick in this mode of working, and may be an outlier. What is there instead is "a profound satisfaction in being empowered, via AI, to pursue many projects that would otherwise be out of reach." A satisfaction-driven pull is healthier than a compulsive one, but it does not exhaust itself the way a compulsion does, which leaves Human Responsibility 4 — decide when to stop — doing the load-bearing work.
+
+Three reasons for optimism, in the user's view:
+
+- **Adaptation.** Humans are adaptable. The user is adapting to the associated mental gymnastics; session-juggling skills are improving with experience, aided by easy stop-resume.
+- **Streamlining remains.** There is still room to streamline the AI-human working relationship. The `interlinked` project (`../interlinked/`) is the current attempt: agents do the recurring work and the human triages small reviewable artifacts; an at-a-glance fleet indicator replaces window-polling.
+- **Self-supervision is improving.** As AI's ability to supervise itself improves — through the model itself or through the harness — a workable, high-productivity, burnout-sensitive rhythm will develop.
+
+## 2026-10-02 — Documentation as the enabler
+
+The ability, and eagerness, of AI to document its own work — independent of the INIT.md formalities — is "a boon of unparalleled magnificence." Documentation is a task the user has always found incredibly onerous. Having detailed reference material appear without human effort is a key enabler of the stop-resume freedom across projects; without it, rotation (§Across projects) would cost a context rebuild from memory every time.
+
+This alone elicits a never-go-back posture in the user's working life.
+
+The caveats are the ones INIT.md already guards against: AI-written records are claims, not evidence, and must be checked against the artifact; and volume is itself an absorption cost, which is why the AI-optimized style stays terse.
 
 # Reminder to Future-Self
 

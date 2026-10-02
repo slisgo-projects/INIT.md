@@ -7,5 +7,9 @@
 !ancillary/
 !ancillary/*.md
 
+# Allow the reports/ directory and its markdown files
+!reports/
+!reports/*.md
+
 # Keep .claude local config out of version control
 .claude/
