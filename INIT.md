@@ -2,7 +2,7 @@
 
 **Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5, Fable 5.1, Opus 5.5
 
-**Version:** 2026-09-30 (date of last substantive change; see §"Versioning")
+**Version:** 2026-10-29 (date of last substantive change; see §"Versioning")
 
 Guidance for the AI assistant on drafting and maintaining the markdown files that define a project.
 
@@ -39,11 +39,12 @@ During drafting: if inconsistencies surface between files, flag them and iterate
 
 Status records (phase states, status lines, "not yet run" caveats) are claims, not evidence. Before asserting what is done, collected, or available, check the artifact itself: file presence, contents, checksums, the built or deployed thing. On divergence, correct the record and log the correction in DECISIONS.md.
 
-During review: the user will request thorough reviews at checkpoints. Surface any inconsistencies for resolution.
+During review: the user will request thorough reviews at checkpoints. Surface any inconsistencies for resolution. Run checkpoint reviews in a context that did not author the changes under review.
 
-# Negative Findings
+# Findings and Checks
 
 - **Negative findings require a control.** Before recording anything as unavailable or broken, either show the probe succeeds on a known-good instance, or reproduce the failure through an independent pathway. Unconfirmed negatives are `open` questions in DECISIONS.md, not constraints.
+- **Checks require a control.** A check is evidence only after it has been seen to fail: run it before the work exists, or against a seeded fault. A check that cannot fail proves nothing.
 
 # File Updates
 
@@ -74,7 +75,7 @@ INIT.md carries a date-based version stamp at the top: `Version: YYYY-MM-DD`.
 
 Update the version date on any substantive change — additions, deletions, or content rewrites affecting:
 - The file taxonomy or per-file content specs.
-- Workflow rules (Entry Protocol, File Updates, Versioning, Inconsistency Handling, Negative Findings, Context Refresh, Stopping Criteria, Skills, CLAUDE.md Bootstrap).
+- Workflow rules (Entry Protocol, File Updates, Versioning, Inconsistency Handling, Findings and Checks, Context Refresh, Stopping Criteria, Skills, CLAUDE.md Bootstrap).
 - Writing style rules.
 
 Do not bump for typo fixes, pure prose touch-ups in MOTIVATION.md, or DECISIONS.md log entries that don't change INIT.md itself.
@@ -117,6 +118,7 @@ Repeatable operational procedures — executing a software package, accessing a 
 - **Location:** `.claude/skills/<name>/SKILL.md` in the project directory. Project-scoped, not `$HOME/.claude/`.
 - **Content:** imperative how-to — commands, parameters, prerequisites, failure modes encountered. No secrets; point to credential locations instead.
 - **Boundary:** skills hold procedures (how to do); `reports/` topic reports hold findings (what was learned); OPERATIONS.md holds standing facts (what exists, where, who reaches it). A skill for reaching a host cites OPERATIONS.md for the host's identity and access rules rather than restating them. See §"Report Files" and §"OPERATIONS.md."
+- **Enforcement:** rules that admit no exceptions are enforced mechanically (hook, CI, script) where the host tool supports it. Prose states the rule; the mechanism holds it.
 - **Coupling:** `SKILL.md` follows the Agent Skills open standard (agentskills.io), supported across vendors. Only the `.claude/skills/` path is Claude Code-specific; other agents use their own skill directory.
 
 # Writing Style for AI-Optimized Files
@@ -261,6 +263,9 @@ Defined upstream of implementation because it shapes what gets built and in what
 
 - Unit, integration, and acceptance criteria.
 - Domain-specific V&V requirements.
+- Per criterion: observable behavior at an element boundary (what, not how), its check, and the pass/fail signal. Mark judgment-only criteria explicitly.
+- At least one concrete example per acceptance criterion, in problem-domain language.
+- **Human-owned.** AI drafts; the user approves. AI does not weaken, delete, or rewrite a criterion or its check to make work pass. A failing check is surfaced per §"Inconsistency Handling."
 
 ### IMPLEMENTATION.md
 

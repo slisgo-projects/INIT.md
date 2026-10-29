@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-**Initialized against INIT.md version:** 2026-09-30
+**Initialized against INIT.md version:** 2026-10-29
 
 **Auto-loaded every session** (per INIT.md §"CLAUDE.md Bootstrap"):
 

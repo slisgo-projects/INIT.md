@@ -11,5 +11,8 @@
 !reports/
 !reports/*.md
 
-# Keep .claude local config out of version control
-.claude/
+# Allow project skills; other .claude/ local config stays ignored
+!.claude/
+!.claude/skills/
+!.claude/skills/*/
+!.claude/skills/*/SKILL.md

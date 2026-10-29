@@ -326,6 +326,7 @@ Detailed criteria for each stage gate. A stage is not complete until all checkbo
 - [ ] Every data gap has a mitigation or blocking flag.
 - [ ] Every assumption is stated and its sensitivity described.
 - [ ] All monetary values use the same currency or note conversions.
+- [ ] Every success measure names its check and pass/fail signal, or is marked judgment-only; at least one concrete example per measure.
 
 ### Gate 6: Validation Credibility
 - [ ] *Category-specific reviewer:* at least one local stakeholder (civic), domain expert (research), beta-reader (authorship), user-tester (software), field-tester (hardware), or operator self-check (personal) has reviewed and confirmed top entries are recognizable.

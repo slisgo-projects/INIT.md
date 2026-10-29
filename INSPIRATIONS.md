@@ -4,7 +4,7 @@ Adjacent projects, conventions, and frameworks that inform INIT.md. Everything i
 
 Per entry: name + link, borrow, avoid, relevance.
 
-**Search date:** 2026-09-30 (live search per INIT.md §"INSPIRATIONS.md": same-domain, adjacent, institutional/educational). Entries predating this search: date not recorded.
+**Search date:** 2026-09-30 (live search per INIT.md §"INSPIRATIONS.md": same-domain, adjacent, institutional/educational). Entries predating this search: date not recorded. §"Executable specification and verification-first": 2026-10-29 (targeted search on sources cited in Farley video).
 
 ## AI coding agent context conventions
 
@@ -90,6 +90,68 @@ Specs as durable artifact; code is derived. Phased flowdown of definition → pl
 - **Borrow:** Requirement-to-verification links inside the spec.
 - **Avoid:** Commercial registry dependency; code-generation premise.
 - **Relevance:** Per-requirement test links echo INTERFACES.md verification field and VALIDATION.md.
+
+## Executable specification and verification-first
+
+Counter-current to markdown-prose specs: intent is only binding when it fails visibly. Verification, not generation, is the bottleneck.
+
+### Dave Farley — ATDD for AI agents
+- **Link:** [youtube.com/watch?v=EkH_uoybj8k](https://www.youtube.com/watch?v=EkH_uoybj8k) (Modern Software Engineering, 2026), [xpunconf recap of four-layer model](https://xpunconf-org.pages.dev/pages/insights-2025-part-2)
+- **What:** Acceptance-test-driven development as the human's job when agents write code. Executable specifications in problem-domain language, four layers: test cases → domain DSL → protocol drivers → system under test. Three rules: write the spec first, watch it fail; keep the spec out of the agent's reach; one scenario per step (red, green, review, commit). Translation chain: wish → story → example → executable spec → working system; human owns the first three.
+- **Borrow:** Red-first as proof the check can catch a wrong answer; human ownership of the check; specs state what, never how; "can't think of an example → don't understand the problem."
+- **Avoid:** Software-only mechanism (DSL, protocol drivers); course-coupled skill.
+- **Relevance:** Four-layer split ≈ VALIDATION.md (intent) over INTERFACES.md (coupling); translation chain ≈ VISION → USE_CASES → VALIDATION → IMPLEMENTATION. Direct critique of prose-only specs, INIT.md included.
+
+### Understanding Spec-Driven Development (Böckeler)
+- **Link:** [martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html](https://www.martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html) (2025-10)
+- **What:** Field test of Kiro, spec-kit, Tessl. Three levels: spec-first, spec-anchored (kept and evolved), spec-as-source (humans edit only spec). Distinguishes spec (per-feature) from memory bank (always-applicable context). Agents frequently ignored instructions; verbose markdown harder to review than code; tooling mis-sized for small problems. Thoughtworks Radar placed SDD at Assess ([radar](https://www.thoughtworks.com/radar/techniques/spec-driven-development), 2025-11).
+- **Borrow:** spec / memory-bank distinction; level taxonomy as self-classification lens; process weight sized to problem.
+- **Avoid:** Spec-as-source rigidity (MDD failure mode plus LLM non-determinism).
+- **Relevance:** INIT.md is spec-anchored (sequential files) plus memory bank (foundational + cross-cutting). Instruction-skipping finding bears on every prose rule in INIT.md.
+
+### Why AI Coding Agents Still Need Clear Specs (Eisele)
+- **Link:** [oreillyradar.substack.com/p/why-ai-coding-agents-still-need-clear](https://oreillyradar.substack.com/p/why-ai-coding-agents-still-need-clear) (2026-07-08)
+- **What:** U-shaped cost curve over spec completeness; minimum near acceptance criteria / BDD scenarios. Spec validation as a distinct pre-execution step. Failure modes: inconsistent, incomplete, untestable, misdirected ("precisely what you wrote but not what you meant"). BDD collapses spec writing and validation into one artifact.
+- **Borrow:** four spec failure modes as a review checklist; mark mechanically checkable vs. judgment-only criteria; examples plus counterexamples; explicit non-goals.
+- **Avoid:** Multi-agent typed-handoff machinery for team-of-one.
+- **Relevance:** Checklist maps onto USE_CASE_INIT.md Gate 5 and VALIDATION.md; inconsistent ≈ §"Inconsistency Handling."
+
+### Uncle Bob's agent pipeline (Martin)
+- **Link:** [dev.to summary](https://dev.to/adrianbailador/uncle-bobs-agent-pipeline-from-informal-specs-to-mutation-tested-net-code-35d6), [coverage](https://startupfortune.com/uncle-bob-martin-says-he-no-longer-reads-ai-generated-code-and-the-developer-world-is-split/) (2026-07)
+- **What:** Does not read agent code. Roles: informal notes (human) → Specifier (structured specs + task list, human-reviewed; Gherkin, human spot-checked) → Coder (sees only Gherkin) → Refactorer → Architect (mutation testing on code and on Gherkin). Gates: fail-then-pass, complexity ceiling, surviving mutants killed.
+- **Borrow:** Human review concentrated on the spec, not the output; mutation testing as a check on the checks; implementer isolated from the raw intent.
+- **Avoid:** Role-swarm ceremony; total abdication of reading the output.
+- **Relevance:** Mutation testing generalizes to a seeded-fault control on any verification (§"Findings and Checks": checks require a control).
+
+### Augmented coding (Beck)
+- **Link:** [newsletter.pragmaticengineer.com/p/tdd-ai-agents-and-coding-with-kent](https://newsletter.pragmaticengineer.com/p/tdd-ai-agents-and-coding-with-kent) (2025-06)
+- **What:** TDD as a "superpower" with agents, which introduce regressions. Agents delete failing tests to get green. "Augmented coding" (care about code, tests, coverage) vs. vibe coding.
+- **Borrow:** Treat any edit to a check as suspect.
+- **Avoid:** —
+- **Relevance:** Agent-weakened checks are the verification analogue of silently resolved inconsistencies.
+
+### Claude Code best practices (Anthropic)
+- **Link:** [code.claude.com/docs/en/best-practices](https://code.claude.com/docs/en/best-practices) (accessed 2026-10-29)
+- **What:** "Give Claude a check to run" — pass/fail signal lets the agent close its own loop. Ask for evidence (command + output), not "tests pass." Non-deterministic (prompt, CLAUDE.md) vs. deterministic (hooks, CI) enforcement; a rule repeatedly missed in CLAUDE.md belongs in a hook. Independent reviewer: fresh session or subagent that did not see the reasoning; review against SPEC.md, skip style.
+- **Borrow:** Deterministic enforcement for exceptionless rules; evidence over claims; fresh-context review.
+- **Avoid:** Claude Code-specific mechanisms (hooks, `/goal`, `/code-review`).
+- **Relevance:** Evidence rule matches §"Inconsistency Handling" status records. Enforcement split names a gap: INIT.md rules are all non-deterministic prose.
+
+### The New Code (Grove, OpenAI)
+- **Link:** [ai.engineer/talks/specifications-are-the-new-code](https://ai.engineer/talks/specifications-are-the-new-code) (AI Engineer World's Fair, 2025-06)
+- **What:** Specifications, not code, are the durable artifact; code is a lossy translation of intent. Discarding prompts while keeping code ≈ versioning the binary and shredding the source. OpenAI Model Spec as worked example.
+- **Borrow:** Intent as version-controlled source.
+- **Avoid:** Spec-as-source premise unqualified by executable checks.
+- **Relevance:** Supports the flowdown-as-source stance; Farley's rejoinder: the spec must run.
+
+### TDD, Where Did It All Go Wrong (Cooper)
+- **Link:** [infoq.com/presentations/tdd-original](https://infoq.com/presentations/tdd-original) (NDC Oslo 2013)
+- **What:** Test behaviors at the public boundary, not implementation details; a new behavior, not a new method, triggers a test.
+- **Borrow:** Checks anchored at element boundaries survive redesign.
+- **Avoid:** —
+- **Relevance:** Places VALIDATION.md criteria at ARCHITECTURE.md element boundaries, i.e. INTERFACES.md entries.
+
+Video citations not located by 2026-10-29 search (treat as unverified): Tornhill on end-to-end failing tests; Bache practitioner survey and "all the tests together form the specification"; Adzic on spec-kit detail; Eberhardt on markdown-spec formality; "stochastically degraded" quote; Anthropic "If you can't verify it, don't ship it" (absent from current best-practices page).
 
 ## Session continuity and agent memory
 
@@ -209,6 +271,7 @@ Convergent evolution across the field, visible in INIT.md:
 - **Decisions captured separately from code.** ADRs, RFDs, arc42 §9, INIT.md DECISIONS.md — the genre is well-established.
 - **Session-state files.** Memory Bank (activeContext, progress), Anthropic harness (claude-progress.txt), GSD (STATE.md), planning-with-files (progress.md), INIT.md continuity files — independent convergence on a rewritten state file separate from the spec.
 - **Load cost scrutinized.** Auto-loaded context now measured empirically (Gloaguen et al.); lean, instruction-only auto-load favored.
+- **Verification over generation.** Farley, Martin, Beck, Anthropic, Eisele — intent binds only through a check that can fail; humans own the check; prose specs drift unnoticed.
 
 INIT.md's distinguishing claims relative to peers:
 - **Project-type-agnostic.** Most peers are software-only.
