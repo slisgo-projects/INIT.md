@@ -15,9 +15,9 @@ Universal use-case formulation protocol. Governs every use case specification, f
 On formulating a use case (new inline in `USE_CASES.md`, or extracting an existing one to its own file):
 
 1. User provides the use case identifier and a description (place, problem, project, application, etc.).
-2. AI proposes the **primary category** that fits the use case, with a **secondary category** noted when the use case spans more than one. Categories A–F defined in §"Category-Specific Sections" below.
-3. User confirms category selection before drafting begins.
-4. AI creates the use case with a header (identifier, name, status, primary category, secondary category if applicable, maturity level) and proposes the Charter (Stage 1) for review.
+2. AI selects the **primary category** that fits the use case, with a **secondary category** noted when the use case spans more than one. Categories A–F defined in §"Category-Specific Sections" below.
+3. AI assigns primary (and secondary) category and records a one-line basis in the header. Proceed without waiting. Pause for user confirmation only when (a) two categories fit comparably, or (b) the assignment would be the first use case in its category. User may override at Charter review.
+4. AI creates the use case with a header (identifier, name, status, primary category, secondary category if applicable, category basis, maturity level) and proposes the Charter (Stage 1) for review.
 
 **Header / changelog / maturity placement:** inline in `USE_CASES.md` — per use-case block; extracted to `USE_CASE_<identifier>.md` — per file. Content is otherwise identical.
 
