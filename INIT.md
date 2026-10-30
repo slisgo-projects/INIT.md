@@ -44,7 +44,7 @@ During review: the user will request thorough reviews at checkpoints. Surface an
 # Findings and Checks
 
 - **Negative findings require a control.** Before recording anything as unavailable or broken, either show the probe succeeds on a known-good instance, or reproduce the failure through an independent pathway. Unconfirmed negatives are `open` questions in DECISIONS.md, not constraints.
-- **Checks require a control.** A check is evidence only after it has been seen to fail: run it before the work exists, or against a seeded fault. A check that cannot fail proves nothing.
+- **Checks require a control.** A check is evidence only after it has been seen to fail: run it before the work exists, or against a seeded fault.
 
 # File Updates
 
@@ -118,7 +118,7 @@ Repeatable operational procedures — executing a software package, accessing a 
 - **Location:** `.claude/skills/<name>/SKILL.md` in the project directory. Project-scoped, not `$HOME/.claude/`.
 - **Content:** imperative how-to — commands, parameters, prerequisites, failure modes encountered. No secrets; point to credential locations instead.
 - **Boundary:** skills hold procedures (how to do); `reports/` topic reports hold findings (what was learned); OPERATIONS.md holds standing facts (what exists, where, who reaches it). A skill for reaching a host cites OPERATIONS.md for the host's identity and access rules rather than restating them. See §"Report Files" and §"OPERATIONS.md."
-- **Enforcement:** rules that admit no exceptions are enforced mechanically (hook, CI, script) where the host tool supports it. Prose states the rule; the mechanism holds it.
+- **Enforcement:** rules that admit no exceptions are enforced mechanically (hook, CI, script) where the host tool supports it.
 - **Coupling:** `SKILL.md` follows the Agent Skills open standard (agentskills.io), supported across vendors. Only the `.claude/skills/` path is Claude Code-specific; other agents use their own skill directory.
 
 # Writing Style for AI-Optimized Files

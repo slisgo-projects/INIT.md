@@ -62,7 +62,7 @@ INIT.md is authoritative for required content per file.
 
 **Scaffolding files** are not read on context refresh, are preserved in `scaffolding/integrated/` after phase completion (not deleted), and supplement DECISIONS.md rather than replace it.
 
-This is not a git repository.
+Git repository; commit only on request.
 
 ## Coding behavioral guidelines
 

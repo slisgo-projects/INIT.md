@@ -15,9 +15,8 @@ Universal use-case formulation protocol. Governs every use case specification, f
 On formulating a use case (new inline in `USE_CASES.md`, or extracting an existing one to its own file):
 
 1. User provides the use case identifier and a description (place, problem, project, application, etc.).
-2. AI selects the **primary category** that fits the use case, with a **secondary category** noted when the use case spans more than one. Categories A–F defined in §"Category-Specific Sections" below.
-3. AI assigns primary (and secondary) category and records a one-line basis in the header. Proceed without waiting. Pause for user confirmation only when (a) two categories fit comparably, or (b) the assignment would be the first use case in its category. User may override at Charter review.
-4. AI creates the use case with a header (identifier, name, status, primary category, secondary category if applicable, category basis, maturity level) and proposes the Charter (Stage 1) for review.
+2. AI selects the **primary category** that fits the use case, with a **secondary category** noted when the use case spans more than one, and records a one-line basis in the header. Categories A–F defined in §"Category-Specific Sections" below. Proceed without waiting. Pause for user confirmation only when (a) two categories fit comparably, or (b) the assignment would be the first use case in its category within this project. User may override at Charter review.
+3. AI creates the use case with a header (identifier, name, status, primary category, secondary category if applicable, category basis, maturity level) and proposes the Charter (Stage 1) for review.
 
 **Header / changelog / maturity placement:** inline in `USE_CASES.md` — per use-case block; extracted to `USE_CASE_<identifier>.md` — per file. Content is otherwise identical.
 
@@ -326,7 +325,7 @@ Detailed criteria for each stage gate. A stage is not complete until all checkbo
 - [ ] Every data gap has a mitigation or blocking flag.
 - [ ] Every assumption is stated and its sensitivity described.
 - [ ] All monetary values use the same currency or note conversions.
-- [ ] Every success measure names its check and pass/fail signal, or is marked judgment-only; at least one concrete example per measure.
+- [ ] Every success measure names its check and pass/fail signal, or is marked judgment-only; at least one concrete example per measure; each check shown capable of failing per INIT.md §"Findings and Checks".
 
 ### Gate 6: Validation Credibility
 - [ ] *Category-specific reviewer:* at least one local stakeholder (civic), domain expert (research), beta-reader (authorship), user-tester (software), field-tester (hardware), or operator self-check (personal) has reviewed and confirmed top entries are recognizable.
@@ -365,7 +364,7 @@ When advancing stages: do not advance until the current stage's quality gate is 
 When the user asks to re-read a use case, also re-read:
 - This file (`USE_CASE_INIT.md`) — to verify current stage and gate criteria.
 - The parent `USE_CASES.md` — to confirm the use case's place in the project's use-case set.
-- Foundational and cross-cutting files of the project per INIT.md (`VISION.md`, `MOTIVATION.md`, `GLOSSARY.md`, `CONSTRAINTS.md`, `INTERFACES.md`, `DECISIONS.md`).
+- Foundational and cross-cutting files of the project per INIT.md (`VISION.md`, `MOTIVATION.md`, `GLOSSARY.md`, `CONSTRAINTS.md`, `INTERFACES.md`, `DECISIONS.md`, and `OPERATIONS.md` where present).
 - Project-specific framework or exploration files when present (e.g., domain-specific frameworks, interactive-mode protocols).
 
 ---
