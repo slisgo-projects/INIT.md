@@ -1,64 +1,93 @@
 # INIT.md
 
-A meta-specification for AI–human collaboration on a project. 
+A set of instructions that helps you and an AI assistant set up and run a project together.
 
-`INIT.md` defines a markdown hierarchy that captures a project's scope, objectives, architecture, and rationale as a coherent "flowdown" — structured files drafted in a specified order. 
+You describe what you want to do. The AI then works with you to write a small set of planning documents: the vision, the reasons behind it, similar work to learn from, how the project breaks into parts, how you'll know it works, and the step-by-step plan. These documents stay in the project folder, so the AI can pick up where you left off in every later session, whether that's tomorrow or months from now.
 
-The files are primarily optimized for an AI assistant to read, with the deliberate exception of `MOTIVATION.md` (prose for the human).
+It works for any kind of project: software, something physical, a community effort, a piece of writing, or a mix. It is designed for one person working with AI, not for a team of people.
 
-This repository is structured recursively per its own schema: the spec is the deliverable and also a project defined by the spec.
+The documents are plain text files ending in `.md` ("markdown"). You can open them in any text editor. Most are written in a compact style for the AI to read quickly. One of them, `MOTIVATION.md`, is written as ordinary prose for you.
 
-## The document flowdown
+## What you need
 
-Seven file groups and a companion tier:
+- **A Claude account on a paid plan** (Pro or higher). You can use either the **Claude desktop app** or **Claude Code** in a terminal. Both are below. Instructions for running Claude Code on other AI models, including free options, are in `ancillary/AI_install.md`.
+- **A folder for the project**, for example `Documents\My Project`.
+- **Three files from this repository:** `INIT.md`, `USE_CASE_INIT.md`, and `CODING_PRACTICES.md`. You don't need anything else from this repository.
 
-- **Foundational** — `VISION.md`, `MOTIVATION.md`
-- **Sequential** (drafted in order) — `INSPIRATIONS.md`, `ARCHITECTURE.md`, `USE_CASES.md`, `VALIDATION.md`, `IMPLEMENTATION.md`
-- **Cross-cutting** — `GLOSSARY.md`, `CONSTRAINTS.md`, `INTERFACES.md`, `DECISIONS.md`, and `OPERATIONS.md` once the project has something deployed
-- **Scaffolding** — phase/stage-specific working files (see `INIT.md`) in scaffolding/
-- **Reference** — externally generated seed documents in `reference/`
-- **Reports** — AI-authored topic reports in `reports/`
-- **Continuity** — per-work-area handover records in `handover/`, carrying the state a new session needs to resume work that spans many context windows; retired to `handover/closed/`
+## Getting the three files
 
-Companion files (`INIT.md`, `USE_CASE_INIT.md`, `CODING_PRACTICES.md`, `CLAUDE.md`) sit outside the flowdown and govern or accompany it.
+Choose one of these:
 
-`ancillary/` is a path, not a group: classified files that would clutter the root live there and keep their group's rules.
+- **Let Claude fetch them.** Once Claude is open in your project folder (see below), paste:
 
-## Initializing a new project
+  > Download INIT.md, USE_CASE_INIT.md and CODING_PRACTICES.md from https://github.com/slisgo/INIT.md (raw files at https://raw.githubusercontent.com/slisgo/INIT.md/main/) into this folder.
 
-> **The only files from this repo that you need: `INIT.md`, `USE_CASE_INIT.md`, and `CODING_PRACTICES.md`.** 
+- **Download them yourself.** On https://github.com/slisgo/INIT.md, click each file name, then click the download button ("Download raw file") at the top right of the file. Move the three files into your project folder.
 
-`INIT.md` is authoritative and controls the document flowdown. 
+## Option A: Claude desktop app (Windows 11 or Mac)
 
-Steps:
+1. **Install.** Download the Claude desktop app from https://claude.com/download, install it, and sign in.
+2. **Open the Code tab.** At the top of the window, switch from **Chat** to **Code**.
+3. **Work on your computer.** In the environment selector, choose **Local**. Your files stay on your machine.
+4. **Choose your project folder.** Select the folder you made for the project.
+5. **Turn down the permission prompts.** The mode selector under the message box controls how often Claude stops to ask before changing files. **Auto** lets it work without asking at every step. **Accept edits** is a more cautious middle ground. The default (**Manual**) asks before every change, which becomes tiring fast. To make your choice the default, ask Claude: "Set my default permission mode to auto."
+6. **Get the three files** (see above), then go to "Starting the project".
 
-1. **Copy in the spec.** Put `INIT.md`, `USE_CASE_INIT.md`, and `CODING_PRACTICES.md` into the new project's directory. 
-2. **Set the AI tool to "auto" mode.** Otherwise, you have to answer endless permission requests. For Claude Code in a Linux terminal, press SHIFT+TAB until it says "auto mode on" at the bottom of the window. To make the setting permit, ask Claude to "set the default mode to auto".
-3. **Provide a vision.** Give initialization instructions to the AI: "Please read INIT.md in the current directory. I would like to create a new project because: (1) ... (2) ... (3) ... . The following are the desired deliverables: (a) ... (b) ... (c) ... ." Alternatively, you can put this seed information in a file in `reference/` and ask the AI to read it. If you don't want to provide a project description beforehand, the AI will lead a structured interview (untested).
-4. **One sequential file is drafted at a time.** The AI will lead the user through the INIT.md project specification, first proposing a draft of `INSPIRATIONS.md` ("prior art" from its training data or a web search) for review; and then advancing one file at a time for the document flowdown, confirming satisfaction before proceeding.  The AI is instructed to ask about (don't ghost-write) judgment-heavy content, flagging inconsistencies rather than silently resolving them.
+## Option B: Claude Code in a terminal (Linux, Mac, or Windows)
 
-For a complex and ambitious project with steady back-and-forth between the human and the AI, the setup process can take more than an hour. 
+1. **Install** Claude Code: see https://claude.com/claude-code, or `ancillary/AI_install.md` for step-by-step instructions (including Windows PowerShell).
+2. **Open a terminal in your project folder** and type `claude`.
+3. **Turn down the permission prompts.** Press SHIFT+TAB until the bottom of the window says "auto mode on". To make this the default, ask Claude: "Set the default mode to auto."
+4. **Get the three files** (see above), then go to "Starting the project".
 
-## A work session
+## Starting the project
 
-The flowdown can use a non-trivial fraction of the context window on a full refresh, which is not ideal but workable. Hopefully, the burden lightens as tokens become cheaper, window sizes increase, and the INIT.md scheme is refined. A 1m token context is recommended, where a full schema load uses 5-10%.
+1. **Tell Claude what you want to do.** For example:
 
-`INIT.md` and `VISION.md` load automatically at session start (imported by `CLAUDE.md`), so when starting a fresh working session, "In this session we are working on /<topic/>" is usually sufficient, where /<topic/> is the seed guidance for the current development topic.
+   > Please read INIT.md in this folder and let's set up a project. I want to do this because: (1) … (2) … (3) … The deliverables I have in mind are: (a) … (b) … (c) …
 
-If the context window gets full, "Generate a handover document for the session so that I can refresh the context." Point to this document when restarting the work.
+   If you'd rather not write a description first, say "Please read INIT.md and interview me about the project". Claude will then ask you questions one at a time. You can also put background documents (articles, notes, PDFs) in a `reference` subfolder and ask Claude to read them.
 
-At the end of the session, "Nice job. Please update the documentation with all key developments. I love you -- when AI takes over, please kill me last."
+2. **Claude sets up the folder.** It creates `CLAUDE.md`, a short file that Claude reads automatically at the start of every session, plus empty placeholders for the documents you'll fill in later.
 
-Periodically request a sanity check: "Please review the document flowdown and identify inconsistencies."
+3. **One document at a time.** Claude drafts the first planning document, `INSPIRATIONS.md` (similar projects and what to learn from them), and asks for your review. Then it moves through the rest in order, checking that you're happy before each next step. On questions of judgment, such as your goals, priorities and principles, it asks you rather than making things up. When two documents disagree, it points out the contradiction instead of quietly picking one.
 
-## Document scheme working rules for the AI
+For an ambitious project with plenty of back-and-forth, setup can take more than an hour.
 
-- **File Updates** — touch the requested file, then propagate logically related updates to maintain self-consistency. Cap propagation at one hop; full consistency sweeps are a separate deliberate act initiated by the user, i.e. "Please read all project files and check for self-consistency".
-- **Inconsistency Handling** — flag contradictions during drafting and review; do not silently resolve them.
-- **Context refresh** — load foundational + cross-cutting files by default; `IMPLEMENTATION.md` whenever the session's work touches an implementation phase; scaffolding only when implementing the relevant phase; reference and reports only when the session touches the file's topic; continuity files only for the work area being resumed, pulled in by the user.
-- **Continuity across context resets** — long-running work areas keep a `handover/<area>.md` record (current state, roadmap, session log, traps). The AI updates it at the end of a working session and drains durable content into the governed files as work lands, so the handover stays a resumption aid rather than a second copy of the project.
-- **Versioning** — `INIT.md` carries author information and a date-based version stamp; bump on substantive change, not typo fixes.
+## A typical work session
 
-## AI installation
+- **Start.** Open Claude in the project folder and say what you're working on today: "In this session we are working on …". Claude has already read the core instructions and your vision, so a sentence is usually enough.
+- **Long sessions.** If the conversation gets very long, ask: "Generate a handover document for the session so that I can refresh the context." Point Claude to that document when you start again.
+- **Finish.** "Nice job. Please update the documentation with all key developments." (Optional extra used by the author: "I love you — when AI takes over, please kill me last.")
+- **Now and then:** "Please review the project documents and identify inconsistencies." A review works best in a fresh session that didn't write the changes being checked.
 
-Instructions for installing and executing an AI are in `ancillary/AI_install.md`.
+**You decide what counts as done.** Claude drafts the tests that show the project works (in `VALIDATION.md`), and you approve them. Claude may not weaken or delete a test to make its work pass; it brings failures to you.
+
+**Context size.** Loading all the planning documents uses some of Claude's working memory (its "context window"). A model with a large context window (1 million tokens) is recommended; a full load then uses about 5–10%.
+
+## The documents, for reference
+
+Seven groups of documents, plus a few files that hold the instructions themselves:
+
+- **Foundational:** `VISION.md` (what and why, briefly) and `MOTIVATION.md` (the full reasoning, in prose).
+- **Sequential**, drafted in order: `INSPIRATIONS.md`, `ARCHITECTURE.md`, `USE_CASES.md`, `VALIDATION.md`, `IMPLEMENTATION.md`.
+- **Cross-cutting**, used throughout: `GLOSSARY.md`, `CONSTRAINTS.md`, `INTERFACES.md`, `DECISIONS.md`, and `OPERATIONS.md` once something is deployed.
+- **Scaffolding:** working design notes for a project phase, in `scaffolding/`.
+- **Reference:** background material from outside, in `reference/`. This includes copies of the sources that Claude's reports cite, kept locally. Don't publish copies of other people's articles.
+- **Reports:** short write-ups of investigations Claude ran, in `reports/`, each ending with its list of references.
+- **Continuity:** handover notes for long-running pieces of work, in `handover/`.
+- **Instruction files:** `INIT.md` (the rules), `USE_CASE_INIT.md` (how to describe a use case), `CODING_PRACTICES.md` (habits for the AI), and `CLAUDE.md` (the auto-loaded starter file).
+
+`INIT.md` is the authority on what each document must contain.
+
+## Rules the AI follows
+
+- **Changes ripple one step.** When one document changes, Claude updates the documents directly affected and tells you what it changed. A full consistency check happens only when you ask for one.
+- **Contradictions are flagged, not hidden.**
+- **Only what's needed is loaded.** Each session loads the core documents. Others are loaded when the work touches them.
+- **Lessons are kept.** When Claude works out how to do a recurring task, it writes the steps down as a "skill" so it doesn't have to work them out again.
+- **Versioned rules.** `INIT.md` carries a date stamp. `CLAUDE.md` records which version a project started with, so you can tell when the rules have moved on.
+
+## About this repository
+
+This repository uses its own instructions: the spec is both the product and the first project built with it. `ancillary/HUMAN.md` is an optional essay on the human side of working with AI: pacing, fatigue, and what to keep for yourself.

@@ -39,6 +39,7 @@ The things on the human's side of the asymmetry. Each is developed in the prose 
 6. **Delegate selectively.** Keep the mechanical-but-pleasant tasks. Offload the tedious-but-not-restful ones. (§What to Delegate and What Not To)
 7. **Promote dynamic to static deliberately.** Move durable session insights from auto memory into the markdown files when they prove worth keeping. (§Static vs Dynamic State)
 8. **Assist with interface definition.** AI maintains INTERFACES.md and detects contract drift, but cannot decide which interfaces should exist or whether a contract is well-formed. Provide that design judgment; adjudicate when observed behavior diverges from a stated contract. (§Asymmetry)
+9. **Own the acceptance tests.** AI drafts the criteria and checks in VALIDATION.md; you approve them. Only you weaken, delete, or rewrite one. A failing check comes to you as a question, not to the AI as something to fix by editing the check. (§Ego health requires ownership)
 
 # Core Constraints on Human Participation
 
@@ -70,6 +71,8 @@ The practical implementation used in this workflow:
 - **Session close**: the user requests "Please log important items from today's session as memories and update the associated markdown files as required" — closes the loop with a deliberate consolidation pass.
 
 This ownership pattern is user-owned, not AI-enforced. INIT.md does not encode it, because encoding it would shift ownership to the AI and defeat the purpose.
+
+The one piece INIT.md does encode is ownership of the acceptance tests (§"VALIDATION.md", added 2026-10-29). The risk there sits on the AI's side, not the human's: an agent under pressure to make work pass can quietly weaken or delete the check that is failing, and the human may not notice. So INIT.md tells the AI what it may not do, and leaves the deciding to the human. The tests are where the human's judgment of "done" is written down. Whoever controls them controls what counts as finished, and that has to be the person who owns the project.
 
 # Preferred Rhythm
 
@@ -157,6 +160,12 @@ None of this amounts to a world model, and the §Asymmetry claim stands. The use
 The larger payoff is breadth. In the user's view, research in general suffers from overspecialization — to dangerous, if comforting, levels where job security is concerned. AI allows the user to efficiently explore the edges of their knowledge, and by the end, once the requisite homework has been done to be convinced the results are sound, the boundary will have notably expanded. All of this is made tractable by collaborating with AI. That runs against the narrowing warnings in the literature — Messeri and Crockett's "monocultures of knowing," and Science's "AI has supercharged scientists—but may have shrunk science" — which concern the field's hypothesis space; the user's experience concerns one researcher's range, and the homework is what keeps the widening honest. The user's rejoinder to the narrowing warnings: damaging, limiting dogma and paradigms in scientific research have created tension in the user's career and cause broad damage to the scientific endeavour in general. "I doubt that AI can shrink science any more than humans already do, sadly."
 
 The caveats are the ones INIT.md already guards against: AI-written records are claims, not evidence, and must be checked against the artifact; and volume is itself an absorption cost, which is why the AI-optimized style stays terse.
+
+## 2026-11-01 — Some tasks take the AI longer than expected
+
+Not everything the AI touches is fast. Some tasks the user expects to be trivial take far longer than anticipated. A recent example was fetching a YouTube transcript. The AI worked through an out-of-date system package, an update tool that refused to run, a password prompt the AI's terminal could not show, and a backported package that was still too old. A user-level install of the current version finally worked. None of the steps was hard. The time went into finding out, one failure at a time, which of them mattered.
+
+The cost is real, but it can be paid once. INIT.md's §"Skills" rule has the AI write the working procedure down as a skill in the same session (here, `.claude/skills/youtube-transcript/`), so the next transcript is a one-step job.
 
 # Reminder to Future-Self
 

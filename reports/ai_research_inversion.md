@@ -27,9 +27,9 @@
 - The post-study reading phase is the comprehension-debt repayment; Messeri & Crockett's explanatory-depth illusion is the failure mode if it is skipped.
 - Candidate USE_CASES.md relevance: research use cases (knowledge-deliverable projects) may need a comprehension step after results, not only a literature step before.
 
-## Sources
+## References
 
-URLs as returned by the search tool; pages not fetched.
+URLs as returned by the search tool; pages not fetched (all search summaries).
 
 - https://anthropic.com/research/vibe-physics
 - https://academy.openai.com/en/public/blogs/terence-tao-ai-is-ready-for-primetime-in-math-and-theoretical-physics-2026-03-06

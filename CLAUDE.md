@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-**Initialized against INIT.md version:** 2026-10-29
+**Initialized against INIT.md version:** 2026-11-01
 
 **Auto-loaded every session** (per INIT.md §"CLAUDE.md Bootstrap"):
 
@@ -25,7 +25,7 @@ Seven flowdown groups plus a companion tier (per INIT.md §"Project Markdown Fil
 - **Sequential**: INSPIRATIONS.md, ARCHITECTURE.md, USE_CASES.md, VALIDATION.md, IMPLEMENTATION.md. VALIDATION.md and IMPLEMENTATION.md deliberately skipped for this recursive project (see DECISIONS.md 2026-05-10).
 - **Cross-cutting**: GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md. No OPERATIONS.md — this project deploys nothing.
 - **Scaffolding**: none in this project.
-- **Reference**: `reference/Seramount-The-AI-Productivity-Paradox-Insight-Paper.pdf`, `reference/The AI Point Elasticity_ When More Capacity Becomes a Liability.pdf` (seed documents — externally generated inputs).
+- **Reference**: `reference/Seramount-The-AI-Productivity-Paradox-Insight-Paper.pdf`, `reference/The AI Point Elasticity_ When More Capacity Becomes a Liability.pdf` (seed documents — externally generated inputs). Report-source copies saved here are local only; `.gitignore` keeps them out of the public repo.
 - **Reports**: `reports/ai_work_intensification.md`, `reports/ai_research_inversion.md` (AI-authored topic reports from mini-investigations).
 - **Continuity**: none in this project (`handover/`; per-work-area session-continuity records). Schema edits are single-session and land in DECISIONS.md.
 - **Companion**: INIT.md, USE_CASE_INIT.md, CODING_PRACTICES.md, CLAUDE.md. (HUMAN.md is an optional companion living in `ancillary/HUMAN.md`, not at root.)
@@ -40,7 +40,7 @@ INIT.md is authoritative for required content per file.
 **Deliverable files** (the spec being authored):
 - **INIT.md** — authoritative spec for the project markdown hierarchy. Read first.
 - **HUMAN.md** — optional companion to INIT.md (lives in `ancillary/HUMAN.md`). Human side of the collaboration and sustainability rationale. Not referenced by INIT.md; not a required part of the flowdown.
-- **CODING_PRACTICES.md** — behavioral guidelines copied into downstream projects' CLAUDE.md per INIT.md §"CLAUDE.md Bootstrap."
+- **CODING_PRACTICES.md** — behavioral guidelines imported into downstream projects' CLAUDE.md per INIT.md §"CLAUDE.md Bootstrap."
 - **USE_CASE_INIT.md** — universal use-case formulation protocol. Governs every use case specification: formulated inline in `USE_CASES.md` by default; extracted to its own `USE_CASE_<identifier>.md` only when an individual case grows unwieldy (length-triggered; protocol identical either way). Defines universal foundational elements plus a section per category (A–F); AI selects primary and optional secondary category from the user's description and applies the corresponding structure.
 
 **Project files** (this repo structured per INIT.md schema):
@@ -66,66 +66,6 @@ Git repository; commit only on request.
 
 ## Coding behavioral guidelines
 
-This is a no-code meta-spec; CODING_PRACTICES.md applies to spec edits by analogy (surface tradeoffs before writing; minimal change; surgical edits; goal-driven verification). Full contents copied below per INIT.md §"CLAUDE.md Bootstrap" — keep in sync with CODING_PRACTICES.md if it changes.
+This is a no-code meta-spec; CODING_PRACTICES.md applies to spec edits by analogy (surface tradeoffs before writing; minimal change; surgical edits; goal-driven verification). Imported per INIT.md §"CLAUDE.md Bootstrap":
 
----
-
-Behavioral guidelines to reduce common LLM coding mistakes (https://github.com/multica-ai/andrej-karpathy-skills).
-
-**Tradeoff:** these guidelines bias toward caution over speed. For trivial tasks, use judgment.
-
-### 1. Think Before Coding
-
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
-
-Before implementing:
-- State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them — don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
-
-### 2. Simplicity First
-
-**Minimum code that solves the problem. Nothing speculative.**
-
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" or "configurability" that wasn't requested.
-- No error handling for impossible scenarios.
-- If you write 200 lines and it could be 50, rewrite it.
-
-Ask: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
-
-### 3. Surgical Changes
-
-**Touch only what you must. Clean up only your own mess.**
-
-When editing existing code:
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it — don't delete it.
-
-When your changes create orphans:
-- Remove imports/variables/functions that YOUR changes made unused.
-- Don't remove pre-existing dead code unless asked.
-
-Test: every changed line traces directly to the user's request.
-
-### 4. Goal-Driven Execution
-
-**Define success criteria. Loop until verified.**
-
-Transform tasks into verifiable goals:
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
-
-For multi-step tasks, state a brief plan:
-```
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-3. [Step] → verify: [check]
-```
-
-Strong success criteria enable independent looping. Weak criteria ("make it work") require constant clarification.
+@CODING_PRACTICES.md

@@ -22,7 +22,7 @@ Files auto-loaded by AI coding tools to instruct behavior in a specific codebase
 - **What:** Anthropic's convention for Claude Code project memory. Auto-loaded each session. Hierarchical (user-level / project / nested).
 - **Borrow:** Auto-load per session removes load-context friction; hierarchical scoping for global vs. per-project rules.
 - **Avoid:** Underspecified contents — projects each invent their own structure, which fragments the ecosystem.
-- **Relevance:** INIT.md §"CLAUDE.md Bootstrap" specifies what populates CLAUDE.md (CODING_PRACTICES + hierarchy stub), filling the gap Anthropic leaves.
+- **Relevance:** INIT.md §"CLAUDE.md Bootstrap" specifies what populates CLAUDE.md (CODING_PRACTICES import + hierarchy stub), filling the gap Anthropic leaves.
 
 ### Cursor Rules (.cursor/rules/*.mdc)
 - **Link:** [cursor.com/docs/rules](https://cursor.com/docs/rules)
@@ -36,7 +36,7 @@ Files auto-loaded by AI coding tools to instruct behavior in a specific codebase
 - **What:** Plain markdown specifying coding conventions (library preferences, type annotations, style). Loaded read-only per session; cacheable.
 - **Borrow:** Conventions in a separate file from project context, loaded on demand; community-contributed conventions repo.
 - **Avoid:** No structure beyond freeform markdown; user invents the format each time.
-- **Relevance:** Direct ancestor of CODING_PRACTICES.md. INIT.md's "copy CODING_PRACTICES.md into CLAUDE.md" instruction fuses Aider's pattern with the AGENTS.md/CLAUDE.md auto-load.
+- **Relevance:** Direct ancestor of CODING_PRACTICES.md. INIT.md's "import CODING_PRACTICES.md into CLAUDE.md" instruction fuses Aider's pattern with the AGENTS.md/CLAUDE.md auto-load.
 
 ### Kiro Steering Files (AWS)
 - **Link:** [kiro.dev/docs/steering](https://kiro.dev/docs/steering/)

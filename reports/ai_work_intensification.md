@@ -28,9 +28,9 @@
 - Candidate `ancillary/HUMAN.md` material: stopping rules, session caps, ambition-vs-absorption checks.
 - Candidate schema question (open, not decided): whether INIT.md should carry any absorption-limit mechanism, or leave it to HUMAN.md.
 
-## Sources
+## References
 
-URLs as returned by the search tool; pages not fetched.
+URLs as returned by the search tool; pages not fetched (all search summaries).
 
 
 - https://hbr.org/2026/02/ai-doesnt-reduce-work-it-intensifies-it

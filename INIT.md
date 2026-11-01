@@ -2,7 +2,7 @@
 
 **Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5, Fable 5.1, Opus 5.5
 
-**Version:** 2026-10-29 (date of last substantive change; see §"Versioning")
+**Version:** 2026-11-01 (date of last substantive change; see §"Versioning")
 
 Guidance for the AI assistant on drafting and maintaining the markdown files that define a project.
 
@@ -156,7 +156,7 @@ Directive, concise:
 
 CLAUDE.md is auto-loaded every session. Populate it once during project setup with four pieces:
 
-1. **Coding behavioral guidelines.** Copy the contents of CODING_PRACTICES.md (separate file), merging with any project-specific guidance.
+1. **Coding behavioral guidelines.** Import CODING_PRACTICES.md with an `@CODING_PRACTICES.md` line, on its own line and outside code spans. Put project-specific coding guidance in CLAUDE.md beside the import. For an AI tool that does not expand `@` imports, paste the file's contents instead.
 
 2. **Markdown hierarchy stub.** A short index of this project's markdown files — its instantiation of the schema. The stub contains:
    - The seven file groups (foundational, sequential, cross-cutting, scaffolding, reference, reports, continuity) and which files belong to each.
@@ -177,7 +177,7 @@ Seven flowdown groups plus a companion tier:
 - **Sequential files** follow the flowdown, general to specific. Drafted in order during project setup. AI-optimized.
 - **Cross-cutting files** are consulted and updated throughout the project lifecycle. Not part of the linear flowdown. AI-optimized. OPERATIONS.md joins the group once the project has deployed hosts or physical devices.
 - **Scaffolding files** capture implementation-detail design work (concepts, open questions, code templates) for a phase or subsystem. Markdown files that grow from concept to code during the planning phase. Moved to `scaffolding/integrated/` once implementation begins, preserved as historical record (as-designed state, not current truth). Not read on context refresh — only when implementing the relevant phase.
-- **Reference files** hold externally generated background material in `reference/`: seed documents gathered around project inception (inputs to VISION.md and MOTIVATION.md). Stored as-is. Loaded when a session touches the relevant topic; not read on context refresh.
+- **Reference files** hold externally generated background material in `reference/`: seed documents gathered around project inception (inputs to VISION.md and MOTIVATION.md), and local copies of sources cited by topic reports. Stored as-is. Loaded when a session touches the relevant topic; not read on context refresh.
 - **Report files** hold AI-authored write-ups of mini-studies or investigations in `reports/`: topic reports from mini-investigations during project execution. Self-updating, status-tracked, cited from the flowdown file where load-bearing. Loaded when a session touches the relevant topic; not read on context refresh.
 - **Continuity files** hold per-work-area session-continuity records in `handover/`: the state a new session needs to resume a work area that spans many context windows. Current state, roadmap with per-job status, dated session log, traps. Self-updating; drained to the governed files as work lands; retired to `handover/closed/`. Loaded when the user pulls the file for the area being resumed; not read on context refresh.
 - **Companion files** sit outside the flowdown. Schema-level artifacts that govern or accompany the flowdown rather than participate in it: INIT.md (this spec), USE_CASE_INIT.md (universal use-case formulation protocol; governs USE_CASES.md content inline and in any extracted daughter file), HUMAN.md (optional sustainability companion; lives in `ancillary/` when present, not a required part of the flowdown), CODING_PRACTICES.md (downstream coding-behavior template), CLAUDE.md (auto-load bootstrap stub). Not subject to the flowdown's loading patterns; loaded on demand or per the auto-load convention of the host AI tool.
@@ -473,10 +473,12 @@ Per §"Context Refresh"; load only when implementing the relevant phase. Integra
 Files in `reference/` holding externally generated background material, consulted by topic.
 
 - **Seed documents.** Externally generated material gathered around project inception. Inputs to VISION.md and MOTIVATION.md. Stored as-is; exempt from §"Writing Style for AI-Optimized Files."
+- **Report sources.** Local copies of references cited by topic reports (see §"Report Files"). Stored as-is.
 
 Rules:
 - Not read on context refresh; load when the session touches the file's topic.
-- Seed documents persist; they do not move or integrate. Stored as-is, not rewritten into AI-optimized style.
+- Reference files persist; they do not move or integrate. Stored as-is, not rewritten into AI-optimized style.
+- Do not commit report-source copies to a public repository.
 
 ## Report Files
 
@@ -488,8 +490,10 @@ Per topic report:
 - Implications for the project.
 - Date. Findings reflect that date's state; treat as potentially stale.
 - Status: current / superseded (with pointer to replacement).
+- References, at the end: per source, author or publisher, title, date, URL or path, and whether it was read in full or seen only as a search summary.
 
 Rules:
+- Where a reference can be downloaded, save a copy to `reference/` and add its local path to the entry.
 - Cite each topic report, path-qualified, from the flowdown file where its findings are load-bearing.
 - Not read on context refresh; load when the session touches the file's topic.
 - Report files persist; they do not move or integrate. When findings are overturned, mark the report superseded with a pointer — do not delete.

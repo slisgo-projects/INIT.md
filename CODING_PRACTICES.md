@@ -2,7 +2,7 @@
 
 Behavioral guidelines to reduce common LLM coding mistakes (https://github.com/multica-ai/andrej-karpathy-skills).
 
-Intended to be copied into CLAUDE.md for each coding project. Merge with project-specific guidance as needed.
+Imported into each coding project's CLAUDE.md with an `@CODING_PRACTICES.md` line; paste the contents instead for AI tools that do not expand `@` imports. Put project-specific guidance in CLAUDE.md beside the import.
 
 **Tradeoff:** these guidelines bias toward caution over speed. For trivial tasks, use judgment.
 
