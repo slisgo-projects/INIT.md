@@ -27,7 +27,7 @@ Choose one of these:
 ## Option A: Claude desktop app (Windows 11 or Mac)
 
 1. **Install.** Download the Claude desktop app from https://claude.com/download, install it, and sign in.
-2. **Open the Code tab.** At the top of the window, switch from **Chat** to **Code**.
+2. **Open the Code tab.** At the top of the window, switch from **Chat** to **Code**. Chat isn't suitable: it can't read or write the project's files, so it can't keep the planning documents up to date between sessions.
 3. **Work on your computer.** In the environment selector, choose **Local**. Your files stay on your machine.
 4. **Choose your project folder.** Select the folder you made for the project.
 5. **Turn down the permission prompts.** The mode selector under the message box controls how often Claude stops to ask before changing files. **Auto** lets it work without asking at every step. **Accept edits** is a more cautious middle ground. The default (**Manual**) asks before every change, which becomes tiring fast. To make your choice the default, ask Claude: "Set my default permission mode to auto."
