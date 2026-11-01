@@ -20,9 +20,9 @@ Choose one of these:
 
 - **Let Claude fetch them.** Once Claude is open in your project folder (see below), paste:
 
-  > Download INIT.md, USE_CASE_INIT.md and CODING_PRACTICES.md from https://github.com/slisgo/INIT.md (raw files at https://raw.githubusercontent.com/slisgo/INIT.md/main/) into this folder.
+  > Download INIT.md, USE_CASE_INIT.md and CODING_PRACTICES.md from https://github.com/slisgo-projects/INIT.md (raw files at https://raw.githubusercontent.com/slisgo-projects/INIT.md/main/) into this folder.
 
-- **Download them yourself.** On https://github.com/slisgo/INIT.md, click each file name, then click the download button ("Download raw file") at the top right of the file. Move the three files into your project folder.
+- **Download them yourself.** On https://github.com/slisgo-projects/INIT.md, click each file name, then click the download button ("Download raw file") at the top right of the file. Move the three files into your project folder.
 
 ## Option A: Claude desktop app (Windows 11 or Mac)
 
