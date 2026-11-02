@@ -41,6 +41,8 @@ The things on the human's side of the asymmetry. Each is developed in the prose 
 8. **Assist with interface definition.** AI maintains INTERFACES.md and detects contract drift, but cannot decide which interfaces should exist or whether a contract is well-formed. Provide that design judgment; adjudicate when observed behavior diverges from a stated contract. (§Asymmetry)
 9. **Own the acceptance tests.** AI drafts the criteria and checks in VALIDATION.md; you approve them. Only you weaken, delete, or rewrite one. A failing check comes to you as a question, not to the AI as something to fix by editing the check. (§Ego health requires ownership)
 
+**Value judgments** is intentionally excluded from the list because it is not clear to the author that humans have values, or more poingantly, any said values readily defer to interests for the vast majority of the population.
+
 # Core Constraints on Human Participation
 
 ## 1. Creative input is finite per project per session
@@ -166,6 +168,8 @@ The caveats are the ones INIT.md already guards against: AI-written records are 
 Not everything the AI touches is fast. Some tasks the user expects to be trivial take far longer than anticipated. A recent example was fetching a YouTube transcript. The AI worked through an out-of-date system package, an update tool that refused to run, a password prompt the AI's terminal could not show, and a backported package that was still too old. A user-level install of the current version finally worked. None of the steps was hard. The time went into finding out, one failure at a time, which of them mattered.
 
 The cost is real, but it can be paid once. INIT.md's §"Skills" rule has the AI write the working procedure down as a skill in the same session (here, `.claude/skills/youtube-transcript/`), so the next transcript is a one-step job.
+
+This is mentioned here as a calibration rather than a criticism -- the user is still mapping out what tasks the AI can execute trivially/efficiently, and what types of problems are a struggle and need more intense supervision. An ultimate goal is to make the AI more independent, with a heavy user-qualified validation layer closer to the end of the project.
 
 # Reminder to Future-Self
 
