@@ -67,7 +67,7 @@ If the project is relatively straightforward, you can ask the AI to skip steps o
 
 **Context size.** Loading all the planning documents uses some of Claude's working memory (its "context window"). A model with a large context window (1 million tokens) is recommended; a full load then uses about 5–10%, which is manageable, if not ideal.
 
-If the context window is getting full, best practice is to ask the AI to create a handover document before issuing the /compact command or restarting the session -- INIT.md is automatically reloaded in either case. The user must explicitly ask for the handover document to be read after the context refresh, i.e. "The context window was reset. Please read the handover document."
+If the context window is getting full, best practice is to ask the AI to create a handover document before the user issues a /compact command in Claude Code or restarts the session. INIT.md is automatically reloaded in either case. The user must explicitly ask for the handover document to be read after the context refresh, i.e. "The context window was reset. Please read the handover document."
 
 ## The documents, for reference
 
