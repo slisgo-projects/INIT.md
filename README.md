@@ -54,6 +54,8 @@ Choose one of these:
 
 For an ambitious project with plenty of back-and-forth, setup can take more than an hour.
 
+If the project is relatively straightforward, you can ask the AI to skip steps or implement a light version of the document flowdown. 
+
 ## A typical work session
 
 - **Start.** Open Claude in the project folder and say what you're working on today: "In this session we are working on …". Claude has already read the core instructions and your vision, so a sentence is usually enough.
