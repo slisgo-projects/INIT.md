@@ -2,11 +2,11 @@
 
 A set of instructions that helps you and an AI assistant set up and run a project together.
 
-You describe what you want to do. The AI then works with you to write a small set of planning documents: the vision, the reasons behind it, similar work to learn from, how the project breaks into parts, how you'll know it works, and the step-by-step plan. These documents stay in the project folder, so the AI can pick up where you left off in every later session, whether that's tomorrow or months from now.
+You describe what you want to do. The AI then works with you to write a small set of planning documents: the vision, the reasons behind it, similar work to learn from, how the project breaks into parts, how you'll know it works, candidate usage scenarios to guide development, and the resulting step-by-step plan for realizing the project. These documents stay in the project folder, so the AI can pick up where you left off in every later session, whether that's tomorrow or months from now.
 
 It works for any kind of project: software, something physical, a community effort, a piece of writing, or a mix. It is designed for one person working with AI, not for a team of people.
 
-The documents are plain text files ending in `.md` ("markdown"). You can open them in any text editor. Most are written in a compact style for the AI to read quickly. One of them, `MOTIVATION.md`, is written as ordinary prose for you.
+The documents are plain text files ending in `.md` ("markdown"). You can open them in any text editor. Most are written in a compact style for the AI to read quickly. One of them, `MOTIVATION.md`, is written as ordinary prose for the user.
 
 ## What you need
 
@@ -27,7 +27,7 @@ Choose one of these:
 ## Option A: Claude desktop app (Windows 11 or Mac)
 
 1. **Install.** Download the Claude desktop app from https://claude.com/download, install it, and sign in.
-2. **Open the Code tab.** At the top of the window, switch from **Chat** to **Code**. Chat isn't suitable: it can't read or write the project's files, so it can't keep the planning documents up to date between sessions. Do all INIT.md work in Code; Chat and Design don't see the folder or the Code conversation. The planning documents are ordinary files, so you can open them in File Explorer or Notepad at any time.
+2. **Open the Code tab.** At the top of the window, switch from **Chat** to **Code**. Chat isn't suitable: it can't read or write the project's files, so it can't keep the planning documents up to date between sessions. 
 3. **Work on your computer.** In the environment selector, choose **Local**. Your files stay on your machine.
 4. **Choose your project folder.** Select the folder you made for the project.
 5. **Turn down the permission prompts.** The mode selector under the message box controls how often Claude stops to ask before changing files. **Auto** lets it work without asking at every step. **Accept edits** is a more cautious middle ground. The default (**Manual**) asks before every change, which becomes tiring fast. To make your choice the default, ask Claude: "Set my default permission mode to auto."
@@ -50,7 +50,7 @@ Choose one of these:
 
 2. **Claude sets up the folder.** It creates `CLAUDE.md`, a short file that Claude reads automatically at the start of every session, plus empty placeholders for the documents you'll fill in later.
 
-3. **One document at a time.** Claude drafts the first planning document, `INSPIRATIONS.md` (similar projects and what to learn from them), and asks for your review. Then it moves through the rest in order, checking that you're happy before each next step. On questions of judgment, such as your goals, priorities and principles, it asks you rather than making things up. When two documents disagree, it points out the contradiction instead of quietly picking one.
+3. **One document at a time.** Claude drafts the first planning document, `INSPIRATIONS.md` (similar projects and what to learn from them, sourced from the model training data and an internet search), and asks for your review. Then it moves through the rest in order, checking that you're happy before each next step. On questions of judgment, such as your goals, priorities and principles, it asks the user rather than making things up. When two documents disagree, it points out the contradiction instead of quietly resolving the clash.
 
 For an ambitious project with plenty of back-and-forth, setup can take more than an hour.
 
