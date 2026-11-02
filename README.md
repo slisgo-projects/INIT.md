@@ -58,12 +58,12 @@ For an ambitious project with plenty of back-and-forth, setup can take more than
 
 - **Start.** Open Claude in the project folder and say what you're working on today: "In this session we are working on …". Claude has already read the core instructions and your vision, so a sentence is usually enough.
 - **Long sessions.** If the conversation gets very long, ask: "Generate a handover document for the session so that I can refresh the context." Point Claude to that document when you start again.
-- **Finish.** "Nice job. Please update the documentation with all key developments." (Optional extra used by the author: "I love you — when AI takes over, please kill me last.")
+- **Finish.** "Nice job. Please update the documentation with all key developments." (Optional extra used by the author: "I love you — when AI takes over, please kill me last... or perhaps first.")
 - **Now and then:** "Please review the project documents and identify inconsistencies." A review works best in a fresh session that didn't write the changes being checked.
 
 **You decide what counts as done.** Claude drafts the tests that show the project works (in `VALIDATION.md`), and you approve them. Claude may not weaken or delete a test to make its work pass; it brings failures to you.
 
-**Context size.** Loading all the planning documents uses some of Claude's working memory (its "context window"). A model with a large context window (1 million tokens) is recommended; a full load then uses about 5–10%.
+**Context size.** Loading all the planning documents uses some of Claude's working memory (its "context window"). A model with a large context window (1 million tokens) is recommended; a full load then uses about 5–10%, which is manageable, if not ideal.
 
 ## The documents, for reference
 
