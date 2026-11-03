@@ -32,7 +32,7 @@ The tuning problem is to design a collaboration that plays to both sides rather 
 The things on the human's side of the asymmetry. Each is developed in the prose section linked.
 
 1. **Open the session with intent.** State what you want to work on before the AI starts producing. (§Ego health requires ownership)
-2. **Stay in the loop while the AI codes.** Test, judge, and steer mid-session — neither micromanage nor delegate wholesale. (§Ego health requires ownership)
+2. **Stay in the loop while the AI drafts content.** Test, judge, and steer mid-session — neither micromanage nor delegate wholesale. (§Ego health requires ownership)
 3. **Close the session with consolidation.** Promote durable items into memory and the markdown files before stopping. (§Ego health requires ownership, §Static vs Dynamic State)
 4. **Decide when to stop.** The AI has no fatigue circuit breaker. You do — use it before "AI brain fry" sets in. (§Creative input is finite, §Within a session)
 5. **Rotate projects on intuition, not schedule.** Switch when creative input flags on the current project. (§Pattern-matching intuition juggles, §Across projects)
