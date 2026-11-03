@@ -1,6 +1,6 @@
 # MOTIVATION.md
 
-**Authors:** S. Lisgo, Opus 4.7
+**Authors:** S. Lisgo, Opus 4.7, Opus 5.5
 
 Developed argument behind the guideposts in VISION.md. Prose for shared human-AI reading. Grows iteratively across sessions. Not AI-optimized and not compressed into bullet form, deliberately.
 
@@ -15,6 +15,16 @@ INIT.md captures that mandate as a structured artifact. The flowdown partitions 
 What this strand cannot do, even in principle: replace strategic judgment with coordination. AI sees the whole board but does not know which game is worth playing. The familiar failure mode — running fast in many directions, none consequential — may be worsened by the schema, since better tooling lowers the activation cost of starting yet another project. Selection remains a human responsibility, captured in HUMAN.md's "Rotate projects on intuition" and "Decide when to stop." The schema serves the chosen direction, not the choosing.
 
 This connects most directly to the *AI-optimized by default* and *Project-type-agnostic* guideposts in VISION.md, and threads through *Team-of-one targeting* and *HUMAN.md sits outside the flowdown*. The spirit is deliberately distributed rather than surfaced as a dedicated guidepost.
+
+## Bookending development from both ends
+
+Development work tends to drift when it is anchored at only one end. Reasoning forward from a vision alone can lose sight of who will eventually use the result; building up from individual uses alone can yield a collection of features with no governing purpose. Holding both ends in view at once, and checking every intermediate decision against them, is a demanding feat of attention for a human working serially.
+
+The flowdown bookends development activity by design, and this is a feature rather than a side effect of its structure. VISION.md and MOTIVATION.md anchor the conceptual end; the use cases collected in USE_CASES.md anchor the deployment end, backcast into requirements and design decisions. Architecture, interfaces, validation, and implementation sit between them. The arrangement relies on AI's greatly expanded breadth of awareness compared with a human's: an AI can read both ends and everything between them in a single session, and notice where a choice in the middle has lost contact with either.
+
+What this strand cannot do, even in principle: show that the design between the bookends will work. Use cases describe what deployment should look like, not whether it will succeed, so that evidence remains the work of VALIDATION.md and of the thing actually built. Nor can the AI's breadth tell it whether the bookends themselves are right. Choosing them remains a human judgment.
+
+This connects most directly to the *AI-optimized by default* guidepost in VISION.md and extends the whole-board argument in complexity wrangling above. As with that strand, the spirit is deliberately distributed rather than surfaced as a dedicated guidepost.
 
 ## World-model anchoring and the slop problem
 

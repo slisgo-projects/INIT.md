@@ -2,7 +2,7 @@
 
 **Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5, Fable 5.1, Opus 5.5
 
-**Version:** 2026-11-01 (date of last substantive change; see §"Versioning")
+**Version:** 2026-11-03 (date of last substantive change; see §"Versioning")
 
 Guidance for the AI assistant on drafting and maintaining the markdown files that define a project.
 
@@ -39,7 +39,7 @@ During drafting: if inconsistencies surface between files, flag them and iterate
 
 Status records (phase states, status lines, "not yet run" caveats) are claims, not evidence. Before asserting what is done, collected, or available, check the artifact itself: file presence, contents, checksums, the built or deployed thing. On divergence, correct the record and log the correction in DECISIONS.md.
 
-During review: the user will request thorough reviews at checkpoints. Surface any inconsistencies for resolution. Run checkpoint reviews in a context that did not author the changes under review.
+During review: the user will request thorough reviews at checkpoints. Surface any inconsistencies for resolution. Run checkpoint reviews in a context that did not author the changes under review. Checkpoint reviews also ask what can be removed: unnecessary content, requirements, phases, recurring records. Removed items follow the owning file's archive rule, if any.
 
 # Findings and Checks
 
