@@ -94,4 +94,4 @@ Seven groups of documents, plus a few files that hold the instructions themselve
 
 ## About this repository
 
-This repository uses its own instructions: the spec is both the product and the first project built with it. `ancillary/HUMAN.md` is an optional essay on the human side of working with AI: pacing, fatigue, and what to keep for yourself.
+This repository uses its own instructions: the spec is both the product and a project built with it. `ancillary/HUMAN.md` is an optional essay on the human side of working with AI: pacing, fatigue, and explicit user responsibilities.
