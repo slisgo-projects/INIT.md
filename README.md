@@ -10,7 +10,7 @@ The documents are plain text files ending in `.md` ("markdown"). You can open th
 
 ## What you need
 
-- **A Claude or Ollama account** (a paid plan is recommended for access to frontier models). You can use either the **Claude desktop app** (Claude AI models only) or **Claude Code** in a terminal (Ollama can also be used; see `ancillary/AI_install.md`).
+- **A Claude or Ollama account** (a paid plan is recommended for access to frontier models). You can use either the **Claude desktop app** (Claude AI models only) or **Claude Code** in a terminal (Ollama can also be used; see `ancillary/AI_install.md`). Claude installation instructions are below.
 - **A folder for the project**, for example `Documents\My Project`.
 - **Three files from this repository:** `INIT.md`, `USE_CASE_INIT.md`, and `CODING_PRACTICES.md`. You don't need anything else from this repository.
 
