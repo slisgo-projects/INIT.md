@@ -2,11 +2,11 @@
 
 > **Document status — unclassified.** This guide is no part of the INIT.md flowdown. It carries no flowdown group, is not registered in the CLAUDE.md markdown-hierarchy stub, and is governed by per-project direction rather than the spec. It lives in `ancillary/` purely to keep the project root clean. See INIT.md §"Project Markdown Files" (Directory layout). Skip the rest of this note if you are here to install something.
 
-Getting started with AI for a new user of this project: install Ollama, set up a free Ollama account, pull the `beam:cloud` model, install Claude Code, and run Claude Code through Ollama using that model.
+Getting started with AI for a new user of this project: install Ollama, set up an Ollama account with Pay as you go credits, install Claude Code, and run Claude Code through Ollama using that model.
 
 This guide uses a **cloud** model (`beam:cloud`). Cloud models run on Ollama's servers, so you do **not** need a powerful GPU or large amounts of RAM — the local Ollama process proxies your requests to Ollama's cloud. This is the easiest path for a new user. (A fully local model would instead need a 64k+ context window and sufficient local hardware; not covered here.)
 
-**Prerequisite:** a modern web browser (for the one-time Ollama sign-in) and an internet connection.
+**Prerequisites:** a modern web browser (for the one-time Ollama sign-in), an internet connection, and Ollama usage credits or a paid plan for cloud models (see §2).
 
 **On Windows 11?** Sections 1–5 are written platform-neutrally, but §6 is a self-contained PowerShell walkthrough covering the same ground with the Windows-specific traps handled. Go straight there. §3.1 (finding models) applies to every platform.
 
@@ -52,9 +52,9 @@ Ollama needs version **0.14.0 or later** for Anthropic-API compatibility (requir
 
 ---
 
-## 2. Create a free Ollama account and sign in
+## 2. Create an Ollama account and sign in
 
-Ollama accounts are free.
+**Paying for cloud models.** The account itself is free, but cloud models are not: Pay as you go accounts pay for each request with usage credits. You don't need a monthly plan. Choose **Pay as you go** ($0 to join, no subscription) on <https://ollama.com/pricing> and buy credits as you need them. Monthly plans include credits and are optional. Check your usage at <https://ollama.com/settings/usage>.
 
 1. In your terminal, run:
    
@@ -70,9 +70,9 @@ To confirm later, run `ollama signin` again — it will report you are already c
 
 ---
 
-## 3. Pull the Ollama models
+## 3. Pull the Ollama models (optional)
 
-Pull the cloud model stub so your local Ollama knows how to route requests to the cloud:
+Cloud models do not need to be downloaded; Claude Code can use them without this step. Pulling adds a small stub so they appear in `ollama list`:
 
 ```bash
 ollama pull beam:cloud
@@ -216,7 +216,7 @@ ANTHROPIC_SMALL_FAST_MODEL=gemma4:31b-cloud \
 claude
 ```
 
-This is the invocation used to run Claude Code for this project (with the base URL on Ollama's default port). It requires Ollama running and reachable at `http://localhost:11434`, and both models pulled (see step 3 — pull `gemma4:31b-cloud` the same way if it is not already present: `ollama pull gemma4:31b-cloud`).
+This is the invocation used to run Claude Code for this project (with the base URL on Ollama's default port). It requires Ollama running and reachable at `http://localhost:11434`, and a signed-in account with usage credits or a paid plan (see §2).
 
 What each variable does:
 
@@ -335,9 +335,11 @@ $env:Path = [Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [Env
 ollama signin
 ```
 
-Your browser opens at <https://ollama.com/connect>. Create the free account or sign in, authorize the CLI, then return to the terminal.
+Your browser opens at <https://ollama.com/connect>. Create the account or sign in, authorize the CLI, then return to the terminal. Cloud models need usage credits or a paid plan; **Pay as you go** has no monthly fee (see §2).
 
-### 6.4 Pull the models
+### 6.4 Pull the models (optional)
+
+Cloud models work without this step; pulling makes them appear in `ollama list`.
 
 ```powershell
 ollama pull beam:cloud
@@ -454,6 +456,56 @@ These apply to **new** terminals only. To undo any of them, set the value to `$n
 
 ---
 
+## 7. Alternative: OpenCode instead of Claude Code
+
+[OpenCode](https://opencode.ai) is an open source (MIT) harness. Use it if you prefer not to depend on Claude Code, which Anthropic does not support with non-Claude models. OpenCode is free, but cloud model usage is still billed (§2).
+
+**Tested 2026-11-04:** OpenCode 1.19.5 on Linux, through `ollama launch` with `opencode run`, using the release binary. **Not tested:** the install commands below, the interactive screen, permission prompts, long sessions and compaction, and Windows.
+
+1. **Set up Ollama and sign in:** §1 and §2.
+
+2. **Install OpenCode.** On Linux or macOS:
+
+   ```bash
+   curl -fsSL https://opencode.ai/install | bash
+   ```
+
+   On Windows, OpenCode recommends WSL. Otherwise, with Node.js installed:
+
+   ```powershell
+   npm install -g opencode-ai
+   ```
+
+3. **Create `opencode.json` in your project folder.** This step is essential. OpenCode reads `CLAUDE.md` but does not follow its `@` imports, so without this file the project rules do not load and nothing warns you:
+
+   ```json
+   {
+     "instructions": ["INIT.md", "VISION.md", "CODING_PRACTICES.md"]
+   }
+   ```
+
+   It is fine that `VISION.md` does not exist until the project is set up.
+
+4. **Start OpenCode** from your project folder:
+
+   ```bash
+   ollama launch opencode --model beam:cloud
+   ```
+
+5. **Check that the rules loaded.** Paste this as your first message, and repeat it after any configuration change:
+
+   > Do not use any tools. From your instructions alone, what Version date is at the top of INIT.md? If you cannot see it, reply NOT LOADED.
+
+   The answer should match the date at the top of `INIT.md`, with no tool use. If the model searches the files or reports `NOT LOADED`, recheck step 3.
+
+**If you add `AGENTS.md`:** OpenCode reads it instead of `CLAUDE.md`, so anything in `CLAUDE.md` stops loading unless you also list `CLAUDE.md` under `instructions`.
+
+**Skills:** OpenCode reads `.claude/skills/`, so project skills need no changes.
+
+**Scripts:** `opencode run` can hang waiting for input. Close it by adding `</dev/null` in bash.
+
+---
+
 ## Troubleshooting
 
 - **"Model not found" / subscription errors** — ensure `ANTHROPIC_API_KEY` is empty and `ANTHROPIC_AUTH_TOKEN` is set to `ollama`; confirm you are not signed into a Claude Pro/Max account, which can take precedence.
@@ -461,7 +513,8 @@ These apply to **new** terminals only. To undo any of them, set the value to `$n
 - **Background tasks (titles, summaries) fail or call Anthropic** — the small/fast tier must map to a local/cloud model; confirm `ANTHROPIC_SMALL_FAST_MODEL` is set (to `gemma4:31b-cloud` in this setup) and that model is pulled.
 - **`gemma4:31b-cloud` errors at startup** — pull it the same way as the primary model: `ollama pull gemma4:31b-cloud`.
 - **`ollama launch claude` not recognized** — your Ollama is older than the version that added the launcher; use Method A or C, or update Ollama.
-- **Cloud model pulls but errors at run time** — run `ollama signin` again to refresh your session; cloud models require a signed-in account.
+- **Cloud model errors at run time** — run `ollama signin` again to refresh your session; cloud models require a signed-in account. If that doesn't help, check for available credits at <https://ollama.com/settings/usage> (§2).
+- **"Claude Code doesn't recognize the model"** — expected with Ollama models. Claude Code still runs, but assumes a 200k-token context window, so it may compact sooner than the model requires.
 - **Connection refused on `localhost:11434`** — Ollama is not running (`ollama serve`), or it has been remapped to a different port; adjust `ANTHROPIC_BASE_URL` to match.
 - **A model tag in this guide fails to pull** — the tag has moved. Find the current one per §3.1 and substitute it.
 - **`ollama search` is not a command** — there is no CLI search; browse <https://ollama.com/search?c=cloud> (§3.1).
@@ -480,7 +533,11 @@ Windows / PowerShell:
 ## Sources
 
 - Ollama Cloud — <https://docs.ollama.com/cloud>
+- Ollama pricing — <https://ollama.com/pricing>
 - Ollama cloud model catalogue — <https://ollama.com/search?c=cloud>
 - Ollama + Claude Code integration — <https://docs.ollama.com/integrations/claude-code>
 - Claude Code environment variables — <https://code.claude.com/docs/en/env-vars.md>
 - Claude Code setup, incl. Windows — <https://code.claude.com/docs/en/setup>
+- OpenCode install — <https://opencode.ai/docs/>
+- OpenCode rules and skills — <https://opencode.ai/docs/rules/>, <https://opencode.ai/docs/skills/>
+- Ollama + OpenCode integration — <https://docs.ollama.com/integrations/opencode>

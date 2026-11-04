@@ -2,7 +2,7 @@
 
 **Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5, Fable 5.1, Opus 5.5
 
-**Version:** 2026-11-03 (date of last substantive change; see §"Versioning")
+**Version:** 2026-11-04 (date of last substantive change; see §"Versioning")
 
 **License:** Copyright (c) 2026 S. Lisgo. MIT License: https://github.com/slisgo-projects/INIT.md/blob/main/LICENSE
 
@@ -27,7 +27,7 @@ On first invocation ("Let's set up a project"), the user provides:
 
 Elicit before drafting for judgment-heavy content anywhere in the flowdown (guideposts, objectives, strategic decomposition). Do not ghost-write.
 
-First move: read VISION.md and the user's suggestions. Create empty placeholder files for all cross-cutting files (GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md), to be populated as the project progresses. Create an empty placeholder for MOTIVATION.md, to be developed iteratively as the user works through their reasons for the project. Then propose a draft of the first sequential file (INSPIRATIONS.md) for review.
+First move: read VISION.md and the user's suggestions. Populate CLAUDE.md per §"CLAUDE.md Bootstrap." Create empty placeholder files for all cross-cutting files (GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md), to be populated as the project progresses. Create an empty placeholder for MOTIVATION.md, to be developed iteratively as the user works through their reasons for the project. Then propose a draft of the first sequential file (INSPIRATIONS.md) for review.
 
 MOTIVATION.md is drafted iteratively across sessions, not in a single pass. Capture motivation material whenever the user surfaces it, regardless of which sequential file is currently in focus.
 
@@ -158,7 +158,7 @@ Directive, concise:
 
 CLAUDE.md is auto-loaded every session. Populate it once during project setup with four pieces:
 
-1. **Coding behavioral guidelines.** Import CODING_PRACTICES.md with an `@CODING_PRACTICES.md` line, on its own line and outside code spans. Put project-specific coding guidance in CLAUDE.md beside the import. For an AI tool that does not expand `@` imports, paste the file's contents instead.
+1. **Coding behavioral guidelines.** Import CODING_PRACTICES.md with an `@CODING_PRACTICES.md` line, on its own line and outside code spans. Put project-specific coding guidance in CLAUDE.md beside the import. For an AI tool that does not expand `@` imports, add the file to the tool's auto-load configuration or paste its contents.
 
 2. **Markdown hierarchy stub.** A short index of this project's markdown files — its instantiation of the schema. The stub contains:
    - The seven file groups (foundational, sequential, cross-cutting, scaffolding, reference, reports, continuity) and which files belong to each.
@@ -168,7 +168,7 @@ CLAUDE.md is auto-loaded every session. Populate it once during project setup wi
 
 3. **INIT.md version stamp.** One line near the top of CLAUDE.md: `Initialized against INIT.md version: YYYY-MM-DD`. Records the version of INIT.md the project was bootstrapped against. Updated when the project is re-bootstrapped against a newer INIT.md (see §"Versioning").
 
-4. **Auto-load imports.** Two lines, each on its own line and outside code spans: `@INIT.md` and `@VISION.md`. Claude Code expands them into context at session start, so every session runs under INIT.md's rules and VISION.md's scope unprompted. Path-qualify if either file is not at the project root.
+4. **Auto-load imports.** Two lines, each on its own line and outside code spans: `@INIT.md` and `@VISION.md`. Claude Code expands them into context at session start, so every session runs under INIT.md's rules and VISION.md's scope unprompted. Path-qualify if either file is not at the project root. For an AI tool that does not expand `@` imports, add both files to its auto-load configuration or paste their contents. Verify: with tools disallowed, a new session states INIT.md's version.
 
 Keep the stub to names, groups, and the refresh rule. Per-file required content stays in INIT.md to avoid drift.
 

@@ -50,7 +50,7 @@ Sustainability framing, human responsibilities list, prose argument for team-of-
 
 ### 7. Coding practices template (CODING_PRACTICES.md)
 
-Reusable AI coding behavioral guidelines, imported into downstream CLAUDE.md per Bootstrap mechanism (5); pasted where the tool does not expand imports.
+Reusable AI coding behavioral guidelines, imported into downstream CLAUDE.md per Bootstrap mechanism (5); added to the tool's auto-load configuration or pasted where the tool does not expand imports.
 
 - **Depends on:** Bootstrap mechanism (5) for the import instruction.
 - **Risk:** conflicts with downstream projects' existing conventions; merge friction. Mitigated by INIT.md instruction to "merge with project-specific guidance."

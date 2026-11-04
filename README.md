@@ -10,7 +10,9 @@ The documents are plain text files ending in `.md` ("markdown"). You can open th
 
 ## What you need
 
-- **A Claude or Ollama account** (a paid plan is recommended for access to frontier models). You can use either the **Claude desktop app** (Claude AI models only) or **Claude Code** in a terminal (Ollama models can also be used; see `ancillary/AI_install.md`). Claude installation instructions are below.
+- **One of these accounts:**
+  - **A paid Claude plan** (Pro or higher) or a Claude Console account billed by usage. Claude's Free plan does not include Claude Code or the Code tab. This is the recommended route, for access to frontier models. It works with the **Claude desktop app** or **Claude Code** in a terminal; installation instructions are below.
+  - **An Ollama account**, used in a terminal with **Claude Code** or the open source **OpenCode**; see `ancillary/AI_install.md`. No monthly plan is needed: Ollama's [Pay as you go](https://ollama.com/pricing) option costs $0 to join, and you buy usage credits for the cloud models you use. Monthly plans are optional. Local models need no account or credits, but do need capable hardware.
 - **A folder for the project**, for example `Documents\My Project`.
 - **Three files from this repository:** `INIT.md`, `USE_CASE_INIT.md`, and `CODING_PRACTICES.md`. You don't need anything else from this repository.
 
@@ -36,7 +38,7 @@ Choose one of these:
 ## Option B: Claude Code in a terminal (Linux, Mac, or Windows)
 
 1. **Install** Claude Code: see https://claude.com/claude-code, or `ancillary/AI_install.md` for step-by-step instructions (including Windows PowerShell).
-2. **Open a terminal in your project folder** and type `claude`.
+2. **Open a terminal in your project folder** and type `claude`. If you're using Ollama, start Claude with the command in `ancillary/AI_install.md` instead.
 3. **Turn down the permission prompts.** Press SHIFT+TAB until the bottom of the window says "auto mode on". To make this the default, ask Claude: "Set the default mode to auto."
 4. **Get the three files** (see above), then go to "Starting the project".
 
