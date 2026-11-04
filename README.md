@@ -2,7 +2,7 @@
 
 A set of instructions that helps you and an AI assistant set up and run a project together.
 
-You describe what you want to do. The AI then works with you to write a small set of planning documents: the vision, the reasons behind it, similar work to learn from, how the project breaks into parts, how you'll know it works, candidate usage scenarios to guide development, and a step-by-step plan for realizing the project. These documents stay in the project folder, so the AI can pick up where you left off in every later session, whether that's tomorrow or months from now.
+You describe what you want to do. The AI then works with you to write a small set of planning documents: the vision, the reasons behind it, similar work to learn from, how the project breaks into parts, how you'll know it works, candidate usage scenarios to guide development, and a step-by-step plan. These documents stay in the project folder, so the AI can pick up where you left off in every later session, whether that's tomorrow or months from now.
 
 It works for any kind of project: software, something physical, a community effort, a piece of writing, or a mix. It is designed for one person working with AI, not for a team of people.
 
