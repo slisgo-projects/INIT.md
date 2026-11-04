@@ -4,6 +4,8 @@
 
 **Version:** 2026-11-03 (date of last substantive change; see §"Versioning")
 
+**License:** Copyright (c) 2026 S. Lisgo. MIT License: https://github.com/slisgo-projects/INIT.md/blob/main/LICENSE
+
 Guidance for the AI assistant on drafting and maintaining the markdown files that define a project.
 
 **Goal:** a coherent flowdown of activity guidelines capturing project scope, objectives, milestones, timelines, resource requirements, stakeholders, and desired impact.

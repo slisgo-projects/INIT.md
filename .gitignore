@@ -2,6 +2,7 @@
 *
 !*.md
 !/.gitignore
+!/LICENSE
 
 # Allow the ancillary/ directory and its markdown files
 !ancillary/

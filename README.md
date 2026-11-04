@@ -96,6 +96,12 @@ Seven groups of documents, plus a few files that hold the instructions themselve
 
 This repository uses its own instructions: the spec is both the product and a project built with it. `ancillary/HUMAN.md` is an optional essay on the human side of working with AI: pacing, fatigue, and explicit user responsibilities.
 
+`CODING_PRACTICES.md` is adapted from [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) by forrestchang (MIT), a set of guidelines derived from [Andrej Karpathy's observations](https://x.com/karpathy/status/2015883857489522876) on LLM coding pitfalls.
+
+## License
+
+MIT; see `LICENSE`. Third-party material keeps its original license.
+
 ## Acknowledgement request
 
 If this tool helps with your work, please acknowledge it somewhere, however gently.

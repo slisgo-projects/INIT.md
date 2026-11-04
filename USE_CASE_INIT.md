@@ -1,5 +1,7 @@
 # USE_CASE Init Protocol
 
+**License:** Copyright (c) 2026 S. Lisgo. MIT License: https://github.com/slisgo-projects/INIT.md/blob/main/LICENSE
+
 Universal use-case formulation protocol. Governs every use case specification, formulated inline in `USE_CASES.md` by default. When an individual case grows unwieldy it is extracted to its own `USE_CASE_<identifier>.md` daughter file (see INIT.md §"Stopping Criteria"); the protocol is identical inline or extracted — extraction changes file location, not protocol.
 
 **Goal:** a coherent use case capturing motivation, scope, stakeholders, and the category-specific structure required for that use case's domain — sufficient for stakeholder review, downstream specification, and eventual action.

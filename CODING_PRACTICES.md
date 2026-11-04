@@ -1,6 +1,8 @@
 # CODING_PRACTICES.md
 
-Behavioral guidelines to reduce common LLM coding mistakes (https://github.com/multica-ai/andrej-karpathy-skills).
+**License:** Copyright (c) 2026 S. Lisgo. MIT License: https://github.com/slisgo-projects/INIT.md/blob/main/LICENSE
+
+Behavioral guidelines to reduce common LLM coding mistakes. Adapted from https://github.com/multica-ai/andrej-karpathy-skills (forrestchang; MIT), derived from Andrej Karpathy's observations on LLM coding pitfalls.
 
 Imported into each coding project's CLAUDE.md with an `@CODING_PRACTICES.md` line; paste the contents instead for AI tools that do not expand `@` imports. Put project-specific guidance in CLAUDE.md beside the import.
 
