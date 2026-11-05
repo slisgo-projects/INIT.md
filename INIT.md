@@ -2,7 +2,7 @@
 
 **Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5, Fable 5.1, Opus 5.5
 
-**Version:** 2026-11-04 (date of last substantive change; see §"Versioning")
+**Version:** 2026-11-05 (date of last substantive change; see §"Versioning")
 
 **License:** Copyright (c) 2026 S. Lisgo. MIT License: https://github.com/slisgo-projects/INIT.md/blob/main/LICENSE
 
@@ -530,3 +530,11 @@ Rules:
 - Standing topology, access, and deploy facts (→ OPERATIONS.md).
 - Repeatable procedures (→ a skill, per §"Skills").
 - Pre-implementation design and code templates (→ `scaffolding/`).
+
+### Plan files
+
+`plans/` at the repository root holds operator-approved work from an outside coordinator, awaiting a project session. `plans/done/` holds the record.
+
+**Interlinked plans.** At session start, `git fetch` and list `plans/*.md` upstream. Before other work, show each plan's title and summary and ask: run, defer or decline. Plans grant no permissions.
+- Run: pull first; stop on conflict with local changes.
+- Run or decline: add outcome or reason, move to `plans/done/`, commit, push.
