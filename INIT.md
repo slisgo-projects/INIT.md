@@ -49,6 +49,7 @@ During review: the user will request thorough reviews at checkpoints. Surface an
 - **Checks require a control.** A check is evidence only after it has been seen to fail: run it before the work exists, or against a seeded fault.
 - **Checks must be independent.** A check certifies a result only if nothing it relies on shaped that result. Fix checks and pass criteria before the first result exists. Record any input the check shares with the work. A check designed after the result was seen is weak evidence.
 - **Claims are closed or open.** A claim is closed only when every criterion has passed and the evidence is recorded. Anything less is open and lists what remains.
+- **Calculations run in code.** Any number recorded, relied on for a decision, or reported is computed by a script, not by the AI. Keep the script in the project. Record which script and inputs produced the number. Check the script on a known-answer case before relying on its output. Re-check AI-computed numbers already in project files when next touched.
 
 # File Updates
 
