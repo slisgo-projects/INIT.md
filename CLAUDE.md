@@ -26,7 +26,7 @@ Seven flowdown groups plus a companion tier (per INIT.md §"Project Markdown Fil
 - **Cross-cutting**: GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md. No OPERATIONS.md — this project deploys nothing.
 - **Scaffolding**: none in this project.
 - **Reference**: `reference/Seramount-The-AI-Productivity-Paradox-Insight-Paper.pdf`, `reference/The AI Point Elasticity_ When More Capacity Becomes a Liability.pdf` (seed documents — externally generated inputs). Report-source copies saved here are local only; `.gitignore` keeps them out of the public repo.
-- **Reports**: `reports/ai_work_intensification.md`, `reports/ai_research_inversion.md`, `reports/practical_realization_lists.md` (AI-authored topic reports from mini-investigations).
+- **Reports**: `reports/ai_work_intensification.md`, `reports/ai_research_inversion.md`, `reports/practical_realization_lists.md`, `reports/bootloops_verification_protocols.md` (AI-authored topic reports from mini-investigations).
 - **Continuity**: none in this project (`handover/`; per-work-area session-continuity records). Schema edits are single-session and land in DECISIONS.md.
 - **Companion**: INIT.md, USE_CASE_INIT.md, CODING_PRACTICES.md, CLAUDE.md. (HUMAN.md is an optional companion living in `ancillary/HUMAN.md`, not at root.)
 - **Ancillary**: `ancillary/HUMAN.md` — optional sustainability companion (companion group; registered here per §"Project Markdown Files" Directory layout). `ancillary/` is a path, not a flowdown group.

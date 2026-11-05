@@ -47,6 +47,8 @@ During review: the user will request thorough reviews at checkpoints. Surface an
 
 - **Negative findings require a control.** Before recording anything as unavailable or broken, either show the probe succeeds on a known-good instance, or reproduce the failure through an independent pathway. Unconfirmed negatives are `open` questions in DECISIONS.md, not constraints.
 - **Checks require a control.** A check is evidence only after it has been seen to fail: run it before the work exists, or against a seeded fault.
+- **Checks must be independent.** A check certifies a result only if nothing it relies on shaped that result. Fix checks and pass criteria before the first result exists. Record any input the check shares with the work. A check designed after the result was seen is weak evidence.
+- **Claims are closed or open.** A claim is closed only when every criterion has passed and the evidence is recorded. Anything less is open and lists what remains.
 
 # File Updates
 
@@ -118,7 +120,7 @@ Repeatable operational procedures — executing a software package, accessing a 
 
 - **Trigger:** when a session works out, or re-derives, such a procedure, capture it as a skill in the same session. Do not wait to be asked. Re-derivation is a mandatory trigger.
 - **Location:** `.claude/skills/<name>/SKILL.md` in the project directory. Project-scoped, not `$HOME/.claude/`.
-- **Content:** imperative how-to — commands, parameters, prerequisites, failure modes encountered. No secrets; point to credential locations instead.
+- **Content:** imperative how-to — commands, parameters, prerequisites, failure modes encountered, what valid output looks like and how to check it. No secrets; point to credential locations instead.
 - **Boundary:** skills hold procedures (how to do); `reports/` topic reports hold findings (what was learned); OPERATIONS.md holds standing facts (what exists, where, who reaches it). A skill for reaching a host cites OPERATIONS.md for the host's identity and access rules rather than restating them. See §"Report Files" and §"OPERATIONS.md."
 - **Enforcement:** rules that admit no exceptions are enforced mechanically (hook, CI, script) where the host tool supports it.
 - **Coupling:** `SKILL.md` follows the Agent Skills open standard (agentskills.io), supported across vendors. Only the `.claude/skills/` path is Claude Code-specific; other agents use their own skill directory.
@@ -488,7 +490,7 @@ Files in `reports/` holding AI-authored topic reports — write-ups of mini-stud
 
 Per topic report:
 - Topic and question investigated.
-- Findings.
+- Findings. Load-bearing claims carry a locator in the source (page, section, table, line); label anything else as memory or inference.
 - Implications for the project.
 - Date. Findings reflect that date's state; treat as potentially stale.
 - Status: current / superseded (with pointer to replacement).

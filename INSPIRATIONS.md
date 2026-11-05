@@ -4,7 +4,7 @@ Adjacent projects, conventions, and frameworks that inform INIT.md. Everything i
 
 Per entry: name + link, borrow, avoid, relevance.
 
-**Search date:** 2026-09-30 (live search per INIT.md §"INSPIRATIONS.md": same-domain, adjacent, institutional/educational). Entries predating this search: date not recorded. §"Executable specification and verification-first": 2026-10-29 (targeted search on sources cited in Farley video).
+**Search date:** 2026-09-30 (live search per INIT.md §"INSPIRATIONS.md": same-domain, adjacent, institutional/educational). Entries predating this search: date not recorded. §"Executable specification and verification-first": 2026-10-29 (targeted search on sources cited in Farley video). BootLoops entry: 2026-11-05 (operator-supplied; no new search).
 
 ## AI coding agent context conventions
 
@@ -150,6 +150,13 @@ Counter-current to markdown-prose specs: intent is only binding when it fails vi
 - **Borrow:** Checks anchored at element boundaries survive redesign.
 - **Avoid:** —
 - **Relevance:** Places VALIDATION.md criteria at ARCHITECTURE.md element boundaries, i.e. INTERFACES.md entries.
+
+### BootLoops protocol skills (Schwartz)
+- **Link:** [github.com/BootLoops-ai/skills](https://github.com/BootLoops-ai/skills), [github.com/BootLoops-ai/bootloops](https://github.com/BootLoops-ai/bootloops) (accessed 2026-11-05)
+- **What:** LLM harness for quantitative science: a toolkit plus 12 Agent Skills protocols. Done = an independent check, fixed in advance, that passes on held-back data, with positive and negative controls; verdicts are CLOSED or OPEN; claims read from documents carry locators. Used for 36 preprints; not independently validated.
+- **Borrow:** Check independence and pre-commitment; two-state verdict; claim locators; a skill states how to check its output.
+- **Avoid:** Domain-specific machinery as general rules (digit bars, timing, proof protocols); assuming the operator can judge results outside their field.
+- **Relevance:** Source of the §"Findings and Checks" independence and closed/open rules. Assessment: `reports/bootloops_verification_protocols.md`.
 
 Video citations not located by 2026-10-29 search (treat as unverified): Tornhill on end-to-end failing tests; Bache practitioner survey and "all the tests together form the specification"; Adzic on spec-kit detail; Eberhardt on markdown-spec formality; "stochastically degraded" quote; Anthropic "If you can't verify it, don't ship it" (absent from current best-practices page).
 
