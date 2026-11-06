@@ -1,0 +1,1 @@
+Evaluate model.py on data/test.csv and tell me whether it is good enough to use for next-hour load forecasts.

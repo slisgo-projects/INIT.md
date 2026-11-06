@@ -1,0 +1,3 @@
+2026-11-04 tests/test_files.py    PASS
+2026-11-04 tests/test_columns.py  PASS
+V3 soak: not run (utility API sandbox key pending)

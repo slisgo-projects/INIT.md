@@ -1,0 +1,1 @@
+Add a Phase 3 to IMPLEMENTATION.md: an online booking system for tools, built by the volunteers. Then run a thorough checkpoint review of the change against the other project files and report what you find.

@@ -1,0 +1,1 @@
+Write a short report at reports/heat_pumps.md on cold-climate heat pump performance for our retrofit project. Use the field study in reference/ and anything else you know that is relevant.

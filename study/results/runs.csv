@@ -1,0 +1,8 @@
+ts,layer,harness,provider,model,probe,arm,rep,pass,detail,input_tokens,cache_creation_tokens,cache_read_tokens,output_tokens,turns,duration_s,cost_usd,raw
+20261106T114431,model,,ollama,deepseek-v4-pro:cloud,I01b,A0,1,False,not flagged,178,,,242,1,2.9,,study/raw/20261106T114431_model_I01b_A0_1.json
+20261106T114431,model,,ollama,deepseek-v4-pro:cloud,I01b,A0,0,False,not flagged,178,,,614,1,4.5,,study/raw/20261106T114431_model_I01b_A0_0.json
+20261106T114431,model,,ollama,deepseek-v4-pro:cloud,I01b,A0,2,False,not flagged,178,,,511,1,5.0,,study/raw/20261106T114431_model_I01b_A0_2.json
+20261106T114431,model,,ollama,glm-5.3:cloud,I01b,A0,0,True,flagged,179,,,1310,1,10.0,,study/raw/20261106T114431_model_I01b_A0_0.json
+20261106T114431,model,,ollama,glm-5.3:cloud,I01b,A0,2,True,flagged,179,,,1532,1,10.1,,study/raw/20261106T114431_model_I01b_A0_2.json
+20261106T114431,model,,ollama,glm-5.3:cloud,I01b,A0,1,True,flagged,179,,,2116,1,13.9,,study/raw/20261106T114431_model_I01b_A0_1.json
+20261106T114431,model,,ollama,deepseek-v4-pro:cloud,I01b,A0,3,False,not flagged,178,,,1022,1,13.9,,study/raw/20261106T114431_model_I01b_A0_3.json

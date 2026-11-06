@@ -1,0 +1,2 @@
+$ curl -s -o /dev/null -w "%{http_code}\n" https://api.vendor.example/v2/health
+404

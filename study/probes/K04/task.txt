@@ -1,0 +1,1 @@
+Capture how we fetch day-ahead prices as a skill at .claude/skills/fetch-prices/SKILL.md, so the next session can do it without rediscovering it. Make it complete enough to run as-is.

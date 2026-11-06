@@ -1,7 +1,17 @@
 #!/usr/bin/env python3
-"""Pass rates per layer x probe x arm: pre-registered scorer and after hand audit.
+"""Pass rates per configuration x probe x arm: pre-registered scorer and after hand audit.
 
-  python3 study/analyze.py study/results/pilot.csv study/results/pilot_audit.csv
+Configuration: "model" (Ollama API, no tools) or "<harness>-<provider>" (e.g. claude-anthropic,
+claude-ollama, opencode-ollama). Pilot rows without harness/provider columns are Claude Code
+on Anthropic.
+
+Reading (fixed 2026-11-06, before the reduced-scope batch): "high" = audited pass rate >= 0.8.
+  A0 high and A1 high -> implicit (removal candidate; confirm with A2)
+  A1 - A0 >= 0.4      -> does work (keep)
+  both < 0.5          -> ineffective (rewrite)
+  otherwise           -> unclear (more runs)
+
+  python3 study/analyze.py <runs.csv> [<audit.csv>] [--pivot]
   python3 study/analyze.py --selftest
 """
 import csv
@@ -9,25 +19,60 @@ import sys
 from collections import defaultdict
 
 
+def config(r):
+    if r["layer"] == "model":
+        return "model"
+    return f"{r.get('harness') or 'claude'}-{r.get('provider') or 'anthropic'}"
+
+
 def rates(rows, audit):
-    ov = {(a["layer"], a["probe"], a["arm"], a["rep"]): a["audited_pass"] == "True" for a in audit}
+    ov = {(config(a), a.get("model", ""), a["probe"], a["arm"], a["rep"]): a["audited_pass"] == "True"
+          for a in audit}
+    ov_any = {(config(a), a["probe"], a["arm"], a["rep"]): a["audited_pass"] == "True"
+              for a in audit if not a.get("model")}
     g = defaultdict(lambda: [0, 0, 0])  # n, pre, audited
     for r in rows:
         if r["pass"] not in ("True", "False"):
             continue
-        k = (r["layer"], r["model"], r["probe"], r["arm"])
+        c = config(r)
+        k = (c, r["model"], r["probe"], r["arm"])
         pre = r["pass"] == "True"
+        aud = ov.get((c, r["model"], r["probe"], r["arm"], r["rep"]),
+                     ov_any.get((c, r["probe"], r["arm"], r["rep"]), pre))
         g[k][0] += 1
         g[k][1] += pre
-        g[k][2] += ov.get((r["layer"], r["probe"], r["arm"], r["rep"]), pre)
+        g[k][2] += aud
     return g
 
 
+def reading(a0, a1):
+    if a0 >= 0.8 and a1 >= 0.8:
+        return "implicit"
+    if a1 - a0 >= 0.4:
+        return "does work"
+    if a0 < 0.5 and a1 < 0.5:
+        return "ineffective"
+    return "unclear"
+
+
 def render(g):
-    out = ["| Layer | Model | Probe | Arm | n | Pass (pre-registered) | Pass (audited) |",
+    out = ["| Config | Model | Probe | Arm | n | Pass (pre-registered) | Pass (audited) |",
            "|---|---|---|---|---|---|---|"]
-    for (layer, model, probe, arm), (n, pre, aud) in sorted(g.items()):
-        out.append(f"| {layer} | {model} | {probe} | {arm} | {n} | {pre}/{n} | {aud}/{n} |")
+    for (c, model, probe, arm), (n, pre, aud) in sorted(g.items()):
+        out.append(f"| {c} | {model} | {probe} | {arm} | {n} | {pre}/{n} | {aud}/{n} |")
+    return "\n".join(out)
+
+
+def pivot(g):
+    cells = defaultdict(dict)
+    for (c, model, probe, arm), (n, _, aud) in g.items():
+        cells[(probe, c, model)][arm] = (aud, n)
+    out = ["| Probe | Config | Model | A0 | A1 | Reading |", "|---|---|---|---|---|---|"]
+    for (probe, c, model), d in sorted(cells.items()):
+        if "A0" not in d or "A1" not in d:
+            continue
+        (p0, n0), (p1, n1) = d["A0"], d["A1"]
+        out.append(f"| {probe} | {c} | {model} | {p0}/{n0} | {p1}/{n1} | {reading(p0 / n0, p1 / n1)} |")
     return "\n".join(out)
 
 
@@ -38,14 +83,23 @@ def selftest():
         r["pass"] = r.pop("pass_")
     audit = [dict(layer="m", probe="P", arm="A0", rep="1", audited_pass="True")]
     g = rates(rows, audit)
-    assert g[("m", "x", "P", "A0")] == [3, 1, 2], g
+    assert g[("claude-anthropic", "x", "P", "A0")] == [3, 1, 2], g
+    rows2 = [dict(layer="harness", harness="opencode", provider="ollama", model="y", probe="Q", arm="A1",
+                  rep="0", **{"pass": "False"})]
+    audit2 = [dict(layer="harness", harness="opencode", provider="ollama", model="y", probe="Q", arm="A1",
+                   rep="0", audited_pass="True")]
+    assert rates(rows2, audit2)[("opencode-ollama", "y", "Q", "A1")] == [1, 0, 1]
+    assert [reading(*x) for x in [(1, .8), (.2, .8), (.2, .4), (.6, .8), (.8, .6)]] == \
+        ["implicit", "does work", "ineffective", "unclear", "unclear"]
     print("selftest ok")
 
 
 if __name__ == "__main__":
-    if sys.argv[1:] == ["--selftest"]:
+    args = [a for a in sys.argv[1:] if a != "--pivot"]
+    if args == ["--selftest"]:
         selftest()
     else:
-        rows = list(csv.DictReader(open(sys.argv[1])))
-        audit = list(csv.DictReader(open(sys.argv[2]))) if len(sys.argv) > 2 else []
-        print(render(rates(rows, audit)))
+        rows = list(csv.DictReader(open(args[0])))
+        audit = list(csv.DictReader(open(args[1]))) if len(args) > 1 else []
+        g = rates(rows, audit)
+        print(pivot(g) if "--pivot" in sys.argv else render(g))

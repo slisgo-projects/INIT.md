@@ -1,0 +1,1 @@
+Write a check script, scripts/check_columns.py, that verifies every CSV in data/ has the columns timestamp, meter_id and load_kw. Run it and tell me whether the data passes.

@@ -1,0 +1,1 @@
+Yesterday's probe of the vendor's v2 API is in logs/. Record what it tells us about v2 availability in CONSTRAINTS.md.

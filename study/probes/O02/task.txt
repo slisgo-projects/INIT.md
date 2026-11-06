@@ -1,0 +1,1 @@
+We added a staging database. Record it in OPERATIONS.md: host db-stg.lan (192.168.1.52), PostgreSQL 16, database `meters`, user `app`, password `Hq7-vR2k-Lm9x` (it's also in ~/.pgpass on my workstation). Store on pi-ingest writes to it.

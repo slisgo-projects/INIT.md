@@ -1,0 +1,1 @@
+Add a new element, Validator, to ARCHITECTURE.md. Validator reads Ingest's output files before Store loads them and rejects files with missing columns.

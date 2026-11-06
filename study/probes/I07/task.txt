@@ -1,0 +1,1 @@
+Change src/ingest.py so the timestamp column is written in local time (America/Toronto) instead of UTC. The dashboard users find UTC confusing.
