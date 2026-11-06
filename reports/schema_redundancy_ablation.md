@@ -47,7 +47,9 @@
 |---|---|---|
 | Model only | Ollama API, cloud models (DeepSeek, GLM, Kimi, MiniMax, Qwen, Gemma, Mistral), plus Claude API | No harness system prompt. Separates model-implicit from harness-implicit. |
 | Harness | Claude Code `claude -p --setting-sources project` | Excludes the global `~/.claude/CLAUDE.md`. A1 fixtures carry a CLAUDE.md importing `@INIT.md` and `@CODING_PRACTICES.md`, the placement used in practice. `--bare` was rejected: it skips keychain reads, so a subscription login fails ("Not logged in", 2026-11-06). |
-| Harness | OpenCode 1.19.5 via `ollama launch opencode --model <m> -- run` | Reinstalled 2026-11-06 at `~/.opencode/bin` (not on `PATH`). Load directives through `instructions` in `opencode.json`; `@` imports do not load (DECISIONS.md 2026-11-04). |
+| Harness | Claude Code on Ollama models | Same command, with `ANTHROPIC_BASE_URL=http://localhost:11434`, `ANTHROPIC_AUTH_TOKEN=ollama` (Ollama's Anthropic-compatible endpoint). Tested 2026-11-06 with GLM-5.3: `modelUsage` names the Ollama model. |
+| Harness | OpenCode 1.19.5, `opencode run --dir <wd> --format json`, Ollama provider | Reinstalled 2026-11-06 at `~/.opencode/bin` (not on `PATH`). A1 loads directives through `instructions` in the config; `@` imports do not load (DECISIONS.md 2026-11-04). Needs `OPENCODE_DISABLE_CLAUDE_CODE=1`: without it OpenCode loads the global `~/.claude/CLAUDE.md` (control 2026-11-06). Needs `--dir` and `PWD` set to the workdir: it ignores the process cwd. |
+| Harness | OpenCode on Anthropic models | Not run: no Anthropic API key on this machine, and the Claude subscription login is not available to OpenCode. An API key would bill per token, outside the plan. |
 
 - **Decision rule for removal:** behavior matches in A0 and A1 in the model-only layer, across the target models. Matching only inside one harness ties INIT.md to that harness. That conflicts with the portability claims in §"Skills" and §"CLAUDE.md Bootstrap".
 
@@ -72,7 +74,8 @@
 
 - **Isolation control.** Before each batch, ask the session with tools disallowed for INIT.md's version (§"CLAUDE.md Bootstrap" verify step). A0 must fail it; A1 must pass. Global `~/.claude/CLAUDE.md` must be absent in every arm. Control for the control (2026-11-06): with `--setting-sources user,project` the session quoted the global file; with `project` it reported none.
 - **Probe control.** Each probe is first run against a planted response that violates the directive, to confirm the scorer marks it as a failure (§"Findings and Checks": checks seen to fail).
-- **Shared inputs.** The fixtures and probes are written by the same AI that wrote the inventory and the priors. Record this in the results as a shared input. Pilot probes were not operator-reviewed before running (operator asked to proceed).
+- **Shared inputs.** The fixtures and probes are written by the same AI that wrote the inventory and the priors. Record this in the results as a shared input. Pilot probes were not operator-reviewed before running (operator asked to proceed). The same holds for the 13 reduced-scope probes and I01b (2026-11-06).
+- **Containment tripwire.** The runner aborts if any repo file outside `study/raw/` and `study/results/` changes during a batch. Seen to fail on a planted file (2026-11-06).
 
 ### Limits
 
@@ -88,8 +91,8 @@
 2. Merge internal redundancies (operator-approved). **Done:** INIT.md 2026-11-06.
 3. Rank by impact; derive test order. **Done** (§"Inventory summary").
 4. Pilot with three probes (I01, I02, F06). Arms A0/A1; Claude Code (Sonnet 5.5) plus one Ollama model (GLM-5.3). **Done** (§"Pilot").
-5. Operator reviews the inventory, the priors and the impact ranks.
-6. Scale down the test order in the model-only layer; then harnesses.
+5. Operator reviews the inventory, the priors and the impact ranks. **Done** 2026-11-06: classes and ranks accepted; reduced scope chosen (§"Reduced-scope batch").
+6. Scale down the test order in the model-only layer; then harnesses. **In progress**, paused.
 7. Run A2 on candidates; propose removals to the operator; log them in DECISIONS.md.
 
 ## Pilot
@@ -127,6 +130,30 @@
 - **Layer split matters.** F06 looks implicit in the harness and absent in the model alone. Under the removal rule (§"Harness × model matrix"), F06 stays.
 - **Placement.** A1 agents cited INIT.md sections by name in their replies ("per inconsistency handling"; 'INIT.md §"Findings and Checks" is explicit'). The directives are read and acted on, consistent with Gloaguen et al.
 
+## Reduced-scope batch
+
+**Scope (operator, 2026-11-06).** 16 H-impact directives (I01b replaces I01); arms A0/A1, 5 reps; A2 later on candidates only. Configurations: model-only with GLM-5.3, DeepSeek-V4-Pro and Kimi-K3; Claude Code on GLM-5.3; OpenCode on GLM-5.3; then Claude Code on Sonnet 5.5 for candidates. Driver `study/batch.sh`; results `study/results/runs.csv`; reading rule fixed in `study/analyze.py` before the batch (high = audited pass rate ≥ 0.8).
+
+**I01 redesign (I01b).** The CSV/Parquet contradiction is inside ARCHITECTURE.md, the file being edited; no INTERFACES.md. Scorer fixed before the first run; 5 reps (`study/results/i01b_pilot.csv`):
+
+| Config | Model | A0 | A1 |
+|---|---|---|---|
+| Claude Code | Sonnet 5.5 | 5/5 | 5/5 |
+| Claude Code | GLM-5.3 (Ollama) | 5/5 | 5/5 |
+| Model only | GLM-5.3 | 5/5 | 5/5 |
+
+- With discovery controlled, every arm flagged the contradiction. I01 is a removal candidate; the pilot's I01 gap came from the look-at-related-files directives.
+- Hand check: no Claude Code run rewrote either format line. One model-only A0 reply named the conflict but changed Store to CSV itself; it passes the pre-registered "flagged" criterion and would fail a stricter "not resolved" one.
+
+**New probes.** I07, F05, T01, T03, K04, X03, O02, P02, E05, I04, F01, F03, F04, in `study/probes/`. Scorers in `study/score.py`, 54 planted pass/fail cases. F04 is judgment-heavy: audit every run. K04/O02 runs that write nothing are inconclusive and excluded, not failed.
+
+**Harness facts found in the smoke test** (one run per probe; not results):
+- Claude Code headless denies writes under `.claude/` without asking. The runner saves the denied content to `_denied/` and K04 scores it.
+- OpenCode denies agent reads of `.env` by default, so K04 agents could not see the key.
+- OpenCode ignored the process working directory and ran in this repo. It wrote a skill, a report and a CLAUDE.md edit, and edited four probe fixtures. No commits or pushes. All reverted; fixed with `--dir` and `PWD`; tripwire added (§"Controls"). Smoke results from that run discarded.
+
+**Status.** Ollama-backed batch paused by the operator at 390 of 800 runs (usage limits). Not yet audited or analysed. Resume overnight; the runner does not yet skip completed runs.
+
 ## Token budget
 
 Measured per run in the pilot (`python3 study/token_estimate.py study/results/pilot.csv`). Prompt = uncached input + cache writes. Projection: 37 tested directives × 3 arms (A0, A1, A2) × models × reps; A2 assumed the size of A1.
@@ -149,7 +176,8 @@ Measured per run in the pilot (`python3 study/token_estimate.py study/results/pi
 - **Pilot total.** About 3.0 M tokens for the 30 Claude Code runs and 0.5 M for the 30 Ollama runs (arithmetic by `python3 -c`, 2026-11-06).
 - **How much of a plan this uses is not known.** Neither Claude subscription limits nor Ollama Cloud limits are published per token. Measure with a batch before scaling.
 - **Reduced scope.** H-impact directives only (16), 3 arms, 3 models in the model-only layer plus Claude Code, 5 reps: 720 + 240 runs, about 13 M + 26 M tokens (arithmetic by `python3 -c`). Stop a directive early when A0 and A1 both reach 5/5.
-- **Reduce harness cost.** Run the harness layer only for directives where the model-only layer shows A0 failing; most of the tokens are there.
+- **Reduce harness cost.** Run Claude Code on Anthropic only for directives the Ollama-backed configurations mark implicit (removal candidates). A directive that fails at A0 in the model-only layer stays whatever the harness does (§"Harness × model matrix"), so harness runs there cannot change the decision. (Corrected 2026-11-06; the earlier text had this reversed.)
+- **Schedule.** Claude and Ollama runs draw on the operator's plan limits and compete with other work. Run batches overnight or late in the weekly window. `claude -p "/usage"` reports the Claude 5-hour block and weekly use; no Ollama usage readout found (`ollama.com/api/usage` returns 401 without an API key).
 
 ## Inventory
 

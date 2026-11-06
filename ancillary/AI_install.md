@@ -460,7 +460,7 @@ These apply to **new** terminals only. To undo any of them, set the value to `$n
 
 [OpenCode](https://opencode.ai) is an open source (MIT) harness. Use it if you prefer not to depend on Claude Code, which Anthropic does not support with non-Claude models. OpenCode is free, but cloud model usage is still billed (§2).
 
-**Tested 2026-11-04:** OpenCode 1.19.5 on Linux, through `ollama launch` with `opencode run`, using the release binary. Install command (Linux, `--no-modify-path`) tested 2026-11-06; it installs to `~/.opencode/bin`, which is not on `PATH`, so `ollama launch opencode` finds it there. **Not tested:** the other install commands below, the interactive screen, permission prompts, long sessions and compaction, and Windows.
+**Tested 2026-11-04:** OpenCode 1.19.5 on Linux, through `ollama launch` with `opencode run`, using the release binary. Install command (Linux, `--no-modify-path`) tested 2026-11-06; it installs to `~/.opencode/bin`, which is not on `PATH`, so `ollama launch opencode` finds it there. OpenCode also loads `~/.claude/CLAUDE.md` as global rules unless `OPENCODE_DISABLE_CLAUDE_CODE=1` is set (tested 2026-11-06). **Not tested:** the other install commands below, the interactive screen, permission prompts, long sessions and compaction, and Windows.
 
 1. **Set up Ollama and sign in:** §1 and §2.
 
