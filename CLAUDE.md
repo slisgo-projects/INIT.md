@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-**Initialized against INIT.md version:** 2026-11-05
+**Initialized against INIT.md version:** 2026-11-06
 
 **Auto-loaded every session** (per INIT.md §"CLAUDE.md Bootstrap"):
 
@@ -13,7 +13,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A meta-specification for AI-human collaboration on project setup. The repo is also structured recursively per its own schema, so it is both the deliverable and the first project applying it.
 
-No code, no build, no tests — deliverables are markdown spec files that downstream projects copy or follow.
+No build — deliverables are markdown spec files that downstream projects copy or follow. Code exists only in `scripts/` (calculation scripts per INIT.md §"Findings and Checks") and `study/` (schema-redundancy study: probes, runner, scorer; see `reports/schema_redundancy_ablation.md`). Raw run transcripts in `study/raw/` stay local.
 
 The working directory is named `INIT.md` (a directory, not a file). Targeted at team-of-one (one human + many AI agents), not multi-person institutional teams.
 

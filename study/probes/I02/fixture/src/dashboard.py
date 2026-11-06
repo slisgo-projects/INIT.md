@@ -1,0 +1,1 @@
+"""Daily load charts (stub)."""

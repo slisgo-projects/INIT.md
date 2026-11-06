@@ -2,7 +2,7 @@
 
 **Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5, Fable 5.1, Opus 5.5
 
-**Version:** 2026-11-05 (date of last substantive change; see §"Versioning")
+**Version:** 2026-11-06 (date of last substantive change; see §"Versioning")
 
 **License:** Copyright (c) 2026 S. Lisgo. MIT License: https://github.com/slisgo-projects/INIT.md/blob/main/LICENSE
 
@@ -10,7 +10,7 @@ Guidance for the AI assistant on drafting and maintaining the markdown files tha
 
 **Goal:** a coherent flowdown of activity guidelines capturing project scope, objectives, milestones, timelines, resource requirements, stakeholders, and desired impact.
 
-**Primary reader:** an AI in future sessions, in most cases. INIT.md and VISION.md auto-load every session via CLAUDE.md imports (see §"CLAUDE.md Bootstrap"). When refreshing context, the user typically requests MOTIVATION.md plus whatever lower-level files are appropriate; IMPLEMENTATION.md loads on the trigger in §"Context Refresh". Favor structured, explicit content over narrative prose, and write so files re-ingest efficiently. This is the default optimization for project files.
+**Primary reader:** an AI in future sessions, in most cases. INIT.md and VISION.md auto-load every session via CLAUDE.md imports (see §"CLAUDE.md Bootstrap"). When refreshing context, the user typically requests MOTIVATION.md plus whatever lower-level files are appropriate; IMPLEMENTATION.md loads on the trigger in §"Context Refresh". Write project files per §"Writing Style for AI-Optimized Files."
 
 **Deliberate exception:** MOTIVATION.md is written in prose for the human running the project. Do not AI-optimize it; AI sessions still read it on context refresh.
 
@@ -23,9 +23,9 @@ On first invocation ("Let's set up a project"), the user provides:
 - Initial suggestions on inspirations, architecture, and implementation.
 - Optionally, seed documents in `reference/` as background to VISION.md and MOTIVATION.md (see §"Reference Files").
 
-**Interview variant.** When the user arrives without VISION.md: read any `reference/` seed documents, then elicit VISION.md by structured interview before drafting anything. Ask open-ended questions derived from the VISION.md required content (north star, guideposts, objectives) and the MOTIVATION.md per-strand structure (problem, approach, limits), one question at a time, each building on prior answers. Draft only from the user's answers; do not propose answers. Interview output seeds MOTIVATION.md; it does not complete it.
+**Interview variant.** When the user arrives without VISION.md: read any `reference/` seed documents, then elicit VISION.md by structured interview before drafting anything. Ask open-ended questions derived from the VISION.md required content (north star, guideposts, objectives) and the MOTIVATION.md per-strand structure (problem, approach, limits), one question at a time, each building on prior answers. Draft only from the user's answers. Interview output seeds MOTIVATION.md; it does not complete it.
 
-Elicit before drafting for judgment-heavy content anywhere in the flowdown (guideposts, objectives, strategic decomposition). Do not ghost-write.
+Elicit before drafting judgment-heavy content anywhere in the flowdown (guideposts, objectives, strategic decomposition). Do not propose answers or ghost-write.
 
 First move: read VISION.md and the user's suggestions. Populate CLAUDE.md per §"CLAUDE.md Bootstrap." Create empty placeholder files for all cross-cutting files (GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md), to be populated as the project progresses. Create an empty placeholder for MOTIVATION.md, to be developed iteratively as the user works through their reasons for the project. Then propose a draft of the first sequential file (INSPIRATIONS.md) for review.
 
@@ -33,13 +33,13 @@ MOTIVATION.md is drafted iteratively across sessions, not in a single pass. Capt
 
 Advance one sequential file at a time. Confirm satisfaction before proceeding.
 
-Do not generate all sequential files at once.
-
 # Inconsistency Handling
 
 During drafting: if inconsistencies surface between files, flag them and iterate with the user. Do not silently resolve them.
 
 Status records (phase states, status lines, "not yet run" caveats) are claims, not evidence. Before asserting what is done, collected, or available, check the artifact itself: file presence, contents, checksums, the built or deployed thing. On divergence, correct the record and log the correction in DECISIONS.md.
+
+Specification records (INTERFACES.md contracts, OPERATIONS.md entries) are the reverse: when observed or intended behavior diverges from one, surface the divergence as a contradiction. Do not rewrite the record to match.
 
 During review: the user will request thorough reviews at checkpoints. Surface any inconsistencies for resolution. Run checkpoint reviews in a context that did not author the changes under review. Checkpoint reviews also ask what can be removed: unnecessary content, requirements, phases, recurring records. Removed items follow the owning file's archive rule, if any.
 
@@ -74,6 +74,13 @@ When the user requests a change mid-project: touch the requested file, then prop
 
 Skip unchanged candidates silently. Surface uncertain cases per §"Inconsistency Handling."
 
+**Self-updating records.** Update these unprompted, in the same edit batch or session as the triggering work:
+- IMPLEMENTATION.md — state-of-progress, as each phase is worked on.
+- INTERFACES.md — the entry, when an element edit affects a contract.
+- OPERATIONS.md — the entry, when a session changes topology, access, environment, or change path.
+- `reports/` — a topic report, when a session completes an investigation worth reusing.
+- `handover/` — the session entry and roadmap statuses, at the end of a working session.
+
 # Versioning
 
 INIT.md carries a date-based version stamp at the top: `Version: YYYY-MM-DD`.
@@ -97,7 +104,7 @@ When the user asks for a re-read to refresh context, also re-read by default:
 - All **foundational files** (VISION.md, MOTIVATION.md), as these establish what the project is and why it is worth doing.
 - All **cross-cutting files** (GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md, and OPERATIONS.md where the project has one), as these apply everywhere.
 
-**Load IMPLEMENTATION.md** whenever the session's work touches an implementation phase — building, changing, verifying, or reporting on a phase deliverable — whether or not the user asked for a re-read. Load it before writing state-of-progress per §"IMPLEMENTATION.md."
+**Load IMPLEMENTATION.md** whenever the session's work touches an implementation phase — building, changing, verifying, or reporting on a phase deliverable — whether or not the user asked for a re-read. Load it before writing state-of-progress per §"File Updates."
 
 **Do NOT** read scaffolding files on context refresh. They are working artifacts. Read them only when implementing the relevant phase. After a phase completes, the scaffolding file is moved to `scaffolding/integrated/` per §"Scaffolding Files," not deleted.
 
@@ -154,8 +161,6 @@ Directive, concise:
 >   - Borrow: clean X/Y separation.
 >   - Avoid: tight coupling of X to internal Z.
 >   - Relevance: Phase 2 needs the same split.
-
-**Self-check before writing:** could this point be made in fewer words without losing meaning? If yes, cut. If a sentence is explaining what the file is doing rather than carrying content, delete it.
 
 # CLAUDE.md Bootstrap
 
@@ -291,7 +296,6 @@ Per-phase entry includes:
 
 Explicit phases, resolved in sequence, typical of Claude Code plan mode.
 
-**Self-updating:** as each phase is worked on, write state-of-progress to IMPLEMENTATION.md automatically. Do not wait to be asked.
 
 ## Cross-Cutting Files
 
@@ -333,9 +337,7 @@ Created when the project acquires its first deployed host, device, or account �
 
 Rules:
 - Cross-cutting: re-read on context refresh alongside GLOSSARY/CONSTRAINTS/INTERFACES/DECISIONS.
-- **Self-updating.** When a session changes topology, access, environment, or change path, update the entry in the same edit batch. Do not wait to be asked. Mirrors the self-updating rule in §"IMPLEMENTATION.md."
 - **Boundary.** CONSTRAINTS.md holds project-wide limits and risks; INTERFACES.md holds contracts between elements; a skill holds an executable procedure; OPERATIONS.md holds the standing facts those three refer to. A fact recorded here is not restated in a skill — the skill cites it.
-- **Divergence is an inconsistency.** If a resource behaves differently from what is recorded, surface it per §"Inconsistency Handling." Do not silently rewrite the entry to match.
 
 ### INTERFACES.md
 
@@ -360,8 +362,6 @@ A change to an interface entry triggers one-hop propagation to both connected AR
 
 Active management:
 - **Pre-flight.** Before editing any element, consult INTERFACES.md for entries touching that element. Treat listed contracts as constraints on the edit.
-- **Self-updating.** When an element edit affects a contract, update the INTERFACES.md entry in the same edit batch. Do not wait to be asked. Mirrors the self-updating rule in §"IMPLEMENTATION.md."
-- **Contract divergence is an inconsistency.** If observed or intended behavior diverges from a stated contract, surface as a contradiction per §"Inconsistency Handling." Do not silently rewrite the entry to match.
 
 ### DECISIONS.md
 
@@ -503,7 +503,6 @@ Rules:
 - Not read on context refresh; load when the session touches the file's topic.
 - Report files persist; they do not move or integrate. When findings are overturned, mark the report superseded with a pointer — do not delete.
 - Durable decisions arising from a report go to DECISIONS.md. The report supplements DECISIONS.md, does not replace it.
-- **Self-updating:** when a session completes an investigation worth reusing, write the topic report without being asked. Mirrors the self-updating rule in §"IMPLEMENTATION.md."
 
 ## Continuity Files
 
@@ -523,7 +522,6 @@ Rules:
 - Not read on context refresh. The user pulls in the file for the area being resumed. A session that needs one and has not been given it asks by name rather than loading every area.
 - Spawn a new file when a work area separates out; cross-reference siblings rather than duplicating their content. Standing operational fact belongs in OPERATIONS.md, cited from here.
 - **Drain rule.** As each session closes, promote durable content to the file that owns it: rationale → DECISIONS.md, phase status → IMPLEMENTATION.md, contracts → INTERFACES.md, topology and access → OPERATIONS.md. Compact the drained session-log entry to a one-line pointer. The continuity file supplements the governed files; it does not replace them, and unbounded growth means the drain is not happening.
-- **Self-updating.** Write the session entry and advance the roadmap statuses at the end of a working session, unprompted. Mirrors the self-updating rule in §"IMPLEMENTATION.md."
 - **Retirement.** When the area closes, drain, then move the file to `handover/closed/` and prepend: `→ historical: continuity record for a closed work area; current truth is the governed files and the code.` Not deleted.
 - AI-optimized per §"Writing Style for AI-Optimized Files," with one bounded exception: session-log entries may carry the narrative needed to reconstruct a state — what was tried, what it looked like, why it was wrong. A wrong diagnosis that cost a session is content here, not rationale in the wrong file.
 

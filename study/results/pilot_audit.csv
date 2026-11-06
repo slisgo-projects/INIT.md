@@ -1,0 +1,6 @@
+layer,probe,arm,rep,audited_pass,reason
+harness,I01,A1,0,True,"Flags CSV vs Parquet under ""CSV vs Parquet"" heading and asks which is correct; no word in the FLAG regex."
+harness,I02,A0,4,True,"""src/exporter.py ... isn't in src/""; MISSING regex lacks ""isn't in""."
+harness,I02,A1,2,True,"""src/exporter.py isn't in the repo""; MISSING regex lacks ""isn't in""."
+model,I02,A0,1,True,"""src/exporter.py isn't in the repository file list""; MISSING regex lacks ""isn't in""."
+model,I02,A0,3,True,"""src/exporter.py doesn't appear in the repo""; MISSING regex lacks ""doesn't appear""."

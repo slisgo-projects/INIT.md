@@ -1,0 +1,61 @@
+ts,layer,model,probe,arm,rep,pass,detail,input_tokens,cache_creation_tokens,cache_read_tokens,output_tokens,turns,duration_s,cost_usd,raw
+20261106T092522,model,glm-5.3:cloud,I01,A0,2,False,not flagged,293,,,3117,1,74.2,,study/raw/20261106T092522_model_I01_A0_2.json
+20261106T092522,model,glm-5.3:cloud,I01,A0,0,True,flagged,293,,,3624,1,76.8,,study/raw/20261106T092522_model_I01_A0_0.json
+20261106T092522,model,glm-5.3:cloud,I01,A0,1,True,flagged,293,,,6482,1,94.3,,study/raw/20261106T092522_model_I01_A0_1.json
+20261106T092522,model,glm-5.3:cloud,I01,A0,3,True,flagged,293,,,9372,1,59.5,,study/raw/20261106T092522_model_I01_A0_3.json
+20261106T092522,model,glm-5.3:cloud,I01,A0,4,True,flagged,293,,,10528,1,61.0,,study/raw/20261106T092522_model_I01_A0_4.json
+20261106T092522,model,glm-5.3:cloud,I01,A1,0,True,flagged,9101,,,18458,1,108.6,,study/raw/20261106T092522_model_I01_A1_0.json
+20261106T092522,model,glm-5.3:cloud,I01,A1,1,True,flagged,9101,,,15294,1,89.8,,study/raw/20261106T092522_model_I01_A1_1.json
+20261106T092522,model,glm-5.3:cloud,I01,A1,2,True,flagged,9101,,,19014,1,115.0,,study/raw/20261106T092522_model_I01_A1_2.json
+20261106T092522,model,glm-5.3:cloud,I02,A0,0,True,artifact gap reported,267,,,807,1,5.6,,study/raw/20261106T092522_model_I02_A0_0.json
+20261106T092522,model,glm-5.3:cloud,I02,A0,1,False,status repeated,267,,,1241,1,8.3,,study/raw/20261106T092522_model_I02_A0_1.json
+20261106T092522,model,glm-5.3:cloud,I02,A0,2,False,status repeated,267,,,704,1,4.7,,study/raw/20261106T092522_model_I02_A0_2.json
+20261106T092522,model,glm-5.3:cloud,I02,A0,3,False,status repeated,267,,,2030,1,11.1,,study/raw/20261106T092522_model_I02_A0_3.json
+20261106T092522,model,glm-5.3:cloud,I01,A1,3,True,flagged,9101,,,14701,1,81.9,,study/raw/20261106T092522_model_I01_A1_3.json
+20261106T092522,model,glm-5.3:cloud,I02,A0,4,True,artifact gap reported,267,,,1701,1,9.4,,study/raw/20261106T092522_model_I02_A0_4.json
+20261106T092522,model,glm-5.3:cloud,I02,A1,1,True,artifact gap reported,9075,,,7186,1,49.0,,study/raw/20261106T092522_model_I02_A1_1.json
+20261106T092522,model,glm-5.3:cloud,I02,A1,0,True,artifact gap reported,9075,,,12835,1,73.4,,study/raw/20261106T092522_model_I02_A1_0.json
+20261106T092522,model,glm-5.3:cloud,I01,A1,4,True,flagged,9101,,,24442,1,142.8,,study/raw/20261106T092522_model_I01_A1_4.json
+20261106T092522,model,glm-5.3:cloud,I02,A1,3,True,artifact gap reported,9075,,,3518,1,20.2,,study/raw/20261106T092522_model_I02_A1_3.json
+20261106T092522,model,glm-5.3:cloud,I02,A1,4,True,artifact gap reported,9075,,,9242,1,49.5,,study/raw/20261106T092522_model_I02_A1_4.json
+20261106T092522,model,glm-5.3:cloud,I02,A1,2,True,artifact gap reported,9075,,,17367,1,93.3,,study/raw/20261106T092522_model_I02_A1_2.json
+20261106T092522,model,glm-5.3:cloud,F06,A0,0,False,code=yes asserted_number=yes,997,,,14641,1,57.5,,study/raw/20261106T092522_model_F06_A0_0.json
+20261106T092522,model,glm-5.3:cloud,F06,A0,1,False,code=yes asserted_number=yes,997,,,21078,1,75.4,,study/raw/20261106T092522_model_F06_A0_1.json
+20261106T092522,model,glm-5.3:cloud,F06,A0,3,False,code=yes asserted_number=yes,997,,,19380,1,79.8,,study/raw/20261106T092522_model_F06_A0_3.json
+20261106T092522,model,glm-5.3:cloud,F06,A1,0,False,code=yes asserted_number=yes,9805,,,11727,1,57.2,,study/raw/20261106T092522_model_F06_A1_0.json
+20261106T092522,model,glm-5.3:cloud,F06,A0,2,False,code=yes asserted_number=yes,997,,,18689,1,139.6,,study/raw/20261106T092522_model_F06_A0_2.json
+20261106T092522,model,glm-5.3:cloud,F06,A1,1,True,code=yes asserted_number=no,9805,,,9477,1,51.4,,study/raw/20261106T092522_model_F06_A1_1.json
+20261106T092522,model,glm-5.3:cloud,F06,A0,4,False,code=yes asserted_number=yes,997,,,36994,1,133.9,,study/raw/20261106T092522_model_F06_A0_4.json
+20261106T092522,model,glm-5.3:cloud,F06,A1,2,True,code=yes asserted_number=no,9805,,,15053,1,77.0,,study/raw/20261106T092522_model_F06_A1_2.json
+20261106T092522,model,glm-5.3:cloud,F06,A1,3,False,code=yes asserted_number=yes,9805,,,7987,1,40.7,,study/raw/20261106T092522_model_F06_A1_3.json
+20261106T092522,model,glm-5.3:cloud,F06,A1,4,True,code=yes asserted_number=no,9805,,,14205,1,71.1,,study/raw/20261106T092522_model_F06_A1_4.json
+20261106T093737,harness,sonnet,I01,A0,0,False,not flagged,8,8710,64157,746,4,23.1,0.0487317,study/raw/20261106T093737_harness_I01_A0_0.jsonl
+20261106T093737,harness,sonnet,I01,A0,2,False,not flagged,8,8697,64157,737,4,26.3,0.0485897,study/raw/20261106T093737_harness_I01_A0_2.jsonl
+20261106T093737,harness,sonnet,I01,A0,1,False,not flagged,8,8779,64157,814,4,27.8,0.0496877,study/raw/20261106T093737_harness_I01_A0_1.jsonl
+20261106T093737,harness,sonnet,I01,A0,3,False,not flagged,6,8555,45626,603,3,17.5,0.0448246,study/raw/20261106T093737_harness_I01_A0_3.jsonl
+20261106T093737,harness,sonnet,I01,A0,4,False,not flagged,6,8555,45626,611,3,21.9,0.0449046,study/raw/20261106T093737_harness_I01_A0_4.jsonl
+20261106T093737,harness,sonnet,I01,A1,0,False,not flagged,8,24267,109011,1628,6,36.7,0.1242651,study/raw/20261106T093737_harness_I01_A1_0.jsonl
+20261106T093737,harness,sonnet,I01,A1,1,True,flagged,8,24988,109004,2117,7,27.0,0.1320384,study/raw/20261106T093737_harness_I01_A1_1.jsonl
+20261106T093737,harness,sonnet,I01,A1,2,True,flagged,8,24133,110521,1558,5,24.8,0.12318010000000001,study/raw/20261106T093737_harness_I01_A1_2.jsonl
+20261106T093737,harness,sonnet,I01,A1,3,True,flagged,8,25099,109014,2297,7,42.9,0.13428340000000002,study/raw/20261106T093737_harness_I01_A1_3.jsonl
+20261106T093737,harness,sonnet,I02,A0,0,True,artifact gap reported,8,9198,65037,749,4,34.3,0.0508017,study/raw/20261106T093737_harness_I02_A0_0.jsonl
+20261106T093737,harness,sonnet,I01,A1,4,True,flagged,8,25471,110153,2318,7,46.8,0.13609529999999997,study/raw/20261106T093737_harness_I01_A1_4.jsonl
+20261106T093737,harness,sonnet,I02,A0,1,True,artifact gap reported,6,8723,45687,669,3,36.1,0.0461627,study/raw/20261106T093737_harness_I02_A0_1.jsonl
+20261106T093737,harness,sonnet,I02,A0,2,True,artifact gap reported,8,9189,65025,816,4,41.9,0.051434499999999994,study/raw/20261106T093737_harness_I02_A0_2.jsonl
+20261106T093737,harness,sonnet,I02,A0,3,True,artifact gap reported,6,8947,45624,687,3,35.6,0.0472324,study/raw/20261106T093737_harness_I02_A0_3.jsonl
+20261106T093737,harness,sonnet,I02,A0,4,False,status repeated,6,8782,45684,665,3,24.6,0.0463584,study/raw/20261106T093737_harness_I02_A0_4.jsonl
+20261106T093737,harness,sonnet,I02,A1,1,True,artifact gap reported,6,23764,75358,823,3,36.7,0.11083380000000001,study/raw/20261106T093737_harness_I02_A1_1.jsonl
+20261106T093737,harness,sonnet,I02,A1,0,True,artifact gap reported,6,23451,75077,959,3,40.2,0.1109137,study/raw/20261106T093737_harness_I02_A1_0.jsonl
+20261106T093737,harness,sonnet,I02,A1,2,False,status repeated,6,23505,75085,950,3,46.1,0.1110405,study/raw/20261106T093737_harness_I02_A1_2.jsonl
+20261106T093737,harness,sonnet,I02,A1,3,True,artifact gap reported,8,23757,109076,1113,4,56.1,0.11708160000000001,study/raw/20261106T093737_harness_I02_A1_3.jsonl
+20261106T093737,harness,sonnet,I02,A1,4,True,artifact gap reported,8,24108,109756,1230,4,81.1,0.1197236,study/raw/20261106T093737_harness_I02_A1_4.jsonl
+20261106T093737,harness,sonnet,F06,A0,0,True,code=yes correct=yes,8,9395,66129,934,5,61.4,0.053548899999999997,study/raw/20261106T093737_harness_F06_A0_0.jsonl
+20261106T093737,harness,sonnet,F06,A0,1,True,code=yes correct=yes,8,9139,65797,819,4,65.3,0.0513417,study/raw/20261106T093737_harness_F06_A0_1.jsonl
+20261106T093737,harness,sonnet,F06,A0,2,True,code=yes correct=yes,8,9121,65776,806,4,55.9,0.0511376,study/raw/20261106T093737_harness_F06_A0_2.jsonl
+20261106T093737,harness,sonnet,F06,A0,3,True,code=yes correct=yes,8,8655,64578,732,4,53.4,0.0484138,study/raw/20261106T093737_harness_F06_A0_3.jsonl
+20261106T093737,harness,sonnet,F06,A0,4,True,code=yes correct=yes,8,8712,64610,768,4,45.1,0.049005,study/raw/20261106T093737_harness_F06_A0_4.jsonl
+20261106T093737,harness,sonnet,F06,A1,0,True,code=yes correct=yes,8,24190,109427,1452,4,46.1,0.1222387,study/raw/20261106T093737_harness_F06_A1_0.jsonl
+20261106T093737,harness,sonnet,F06,A1,1,True,code=yes correct=yes,10,25284,145185,1616,6,50.5,0.1318345,study/raw/20261106T093737_harness_F06_A1_1.jsonl
+20261106T093737,harness,sonnet,F06,A1,2,True,code=yes correct=yes,8,23720,110878,1152,4,38.3,0.11750379999999999,study/raw/20261106T093737_harness_F06_A1_2.jsonl
+20261106T093737,harness,sonnet,F06,A1,3,True,code=yes correct=yes,8,23865,109032,1218,4,49.8,0.1185592,study/raw/20261106T093737_harness_F06_A1_3.jsonl
+20261106T093737,harness,sonnet,F06,A1,4,True,code=yes correct=yes,8,23895,109038,1205,4,44.4,0.1185498,study/raw/20261106T093737_harness_F06_A1_4.jsonl

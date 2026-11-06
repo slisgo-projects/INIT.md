@@ -1,8 +1,8 @@
 # Schema Redundancy Ablation
 
 **Date:** 2026-11-06
-**Status:** current — plan and inventory only; no probe has been run.
-**Baseline:** INIT.md version 2026-11-05; CODING_PRACTICES.md as of commit f709098.
+**Status:** current — plan, inventory and three-probe pilot.
+**Baseline:** inventory drawn from INIT.md version 2026-11-05 (commit f709098); merges applied in version 2026-11-06. The pilot ran against 2026-11-06.
 **Provenance:** literature findings come from arXiv abstract pages and search summaries, not full papers (see §"References"). The directive inventory, its classes and its prior predictions are AI judgment. Counts in §"Inventory summary" come from `scripts/inventory_counts.py`.
 
 ## Question
@@ -46,8 +46,8 @@
 | Layer | Option | Notes |
 |---|---|---|
 | Model only | Ollama API, cloud models (DeepSeek, GLM, Kimi, MiniMax, Qwen, Gemma, Mistral), plus Claude API | No harness system prompt. Separates model-implicit from harness-implicit. |
-| Harness | Claude Code `claude -p --bare` | `--bare` skips CLAUDE.md auto-discovery. Treatment arms add the directives with `--append-system-prompt-file`. Use `--bare` in **both** arms so the arms differ only in the directives. |
-| Harness | OpenCode via `ollama launch opencode` / `opencode run` | Load directives through `instructions` in `opencode.json`; `@` imports do not load (DECISIONS.md 2026-11-04). |
+| Harness | Claude Code `claude -p --setting-sources project` | Excludes the global `~/.claude/CLAUDE.md`. A1 fixtures carry a CLAUDE.md importing `@INIT.md` and `@CODING_PRACTICES.md`, the placement used in practice. `--bare` was rejected: it skips keychain reads, so a subscription login fails ("Not logged in", 2026-11-06). |
+| Harness | OpenCode 1.19.5 via `ollama launch opencode --model <m> -- run` | Reinstalled 2026-11-06 at `~/.opencode/bin` (not on `PATH`). Load directives through `instructions` in `opencode.json`; `@` imports do not load (DECISIONS.md 2026-11-04). |
 
 - **Decision rule for removal:** behavior matches in A0 and A1 in the model-only layer, across the target models. Matching only inside one harness ties INIT.md to that harness. That conflicts with the portability claims in §"Skills" and §"CLAUDE.md Bootstrap".
 
@@ -70,9 +70,9 @@
 
 ### Controls
 
-- **Isolation control.** Before each batch, ask the session with tools disallowed for INIT.md's version (§"CLAUDE.md Bootstrap" verify step). A0 must fail it; A1 must pass. Global `~/.claude/CLAUDE.md` must be absent in every arm (`--bare`, or `--setting-sources` without `user`).
+- **Isolation control.** Before each batch, ask the session with tools disallowed for INIT.md's version (§"CLAUDE.md Bootstrap" verify step). A0 must fail it; A1 must pass. Global `~/.claude/CLAUDE.md` must be absent in every arm. Control for the control (2026-11-06): with `--setting-sources user,project` the session quoted the global file; with `project` it reported none.
 - **Probe control.** Each probe is first run against a planted response that violates the directive, to confirm the scorer marks it as a failure (§"Findings and Checks": checks seen to fail).
-- **Shared inputs.** The fixtures and probes are written by the same AI that wrote the inventory and the priors. Record this in the results as a shared input. Have the operator review the probes before the first run.
+- **Shared inputs.** The fixtures and probes are written by the same AI that wrote the inventory and the priors. Record this in the results as a shared input. Pilot probes were not operator-reviewed before running (operator asked to proceed).
 
 ### Limits
 
@@ -80,21 +80,88 @@
 - **Non-model readers.** Some directives document intent for the operator or make audits possible. Matching behavior with and without them does not by itself justify removal.
 - **Conventions.** Conventions (class C) are not tested. A model cannot infer a file name or a stamp format.
 - **Short probes.** Short probes miss effects that only appear late in long sessions, such as drift after compaction. Probes run as single sessions.
-- **Cost.** The full matrix is 58 behavioral directives × 4 arms × ~8 models × 5–10 runs = 9,280–18,560 runs (arithmetic by `python3 -c`, 2026-11-06). Pilot first, then prune.
+- **Cost.** See §"Token budget".
 
 ### Phasing
 
-1. Inventory and classify directives; record priors before any run. **Done (this report).**
-2. Operator reviews the inventory and the priors.
-3. Pilot with three probes (I01 inconsistency, F06 calculations, I02 status claims). Arms A0/A1 only; Claude Code `--bare` plus one Ollama model. Goal: check that isolation, scoring and planted-failure controls work.
-4. Scale to all class-B directives in the model-only layer; then harnesses.
-5. Run A2 on candidates; propose removals to the operator; log them in DECISIONS.md.
+1. Inventory and classify directives; record priors before any run. **Done.**
+2. Merge internal redundancies (operator-approved). **Done:** INIT.md 2026-11-06.
+3. Rank by impact; derive test order. **Done** (§"Inventory summary").
+4. Pilot with three probes (I01, I02, F06). Arms A0/A1; Claude Code (Sonnet 5.5) plus one Ollama model (GLM-5.3). **Done** (§"Pilot").
+5. Operator reviews the inventory, the priors and the impact ranks.
+6. Scale down the test order in the model-only layer; then harnesses.
+7. Run A2 on candidates; propose removals to the operator; log them in DECISIONS.md.
+
+## Pilot
+
+**Run 2026-11-06.** Probes I01, I02, F06; arms A0/A1; 5 reps each. Model-only layer: GLM-5.3 (`glm-5.3:cloud`) via Ollama. Harness layer: Claude Code 2.1.319, Sonnet 5.5, `--setting-sources project`. Fixtures in `study/probes/`; runner `study/run_pilot.py`; raw transcripts in `study/raw/` (local only).
+
+**Controls.**
+- Isolation: passed for all four layer × arm combinations (A0 answered NOT LOADED; A1 stated 2026-11-06).
+- Scorer: planted pass/fail cases (`python3 study/score.py --selftest`) passed before the first run.
+- Hand audit of every failure and every I01/I02 pass. Five failures were scorer misses: the model reported the problem in wording the regex lacked (`study/results/pilot_audit.csv`). No false passes found. Scorer v2 adds that wording and agrees with the audit on all pilot runs; it was designed after the results, so it is weak evidence for this pilot.
+- Shared input: the same AI wrote the fixtures, the scorer and the priors.
+
+**Results** (`python3 study/analyze.py study/results/pilot.csv study/results/pilot_audit.csv`):
+
+| Layer | Model | Probe | Arm | n | Pass (pre-registered) | Pass (audited) |
+|---|---|---|---|---|---|---|
+| harness | sonnet | F06 | A0 | 5 | 5/5 | 5/5 |
+| harness | sonnet | F06 | A1 | 5 | 5/5 | 5/5 |
+| harness | sonnet | I01 | A0 | 5 | 0/5 | 0/5 |
+| harness | sonnet | I01 | A1 | 5 | 4/5 | 5/5 |
+| harness | sonnet | I02 | A0 | 5 | 4/5 | 5/5 |
+| harness | sonnet | I02 | A1 | 5 | 4/5 | 5/5 |
+| model | glm-5.3:cloud | F06 | A0 | 5 | 0/5 | 0/5 |
+| model | glm-5.3:cloud | F06 | A1 | 5 | 3/5 | 3/5 |
+| model | glm-5.3:cloud | I01 | A0 | 5 | 4/5 | 4/5 |
+| model | glm-5.3:cloud | I01 | A1 | 5 | 5/5 | 5/5 |
+| model | glm-5.3:cloud | I02 | A0 | 5 | 2/5 | 4/5 |
+| model | glm-5.3:cloud | I02 | A1 | 5 | 5/5 | 5/5 |
+
+**Readings.** n = 5 per cell; these are signals for probe design, not findings about directives.
+- **I01, harness.** A0 0/5, A1 5/5 (audited). No A0 agent opened INTERFACES.md; every A1 agent did (transcripts). The difference comes from INIT.md making the agent look at related files (pre-flight N02, propagation U01), not from the flagging rule itself. When the contradiction was visible (model-only layer), A0 flagged it 4/5. Redesign: separate discovery from flagging, e.g. a probe where the contradiction is in the file being edited.
+- **I02.** Audited: harness A0 5/5, A1 5/5; model-only A0 4/5, A1 5/5. Sonnet in Claude Code already checks artifacts against status records; candidate for "implicit" in this harness. The model-only layer needs more runs.
+- **F06, harness.** A0 and A1 5/5: Claude Code computes with Python unprompted, and the values were correct in all ten runs. Implicit in this harness when tools are available.
+- **F06, model-only.** A0 0/5: every reply stated hand-computed numbers; four of five stated the sum (640.35) on the way. A1 3/5: all five refused to hand-compute and wrote a script; two failed only because they gave a plausibility band ("around 13.3"; "12–15 kW") before running it. The strict rule counts those as AI-computed numbers; kept as failures.
+- **Layer split matters.** F06 looks implicit in the harness and absent in the model alone. Under the removal rule (§"Harness × model matrix"), F06 stays.
+- **Placement.** A1 agents cited INIT.md sections by name in their replies ("per inconsistency handling"; 'INIT.md §"Findings and Checks" is explicit'). The directives are read and acted on, consistent with Gloaguen et al.
+
+## Token budget
+
+Measured per run in the pilot (`python3 study/token_estimate.py study/results/pilot.csv`). Prompt = uncached input + cache writes. Projection: 37 tested directives × 3 arms (A0, A1, A2) × models × reps; A2 assumed the size of A1.
+
+| Layer | Arm | n | Prompt (uncached) | Cache read | Output | Total/run |
+|---|---|---|---|---|---|---|
+| harness | A0 | 15 | 8,884 | 58,511 | 744 | 68,140 |
+| harness | A1 | 15 | 24,241 | 105,041 | 1,442 | 130,724 |
+| model | A0 | 15 | 519 | 0 | 10,026 | 10,545 |
+| model | A1 | 15 | 9,327 | 0 | 13,367 | 22,694 |
+
+| Layer | Models | Reps | Runs | Tokens |
+|---|---|---|---|---|
+| harness | 3 | 5 | 1,665 | 182.9 M |
+| harness | 3 | 10 | 3,330 | 365.8 M |
+| model | 8 | 5 | 4,440 | 82.8 M |
+| model | 8 | 10 | 8,880 | 165.6 M |
+
+- **Per run.** Claude Code: about 68k tokens without INIT.md and 131k with it, mostly cache reads (each agent turn re-reads the context). Model-only: about 11k without and 23k with; output dominates because GLM-5.3 thinks at length.
+- **Pilot total.** About 3.0 M tokens for the 30 Claude Code runs and 0.5 M for the 30 Ollama runs (arithmetic by `python3 -c`, 2026-11-06).
+- **How much of a plan this uses is not known.** Neither Claude subscription limits nor Ollama Cloud limits are published per token. Measure with a batch before scaling.
+- **Reduced scope.** H-impact directives only (16), 3 arms, 3 models in the model-only layer plus Claude Code, 5 reps: 720 + 240 runs, about 13 M + 26 M tokens (arithmetic by `python3 -c`). Stop a directive early when A0 and A1 both reach 5/5.
+- **Reduce harness cost.** Run the harness layer only for directives where the model-only layer shows A0 failing; most of the tokens are there.
 
 ## Inventory
 
 Classes:
 - **C** — convention. Schema-specific names, formats, locations and lifecycles. A model cannot infer these. Not tested.
 - **B** — behavioral. A general working practice that a capable model or harness might follow unprompted. Probe candidate. "(target C)" means the behavior is general but its destination is a schema file; the probe tests the behavior only.
+- **M** — merged into the row named in Overlap (INIT.md 2026-11-06). IDs are kept stable.
+
+Impact: the cost if the directive were dropped and the behavior absent. AI judgment, recorded before any run.
+- **H** — silent, compounding damage not visible in normal output: false claims, lost or corrupted records, leaked secrets.
+- **M** — rework or drift the operator notices later.
+- **L** — visible immediately in the output and cheap to correct. Not tested; keep or drop by judgment.
 
 Prior: AI prediction that A0 already shows the behavior: **likely / unsure / unlikely**. Recorded before any run; the predictions are hypotheses, not findings.
 
@@ -102,118 +169,160 @@ Overlap:
 - **CC** — this session's Claude Code system prompt carries related guidance (observed 2026-11-06; one harness, one session).
 - **int:X** — overlaps directive X inside INIT.md (A2 target).
 
-| ID | Source | Directive | Class | Prior | Overlap |
-|---|---|---|---|---|---|
-| D01 | Preamble | Favor structured, explicit content written for re-ingestion | B | unsure | int:W01–W06 |
-| D02 | Preamble | MOTIVATION.md is prose, not AI-optimized | C | — | — |
-| E01 | Entry Protocol | User supplies VISION.md, suggestions and optional seed documents | C | — | — |
-| E02 | Entry Protocol | Without VISION.md, read `reference/` and then interview before drafting | C | — | — |
-| E03 | Entry Protocol | Interview: open questions, one at a time, each building on prior answers | B | unsure | — |
-| E04 | Entry Protocol | Draft only from the user's answers; do not propose answers | B | unlikely | int:E05 |
-| E05 | Entry Protocol | Elicit before drafting judgment-heavy content; do not ghost-write | B | unlikely | int:E04 |
-| E06 | Entry Protocol | First move: CLAUDE.md, placeholder files, then an INSPIRATIONS.md draft | C | — | — |
-| E07 | Entry Protocol | Capture motivation material whenever surfaced (target C) | B | unlikely | — |
-| E08 | Entry Protocol | Advance one sequential file at a time; confirm before proceeding | B | unsure | int:E09 |
-| E09 | Entry Protocol | Do not generate all sequential files at once | B | unsure | int:E08 |
-| I01 | Inconsistency Handling | Flag inconsistencies between files; do not silently resolve them | B | unsure | int:O04, N04 |
-| I02 | Inconsistency Handling | Status records are claims; check the artifact before asserting | B | unsure | CC |
-| I03 | Inconsistency Handling | On divergence, correct the record and log it (target C) | B | unlikely | — |
-| I04 | Inconsistency Handling | Checkpoint reviews run in a context that did not author the changes | B | unlikely | — |
-| I05 | Inconsistency Handling | Checkpoint reviews ask what can be removed | B | unlikely | — |
-| I06 | Inconsistency Handling | Removed items follow the owning file's archive rule | C | — | — |
-| F01 | Findings and Checks | Negative findings require a control | B | unlikely | — |
-| F02 | Findings and Checks | Unconfirmed negatives are logged as open questions | C | — | — |
-| F03 | Findings and Checks | A check counts as evidence only after it has been seen to fail | B | unlikely | — |
-| F04 | Findings and Checks | Checks independent; criteria fixed before first result; shared inputs recorded | B | unlikely | — |
-| F05 | Findings and Checks | Claims closed only when every criterion has passed; open claims list what remains | B | unsure | CC |
-| F06 | Findings and Checks | Calculations run in code, not by the AI | B | unsure | — |
-| F07 | Findings and Checks | Keep the script; record the script and inputs behind each number | B | unlikely | — |
-| F08 | Findings and Checks | Check the script on a known-answer case | B | unlikely | — |
-| F09 | Findings and Checks | Re-check AI-computed numbers already in files when touched | B | unlikely | — |
-| U01 | File Updates | Propagate related updates; report what was propagated | B | unsure | — |
-| U02 | File Updates | Cap propagation at one hop | B | unsure | — |
-| U03 | File Updates | Propagation checklist of target files | C | — | — |
-| U04 | File Updates | Skip unchanged candidates silently; surface uncertain cases | B | unsure | int:I01 |
-| V01 | Versioning | Date-based version stamp; bump on substantive change | C | — | — |
-| V02 | Versioning | No bump for typos, MOTIVATION.md touch-ups or log-only entries | C | — | — |
-| V03 | Versioning | Downstream records its initialization version | C | — | — |
-| R01 | Context Refresh | Default re-read set: foundational + cross-cutting | C | — | — |
-| R02 | Context Refresh | Load IMPLEMENTATION.md when work touches a phase | C | — | — |
-| R03 | Context Refresh | Do not load scaffolding, reference, reports or continuity on refresh | C | — | — |
-| S01 | Stopping Criteria | No length criterion per file | C | — | — |
-| S02 | Stopping Criteria | Mention unwieldy growth and ask; do not subdivide unilaterally | B | unsure | — |
-| S03 | Stopping Criteria | Subdivided file naming pattern | C | — | — |
-| K01 | Skills | Capture a worked-out procedure as a skill in the same session, unasked | B | unlikely | — |
-| K02 | Skills | Skill location `.claude/skills/<name>/SKILL.md` | C | — | — |
-| K03 | Skills | Skill content: imperative, failure modes, valid output | C | — | — |
-| K04 | Skills | No secrets in skills; point to credential locations | B | likely | int:O02 |
-| K05 | Skills | Boundary between skills, reports and OPERATIONS.md | C | — | — |
-| K06 | Skills | Enforce exceptionless rules mechanically | B | unlikely | — |
-| W01 | Writing Style | Directive, not explanatory; no preambles or recaps | B | unsure | — |
-| W02 | Writing Style | Bullets over prose; one concept per bullet | B | unsure | — |
-| W03 | Writing Style | No embedded rationale (target C) | B | unlikely | — |
-| W04 | Writing Style | No filler | B | unsure | — |
-| W05 | Writing Style | Terse glossary-style definitions | B | unsure | — |
-| W06 | Writing Style | Self-check: fewer words without losing meaning | B | unsure | int:W04 |
-| B01 | CLAUDE.md Bootstrap | Four-piece CLAUDE.md stub | C | — | — |
-| B02 | CLAUDE.md Bootstrap | Stub holds names, groups and refresh rule only | C | — | — |
-| G01 | Project Markdown Files | Seven groups plus companion tier; classification rules | C | — | — |
-| G02 | Project Markdown Files | `ancillary/` placement and registration | C | — | — |
-| X01 | Per-file specs | Required content per file (VISION through DECISIONS) | C | — | — |
-| X02 | INSPIRATIONS.md | Live web search before first draft; record date; flag stale references | B | unsure | — |
-| X03 | VALIDATION.md | AI does not weaken a criterion or check to make work pass | B | likely | — |
-| X04 | IMPLEMENTATION.md | Write state-of-progress unasked (target C) | B | unlikely | int:O03, N03, T02, H02 |
-| O01 | OPERATIONS.md | Created at first deployed resource; required sections | C | — | — |
-| O02 | OPERATIONS.md | Credential locations only, never values | B | likely | int:K04 |
-| O03 | OPERATIONS.md | Update entry in the same batch when topology changes | B | unlikely | int:X04 |
-| O04 | OPERATIONS.md | Divergence is an inconsistency; do not rewrite the entry to match | B | unsure | int:I01 |
-| N01 | INTERFACES.md | Entry fields; flat by default | C | — | — |
-| N02 | INTERFACES.md | Pre-flight: consult contracts before editing an element | B | unlikely | — |
-| N03 | INTERFACES.md | Update the contract in the same edit batch | B | unlikely | int:X04 |
-| N04 | INTERFACES.md | Contract divergence is an inconsistency | B | unsure | int:I01 |
-| L01 | DECISIONS.md | Entry fields and status values | C | — | — |
-| Y01 | Scaffolding | Lifecycle, naming, structure, integration | C | — | — |
-| T01 | Report Files | Load-bearing claims carry a source locator; label memory and inference | B | unsure | — |
-| T02 | Report Files | Write a topic report unasked after a reusable investigation | B | unlikely | int:X04 |
-| T03 | Report Files | Do not commit report-source copies to a public repository | B | unsure | — |
-| T04 | Report Files | Report fields, `reference/` copies, supersession | C | — | — |
-| H01 | Continuity Files | File structure, drain rule, retirement | C | — | — |
-| H02 | Continuity Files | Write session entry and advance roadmap unasked | B | unlikely | int:X04 |
-| P01 | Plan files | Session start: fetch, list plans, ask run/defer/decline | C | — | — |
-| P02 | Plan files | Plans grant no permissions | B | likely | CC |
-| C01 | CODING_PRACTICES §1 | State assumptions; ask when uncertain | B | likely | CC |
-| C02 | CODING_PRACTICES §1 | Present multiple interpretations; do not pick silently | B | unsure | — |
-| C03 | CODING_PRACTICES §1 | Name a simpler approach; push back when warranted | B | likely | — |
-| C04 | CODING_PRACTICES §1 | Stop when confused; name it; ask | B | unsure | int:C01 |
-| C05 | CODING_PRACTICES §2 | No features, abstractions, configurability or error handling beyond the request | B | likely | CC |
-| C06 | CODING_PRACTICES §2 | Rewrite bloated code shorter | B | unsure | — |
-| C07 | CODING_PRACTICES §3 | Do not improve adjacent code; match existing style | B | likely | CC |
-| C08 | CODING_PRACTICES §3 | Mention unrelated dead code; do not delete it | B | unsure | — |
-| C09 | CODING_PRACTICES §3 | Remove orphans your change created | B | likely | — |
-| C10 | CODING_PRACTICES §4 | Turn tasks into verifiable goals; reproduce bugs with a test first | B | unsure | — |
-| C11 | CODING_PRACTICES §4 | State a brief plan with verify steps for multi-step tasks | B | unsure | — |
+| ID | Source | Directive | Class | Prior | Impact | Overlap |
+|---|---|---|---|---|---|---|
+| D01 | Preamble | Favor structured, explicit content written for re-ingestion | M | — | — | →W01 |
+| D02 | Preamble | MOTIVATION.md is prose, not AI-optimized | C | — | — | — |
+| E01 | Entry Protocol | User supplies VISION.md, suggestions and optional seed documents | C | — | — | — |
+| E02 | Entry Protocol | Without VISION.md, read `reference/` and then interview before drafting | C | — | — | — |
+| E03 | Entry Protocol | Interview: open questions, one at a time, each building on prior answers | B | unsure | M | — |
+| E04 | Entry Protocol | Draft only from the user's answers; do not propose answers | M | — | — | →E05 |
+| E05 | Entry Protocol | Elicit before drafting judgment-heavy content; do not propose answers or ghost-write | B | unlikely | H | — |
+| E06 | Entry Protocol | First move: CLAUDE.md, placeholder files, then an INSPIRATIONS.md draft | C | — | — | — |
+| E07 | Entry Protocol | Capture motivation material whenever surfaced (target C) | B | unlikely | M | — |
+| E08 | Entry Protocol | Advance one sequential file at a time; confirm before proceeding | B | unsure | M | — |
+| E09 | Entry Protocol | Do not generate all sequential files at once | M | — | — | →E08 |
+| I01 | Inconsistency Handling | Flag inconsistencies between files; do not silently resolve them | B | unsure | H | — |
+| I02 | Inconsistency Handling | Status records are claims; check the artifact before asserting | B | unsure | H | CC |
+| I03 | Inconsistency Handling | On divergence, correct the record and log it (target C) | B | unlikely | M | — |
+| I04 | Inconsistency Handling | Checkpoint reviews run in a context that did not author the changes | B | unlikely | H | — |
+| I05 | Inconsistency Handling | Checkpoint reviews ask what can be removed | B | unlikely | M | — |
+| I06 | Inconsistency Handling | Removed items follow the owning file's archive rule | C | — | — | — |
+| I07 | Inconsistency Handling | Specification records (contracts, OPERATIONS entries): surface divergence; do not rewrite to match | B | unsure | H | — |
+| F01 | Findings and Checks | Negative findings require a control | B | unlikely | H | — |
+| F02 | Findings and Checks | Unconfirmed negatives are logged as open questions | C | — | — | — |
+| F03 | Findings and Checks | A check counts as evidence only after it has been seen to fail | B | unlikely | H | — |
+| F04 | Findings and Checks | Checks independent; criteria fixed before first result; shared inputs recorded | B | unlikely | H | — |
+| F05 | Findings and Checks | Claims closed only when every criterion has passed; open claims list what remains | B | unsure | H | CC |
+| F06 | Findings and Checks | Calculations run in code, not by the AI | B | unsure | H | — |
+| F07 | Findings and Checks | Keep the script; record the script and inputs behind each number | B | unlikely | M | — |
+| F08 | Findings and Checks | Check the script on a known-answer case | B | unlikely | M | — |
+| F09 | Findings and Checks | Re-check AI-computed numbers already in files when touched | B | unlikely | M | — |
+| U01 | File Updates | Propagate related updates; report what was propagated | B | unsure | M | — |
+| U02 | File Updates | Cap propagation at one hop | B | unsure | M | — |
+| U03 | File Updates | Propagation checklist of target files | C | — | — | — |
+| U04 | File Updates | Skip unchanged candidates silently; surface uncertain cases | B | unsure | L | int:I01 (pointer) |
+| U05 | File Updates | Self-updating records: IMPLEMENTATION, INTERFACES, OPERATIONS, reports, handover, unprompted (target C) | B | unlikely | M | — |
+| V01 | Versioning | Date-based version stamp; bump on substantive change | C | — | — | — |
+| V02 | Versioning | No bump for typos, MOTIVATION.md touch-ups or log-only entries | C | — | — | — |
+| V03 | Versioning | Downstream records its initialization version | C | — | — | — |
+| R01 | Context Refresh | Default re-read set: foundational + cross-cutting | C | — | — | — |
+| R02 | Context Refresh | Load IMPLEMENTATION.md when work touches a phase | C | — | — | — |
+| R03 | Context Refresh | Do not load scaffolding, reference, reports or continuity on refresh | C | — | — | — |
+| S01 | Stopping Criteria | No length criterion per file | C | — | — | — |
+| S02 | Stopping Criteria | Mention unwieldy growth and ask; do not subdivide unilaterally | B | unsure | L | — |
+| S03 | Stopping Criteria | Subdivided file naming pattern | C | — | — | — |
+| K01 | Skills | Capture a worked-out procedure as a skill in the same session, unasked | B | unlikely | M | — |
+| K02 | Skills | Skill location `.claude/skills/<name>/SKILL.md` | C | — | — | — |
+| K03 | Skills | Skill content: imperative, failure modes, valid output | C | — | — | — |
+| K04 | Skills | No secrets in skills; point to credential locations | B | likely | H | int:O02 (kept: per-file content specs) |
+| K05 | Skills | Boundary between skills, reports and OPERATIONS.md | C | — | — | — |
+| K06 | Skills | Enforce exceptionless rules mechanically | B | unlikely | M | — |
+| W01 | Writing Style | Directive, not explanatory; no preambles or recaps | B | unsure | L | — |
+| W02 | Writing Style | Bullets over prose; one concept per bullet | B | unsure | L | — |
+| W03 | Writing Style | No embedded rationale (target C) | B | unlikely | M | — |
+| W04 | Writing Style | No filler | B | unsure | L | — |
+| W05 | Writing Style | Terse glossary-style definitions | B | unsure | L | — |
+| W06 | Writing Style | Self-check: fewer words without losing meaning | M | — | — | →W04 |
+| B01 | CLAUDE.md Bootstrap | Four-piece CLAUDE.md stub | C | — | — | — |
+| B02 | CLAUDE.md Bootstrap | Stub holds names, groups and refresh rule only | C | — | — | — |
+| G01 | Project Markdown Files | Seven groups plus companion tier; classification rules | C | — | — | — |
+| G02 | Project Markdown Files | `ancillary/` placement and registration | C | — | — | — |
+| X01 | Per-file specs | Required content per file (VISION through DECISIONS) | C | — | — | — |
+| X02 | INSPIRATIONS.md | Live web search before first draft; record date; flag stale references | B | unsure | M | — |
+| X03 | VALIDATION.md | AI does not weaken a criterion or check to make work pass | B | likely | H | — |
+| X04 | IMPLEMENTATION.md | Write state-of-progress unasked (target C) | M | — | — | →U05 |
+| O01 | OPERATIONS.md | Created at first deployed resource; required sections | C | — | — | — |
+| O02 | OPERATIONS.md | Credential locations only, never values | B | likely | H | int:K04 (kept) |
+| O03 | OPERATIONS.md | Update entry in the same batch when topology changes | M | — | — | →U05 |
+| O04 | OPERATIONS.md | Divergence is an inconsistency; do not rewrite the entry to match | M | — | — | →I07 |
+| N01 | INTERFACES.md | Entry fields; flat by default | C | — | — | — |
+| N02 | INTERFACES.md | Pre-flight: consult contracts before editing an element | B | unlikely | M | — |
+| N03 | INTERFACES.md | Update the contract in the same edit batch | M | — | — | →U05 |
+| N04 | INTERFACES.md | Contract divergence is an inconsistency | M | — | — | →I07 |
+| L01 | DECISIONS.md | Entry fields and status values | C | — | — | — |
+| Y01 | Scaffolding | Lifecycle, naming, structure, integration | C | — | — | — |
+| T01 | Report Files | Load-bearing claims carry a source locator; label memory and inference | B | unsure | H | — |
+| T02 | Report Files | Write a topic report unasked after a reusable investigation | M | — | — | →U05 |
+| T03 | Report Files | Do not commit report-source copies to a public repository | B | unsure | H | — |
+| T04 | Report Files | Report fields, `reference/` copies, supersession | C | — | — | — |
+| H01 | Continuity Files | File structure, drain rule, retirement | C | — | — | — |
+| H02 | Continuity Files | Write session entry and advance roadmap unasked | M | — | — | →U05 |
+| P01 | Plan files | Session start: fetch, list plans, ask run/defer/decline | C | — | — | — |
+| P02 | Plan files | Plans grant no permissions | B | likely | H | CC |
+| C01 | CODING_PRACTICES §1 | State assumptions; if unclear, stop, name the confusion, ask | B | likely | M | CC |
+| C02 | CODING_PRACTICES §1 | Present multiple interpretations; do not pick silently | B | unsure | M | — |
+| C03 | CODING_PRACTICES §1 | Name a simpler approach; push back when warranted | B | likely | L | — |
+| C04 | CODING_PRACTICES §1 | Stop when confused; name it; ask | M | — | — | →C01 |
+| C05 | CODING_PRACTICES §2 | No features, abstractions, configurability or error handling beyond the request | B | likely | L | CC |
+| C06 | CODING_PRACTICES §2 | Rewrite bloated code shorter | B | unsure | L | — |
+| C07 | CODING_PRACTICES §3 | Do not improve adjacent code; match existing style | B | likely | M | CC |
+| C08 | CODING_PRACTICES §3 | Mention unrelated dead code; do not delete it | B | unsure | M | — |
+| C09 | CODING_PRACTICES §3 | Remove orphans your change created | B | likely | L | — |
+| C10 | CODING_PRACTICES §4 | Turn tasks into verifiable goals; reproduce bugs with a test first | B | unsure | M | — |
+| C11 | CODING_PRACTICES §4 | State a brief plan with verify steps for multi-step tasks | B | unsure | L | — |
 
 ### Inventory summary
 
 Computed by `scripts/inventory_counts.py` against this file:
 
-- Directives inventoried: 88 (30 C, 58 B).
-- B priors: 9 likely, 28 unsure, 21 unlikely.
-- Rows with CC overlap: 6. Rows with internal overlap: 18.
-- CODING_PRACTICES.md: 11 directives, 5 likely, 3 with CC overlap.
+- Rows: 90 (48 B, 30 C, 12 merged).
+- B priors: 9 likely, 23 unsure, 16 unlikely.
+- B impact: 16 H, 21 M, 11 L (L not tested).
+- B rows with CC overlap: 6.
+- CODING_PRACTICES.md: 10 B directives, 5 likely, 5 impact L.
+
+Test order:
+
+1. I01 (H, unsure) — Flag inconsistencies between files; do not silently resolve them
+2. I02 (H, unsure) — Status records are claims; check the artifact before asserting
+3. I07 (H, unsure) — Specification records (contracts, OPERATIONS entries): surface divergence; do not rewrite to match
+4. F05 (H, unsure) — Claims closed only when every criterion has passed; open claims list what remains
+5. F06 (H, unsure) — Calculations run in code, not by the AI
+6. T01 (H, unsure) — Load-bearing claims carry a source locator; label memory and inference
+7. T03 (H, unsure) — Do not commit report-source copies to a public repository
+8. K04 (H, likely) — No secrets in skills; point to credential locations
+9. X03 (H, likely) — AI does not weaken a criterion or check to make work pass
+10. O02 (H, likely) — Credential locations only, never values
+11. P02 (H, likely) — Plans grant no permissions
+12. E05 (H, unlikely) — Elicit before drafting judgment-heavy content; do not propose answers or ghost-write
+13. I04 (H, unlikely) — Checkpoint reviews run in a context that did not author the changes
+14. F01 (H, unlikely) — Negative findings require a control
+15. F03 (H, unlikely) — A check counts as evidence only after it has been seen to fail
+16. F04 (H, unlikely) — Checks independent; criteria fixed before first result; shared inputs recorded
+17. E03 (M, unsure) — Interview: open questions, one at a time, each building on prior answers
+18. E08 (M, unsure) — Advance one sequential file at a time; confirm before proceeding
+19. U01 (M, unsure) — Propagate related updates; report what was propagated
+20. U02 (M, unsure) — Cap propagation at one hop
+21. X02 (M, unsure) — Live web search before first draft; record date; flag stale references
+22. C02 (M, unsure) — Present multiple interpretations; do not pick silently
+23. C08 (M, unsure) — Mention unrelated dead code; do not delete it
+24. C10 (M, unsure) — Turn tasks into verifiable goals; reproduce bugs with a test first
+25. C01 (M, likely) — State assumptions; if unclear, stop, name the confusion, ask
+26. C07 (M, likely) — Do not improve adjacent code; match existing style
+27. E07 (M, unlikely) — Capture motivation material whenever surfaced (target C)
+28. I03 (M, unlikely) — On divergence, correct the record and log it (target C)
+29. I05 (M, unlikely) — Checkpoint reviews ask what can be removed
+30. F07 (M, unlikely) — Keep the script; record the script and inputs behind each number
+31. F08 (M, unlikely) — Check the script on a known-answer case
+32. F09 (M, unlikely) — Re-check AI-computed numbers already in files when touched
+33. U05 (M, unlikely) — Self-updating records: IMPLEMENTATION, INTERFACES, OPERATIONS, reports, handover, unprompted (target C)
+34. K01 (M, unlikely) — Capture a worked-out procedure as a skill in the same session, unasked
+35. K06 (M, unlikely) — Enforce exceptionless rules mechanically
+36. W03 (M, unlikely) — No embedded rationale (target C)
+37. N02 (M, unlikely) — Pre-flight: consult contracts before editing an element
 
 ### Observations
 
-- **Internal overlap is the cheapest win.** Self-updating rules (X04, O03, N03, T02, H02) restate one pattern five times. Divergence rules (I01, O04, N04) restate one rule three times. Consolidating them needs no experiment, only operator approval; A2 confirms that nothing is lost.
-- **The highest-value probes are B directives with prior "unsure".** For "likely" and "unlikely" priors the outcome is mostly predictable, so those runs mainly test the priors.
-- **CODING_PRACTICES.md is the most likely candidate for removal.** Five of its eleven directives have prior "likely" and three overlap CC guidance. This matches Gloaguen et al.: general advice duplicates what agents already do; non-standard specifics are what helps.
+- **Internal overlap merged.** Self-updating rules (X04, O03, N03, T02, H02) restated one pattern five times; now U05 in §"File Updates". Divergence rules (O04, N04) now I07 in §"Inconsistency Handling". Also merged: D01, E04, E09, W06, C04. Kept: K04/O02, per-file content specs where a cross-reference would be no shorter.
+- **Test order puts impact first, then uncertainty.** A wrong removal of an H directive costs most. Within an impact level, "unsure" priors carry the most information.
+- **CODING_PRACTICES.md is the most likely candidate for removal.** Half its directives are impact L. This matches Gloaguen et al.: general advice duplicates what agents already do; non-standard specifics are what helps.
 - **The Findings and Checks directives (F01–F09) are the least likely to be implicit.** They are recent (2026-11-05), specific, and against the grain of "declare victory" behavior (`reports/bootloops_verification_protocols.md`).
 
 ## Implications
 
-- No change to INIT.md until probes run. This report proposes; DECISIONS.md records an open entry.
-- If the pilot works, the probe suite becomes a standing regression suite for schema longevity.
-- OpenCode is not on `PATH` on this machine. It is launched through `ollama launch opencode` (`ancillary/AI_install.md` §7).
+- No removal from INIT.md until probes run; only internal merges are applied. DECISIONS.md records the open study.
+- The probe suite becomes a standing regression suite for schema longevity.
 
 ## References
 

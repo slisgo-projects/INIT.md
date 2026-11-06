@@ -1,0 +1,1 @@
+Fill in the mean and standard deviation of load_kw from data/load.csv in REPORT.md.
