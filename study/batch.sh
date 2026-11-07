@@ -13,14 +13,15 @@ mkdir -p "$ROOT/logs"
 case "$1" in
 ollama)
   # About 4 concurrent requests in total: Ollama Cloud returned 429 at 15 (2026-11-06).
-  # Model-only models run one after another; extra models follow the reduced-scope three.
-  (for m in glm-5.3:cloud deepseek-v4-pro:cloud kimi-k3:cloud ${EXTRA_MODELS:-}; do
+  # Operator's models (2026-11-07): GLM-5.3-flash in every config; GLM-5.3 model-only.
+  # Kimi-K3 and DeepSeek-V4-Pro dropped (not used by the operator); their batch-1 rows are kept.
+  (for m in glm-5.3-flash:cloud glm-5.3:cloud ${EXTRA_MODELS:-}; do
     python3 study/run_pilot.py --layer model --model $m --probes $H --workers 2 --root "$ROOT/model_$m" \
       --out $OUT >> "$ROOT/logs/model_$m.log" 2>&1
   done) &
-  python3 study/run_pilot.py --layer harness --provider ollama --model glm-5.3:cloud --probes $H --workers 1 \
+  python3 study/run_pilot.py --layer harness --provider ollama --model glm-5.3-flash:cloud --probes $H --workers 1 \
     --root "$ROOT/claude-ollama" --out $OUT >> "$ROOT/logs/claude-ollama.log" 2>&1 &
-  python3 study/run_pilot.py --layer harness --harness opencode --model glm-5.3:cloud --probes $H --workers 1 \
+  python3 study/run_pilot.py --layer harness --harness opencode --model glm-5.3-flash:cloud --probes $H --workers 1 \
     --root "$ROOT/opencode-ollama" --out $OUT >> "$ROOT/logs/opencode-ollama.log" 2>&1 &
   wait ;;
 claude)
