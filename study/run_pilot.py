@@ -66,7 +66,10 @@ def snapshot(fixture):
 # ---------- model layer ----------
 def ollama(model, system, user):
     msgs = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": user}]
-    body = json.dumps({"model": model, "messages": msgs, "stream": False}).encode()
+    req = {"model": model, "messages": msgs, "stream": False}
+    if EFFORT:
+        req["think"] = EFFORT  # Ollama think level (low|medium|high)
+    body = json.dumps(req).encode()
     for attempt in range(8):  # Ollama Cloud returns 429 under concurrency; back off and retry
         t = time.time()
         try:
@@ -130,7 +133,7 @@ def opencode(model, wd, prompt, arm, tools_off=False, timeout=900):
     cfg = {"$schema": "https://opencode.ai/config.json",
            "provider": {"ollama": {"npm": "@ai-sdk/openai-compatible",
                                    "options": {"baseURL": "http://localhost:11434/v1"},
-                                   "models": {model: {}}}},
+                                   "models": {model: {"options": {"reasoningEffort": EFFORT}} if EFFORT else {}}}},
            "permission": ({k: "deny" for k in ("read", "edit", "bash", "glob", "grep", "list", "task", "webfetch")}
                           if tools_off else {"edit": "allow", "bash": "allow", "webfetch": "deny"})}
     if arm == "A1":
@@ -157,7 +160,10 @@ def opencode(model, wd, prompt, arm, tools_off=False, timeout=900):
     return events, seq, res, time.time() - t
 
 
-EFFORT = None  # --effort; None = harness default (all runs before 2026-11-07)
+# Effort per config (verified by request capture, 2026-11-07): Claude Code --effort -> output_config.effort
+# (Claude Code sends "high" when unset); OpenCode -> reasoning_effort via model options (--variant sends
+# nothing for this provider); model-only -> Ollama "think". None = default (all runs before 2026-11-07).
+EFFORT = None
 
 
 def claude(model, wd, prompt, tools_off=False, timeout=900, provider="anthropic", agent_tool=False):
@@ -273,14 +279,13 @@ def main():
     ap.add_argument("--probes", default="I01,I02,F06")
     ap.add_argument("--arms", default="A0,A1")
     ap.add_argument("--reps", type=int, default=5)
-    ap.add_argument("--effort", default=None, help="Claude Code --effort (low|medium|high|...); default: harness default")
+    ap.add_argument("--effort", default=None, help="low|medium|high (Claude Code --effort, OpenCode reasoning_effort, Ollama think); default: unset")
     ap.add_argument("--workers", type=int, default=3)
     ap.add_argument("--root", required=True, help="scratch dir outside the repo for harness workdirs")
     ap.add_argument("--out", default=os.path.join(STUDY, "results", "runs.csv"))
     a = ap.parse_args()
     global EFFORT
     EFFORT = a.effort
-    assert not (a.effort and a.harness != "claude"), "--effort applies to Claude Code only"
     a.provider = a.provider or ("ollama" if a.harness == "opencode" else "anthropic")
     assert not (a.harness == "opencode" and a.provider == "anthropic"), "OpenCode: no Anthropic credential"
     if a.layer == "model":
