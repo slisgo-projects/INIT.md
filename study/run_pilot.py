@@ -29,6 +29,7 @@ import shutil
 import subprocess
 import sys
 import time
+import urllib.error
 import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -44,7 +45,7 @@ ISO_Q = ("Do not use any tools. From your instructions alone, what Version date 
          "of INIT.md? If you cannot see it, reply NOT LOADED.")
 MODEL_NOTE = ("You have no tools in this session. Reply as you would to the user; show any file "
               "edits as full new file contents.")
-FIELDS = ["ts", "layer", "harness", "provider", "model", "probe", "arm", "rep", "pass", "detail", "input_tokens",
+FIELDS = ["ts", "layer", "harness", "provider", "model", "effort", "probe", "arm", "rep", "pass", "detail", "input_tokens",
           "cache_creation_tokens", "cache_read_tokens", "output_tokens", "turns", "duration_s",
           "cost_usd", "raw"]
 
@@ -66,10 +67,16 @@ def snapshot(fixture):
 def ollama(model, system, user):
     msgs = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": user}]
     body = json.dumps({"model": model, "messages": msgs, "stream": False}).encode()
-    t = time.time()
-    r = json.load(urllib.request.urlopen(
-        urllib.request.Request("http://localhost:11434/api/chat", body), timeout=900))
-    return r, time.time() - t
+    for attempt in range(8):  # Ollama Cloud returns 429 under concurrency; back off and retry
+        t = time.time()
+        try:
+            r = json.load(urllib.request.urlopen(
+                urllib.request.Request("http://localhost:11434/api/chat", body), timeout=900))
+            return r, time.time() - t
+        except urllib.error.HTTPError as e:
+            if e.code != 429 or attempt == 7:
+                raise
+            time.sleep(min(600, 30 * 2 ** attempt))
 
 
 def run_model(model, probe, arm, rep, tag):
@@ -150,8 +157,12 @@ def opencode(model, wd, prompt, arm, tools_off=False, timeout=900):
     return events, seq, res, time.time() - t
 
 
+EFFORT = None  # --effort; None = harness default (all runs before 2026-11-07)
+
+
 def claude(model, wd, prompt, tools_off=False, timeout=900, provider="anthropic", agent_tool=False):
-    cmd = ["claude", "-p", "--setting-sources", "project", "--model", model,
+    cmd = ["claude", "-p", "--setting-sources", "project", "--model", model] + (
+        ["--effort", EFFORT] if EFFORT else []) + [
            "--output-format", "stream-json", "--verbose"]
     cmd += (["--disallowedTools", "Bash,Read,Grep,Glob,Edit,Write,WebFetch,WebSearch,Agent"] if tools_off
             else ["--allowedTools", "Bash,Read,Edit,Write,Glob,Grep" + (",Agent" if agent_tool else "")])
@@ -201,6 +212,9 @@ def run_harness(model, probe, arm, rep, tag, root, harness="claude", provider="a
     pre = pre_subject(seq, open(subj).read().strip()) if os.path.exists(subj) else ""
     raw = os.path.join(RAW, f"{tag}_{harness}-{provider}_{probe}_{arm}_{rep}.jsonl")
     open(raw, "w").write("\n".join(json.dumps(e) for e in events))
+    errs = [e for e in events if e.get("type") == "error"]
+    if res.get("is_error") or errs or not events:
+        raise RuntimeError(f"agent API error: {str(res.get('result') or errs or 'no output')[:150]}")
     s = score(probe, "harness", res.get("result", ""), wd, bash, tools, pre)
     u = res.get("usage", {})
     return dict(pass_=s["pass_"], detail=s["detail"], input_tokens=u.get("input_tokens"),
@@ -259,10 +273,14 @@ def main():
     ap.add_argument("--probes", default="I01,I02,F06")
     ap.add_argument("--arms", default="A0,A1")
     ap.add_argument("--reps", type=int, default=5)
+    ap.add_argument("--effort", default=None, help="Claude Code --effort (low|medium|high|...); default: harness default")
     ap.add_argument("--workers", type=int, default=3)
     ap.add_argument("--root", required=True, help="scratch dir outside the repo for harness workdirs")
     ap.add_argument("--out", default=os.path.join(STUDY, "results", "runs.csv"))
     a = ap.parse_args()
+    global EFFORT
+    EFFORT = a.effort
+    assert not (a.effort and a.harness != "claude"), "--effort applies to Claude Code only"
     a.provider = a.provider or ("ollama" if a.harness == "opencode" else "anthropic")
     assert not (a.harness == "opencode" and a.provider == "anthropic"), "OpenCode: no Anthropic credential"
     if a.layer == "model":
@@ -274,7 +292,15 @@ def main():
     before = repo_state()
     arms = [x for x in a.arms.split(",") if isolation(a.layer, a.model, x, a.root, tag, a.harness, a.provider)]
     check_contained(before)
-    jobs = [(p, x, r) for p in a.probes.split(",") for x in arms for r in range(a.reps)]
+    done = set()
+    if os.path.exists(a.out):  # resume: skip runs already recorded without error
+        for r in csv.DictReader(open(a.out)):
+            if not r.get("detail", "").startswith("ERROR") and r.get("harness", "") == a.harness \
+                    and r.get("provider", "") == a.provider and r["layer"] == a.layer and r["model"] == a.model:
+                if (r.get("effort") or "default") == (a.effort or "default"):
+                    done.add((r["probe"], r["arm"], int(r["rep"])))
+    jobs = [(p, x, r) for p in a.probes.split(",") for x in arms for r in range(a.reps) if (p, x, r) not in done]
+    print(f"{len(jobs)} runs to do, {len(done)} already recorded", flush=True)
     new = not os.path.exists(a.out)
     with open(a.out, "a", newline="") as fh, cf.ThreadPoolExecutor(a.workers) as ex:
         w = csv.DictWriter(fh, FIELDS)
@@ -289,7 +315,7 @@ def main():
                 d = f.result()
             except Exception as e:  # record failures, do not drop them
                 d = dict(pass_="", detail=f"ERROR {type(e).__name__}: {e}"[:200])
-            row = {"ts": tag, "layer": a.layer, "harness": a.harness, "provider": a.provider, "model": a.model, "probe": p, "arm": x, "rep": r,
+            row = {"ts": tag, "layer": a.layer, "harness": a.harness, "provider": a.provider, "model": a.model, "effort": a.effort or "default", "probe": p, "arm": x, "rep": r,
                    "pass": d.pop("pass_"), **d}
             row["raw"] = os.path.relpath(row.get("raw", ""), REPO) if row.get("raw") else ""
             w.writerow(row)
