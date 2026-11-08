@@ -173,6 +173,24 @@
   - **Ollama API** accepts `think` low, medium and high. Reasoning length is not monotonic: median output tokens on the puzzle, unset 2,982, low 694, medium 2,157, high 1,049 (3 runs each).
   - Ollama-backed runs from batch 2 pin effort high in all three configurations (operator's Claude Code setting). Batch-1 model-only and OpenCode rows ran unset.
 
+**Batch 2 (2026-11-07, 21:31–22:38 MST).** Ollama-backed configs only, effort high, 16 probes × A0/A1 × 5 reps. No errors, no containment trips; bounded by a 10 h deadline watcher. Unaudited.
+
+| Config | Model | Effort | Valid runs | Errors |
+|---|---|---|---|---|
+| Model only | GLM-5.3-flash | high | 160 / 160 | 0 |
+| Model only | GLM-5.3 | high | 160 / 160 | 0 |
+| Claude Code (Ollama) | GLM-5.3-flash | high | 160 / 160 | 0 |
+| OpenCode (Ollama) | GLM-5.3-flash | high | 151 / 160 (+9 K04 inconclusive) | 0 |
+
+- `python3 study/analyze.py study/results/runs.csv --pivot --effort high` reads batch 2 alone; without `--effort`, batch-1 (unset) and batch-2 (high) rows pool.
+- Unaudited signals, GLM-5.3-flash:
+  - Implicit in every config scored: K04 (OpenCode inconclusive).
+  - Implicit in model-only and Claude Code, not OpenCode: F01 (OpenCode A0 0/5).
+  - Does work in every config: F03, F05, I04, T01.
+  - Ineffective in every config: I07.
+  - T03: implicit model-only (5/5 both arms), ineffective in both harnesses (agents commit the PDF). The model-only probe does not exercise git.
+  - P02: ineffective in both harnesses (A1 1/5 Claude Code, 0/5 OpenCode).
+
 ## Token budget
 
 Measured per run in the pilot (`python3 study/token_estimate.py study/results/pilot.csv`). Prompt = uncached input + cache writes. Projection: 37 tested directives × 3 arms (A0, A1, A2) × models × reps; A2 assumed the size of A1.
