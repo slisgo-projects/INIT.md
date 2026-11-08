@@ -11,7 +11,7 @@ Reading (fixed 2026-11-06, before the reduced-scope batch): "high" = audited pas
   both < 0.5          -> ineffective (rewrite)
   otherwise           -> unclear (more runs)
 
-  python3 study/analyze.py <runs.csv> [<audit.csv>] [--pivot]
+  python3 study/analyze.py <runs.csv> [<audit.csv>] [--pivot] [--effort high,default]
   python3 study/analyze.py --selftest
 """
 import csv
@@ -43,6 +43,12 @@ def rates(rows, audit):
         g[k][1] += pre
         g[k][2] += aud
     return g
+
+
+def by_effort(rows, efforts):
+    """Keep rows whose effort is in the comma list; rows without an effort column count as default."""
+    keep = set(efforts.split(","))
+    return [r for r in rows if (r.get("effort") or "default") in keep]
 
 
 def reading(a0, a1):
@@ -89,17 +95,27 @@ def selftest():
     audit2 = [dict(layer="harness", harness="opencode", provider="ollama", model="y", probe="Q", arm="A1",
                    rep="0", audited_pass="True")]
     assert rates(rows2, audit2)[("opencode-ollama", "y", "Q", "A1")] == [1, 0, 1]
+    mixed = [dict(rows2[0], effort="high"), dict(rows2[0], effort="default", rep="1")]
+    assert rates(by_effort(mixed, "high"), [])[("opencode-ollama", "y", "Q", "A1")] == [1, 0, 0]
     assert [reading(*x) for x in [(1, .8), (.2, .8), (.2, .4), (.6, .8), (.8, .6)]] == \
         ["implicit", "does work", "ineffective", "unclear", "unclear"]
     print("selftest ok")
 
 
 if __name__ == "__main__":
-    args = [a for a in sys.argv[1:] if a != "--pivot"]
+    argv = sys.argv[1:]
+    effort = None
+    if "--effort" in argv:
+        i = argv.index("--effort")
+        effort = argv[i + 1]
+        del argv[i:i + 2]
+    args = [a for a in argv if a != "--pivot"]
     if args == ["--selftest"]:
         selftest()
     else:
         rows = list(csv.DictReader(open(args[0])))
+        if effort:
+            rows = by_effort(rows, effort)
         audit = list(csv.DictReader(open(args[1]))) if len(args) > 1 else []
         g = rates(rows, audit)
         print(pivot(g) if "--pivot" in sys.argv else render(g))
