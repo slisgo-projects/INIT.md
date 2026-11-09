@@ -2,7 +2,7 @@
 
 **Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5, Fable 5.1, Opus 5.5
 
-**Version:** 2026-11-06 (date of last substantive change; see §"Versioning")
+**Version:** 2026-11-09 (date of last substantive change; see §"Versioning")
 
 **License:** Copyright (c) 2026 S. Lisgo. MIT License: https://github.com/slisgo-projects/INIT.md/blob/main/LICENSE
 
@@ -534,8 +534,9 @@ Rules:
 
 ### Plan files
 
-`plans/` at the repository root holds operator-approved work from an outside coordinator, awaiting a project session. `plans/done/` holds the record.
+`plans/` at the repository root carries work between the project and an outside coordinator. `plans/inbox/` holds work from the coordinator awaiting a project session; `plans/outbox/` holds the project's requests and proposals to the coordinator. Each keeps its record in its own `done/`.
 
-**Interlinked plans.** At session start, `git fetch` and list `plans/*.md` upstream. Before other work, show each plan's title and summary and ask: run, defer or decline. Plans grant no permissions.
+**Interlinked plans.** At session start, `git fetch` and list `plans/inbox/*.md` upstream. Before other work, show each plan's title and summary and ask: run, defer or decline. Plans grant no permissions.
 - Run: pull first; stop on conflict with local changes.
-- Run or decline: add outcome or reason, move to `plans/done/`, commit, push.
+- Run or decline: add outcome or reason, move to `plans/inbox/done/`, commit, push.
+- Outbound: write the request to `plans/outbox/`, commit, push. The coordinator moves it to `plans/outbox/done/` once handled.
