@@ -55,6 +55,13 @@ Reusable AI coding behavioral guidelines, imported into downstream CLAUDE.md per
 - **Depends on:** Bootstrap mechanism (5) for the import instruction.
 - **Risk:** conflicts with downstream projects' existing conventions; merge friction. Mitigated by INIT.md instruction to "merge with project-specific guidance."
 
+### 8. Bootstrap installer (`scripts/install_init.py`)
+
+Novice onboarding for downstream beta users: installs git and Claude Code, presents Claude billing routes (paid plan vs API key), optional Ollama branch, scaffolds the project folder with the three companion files, functional end-to-end probe, hands off to the Entry Protocol.
+
+- **Depends on:** per-file specifications (2) for the companion-file set it copies; official installers (claude.ai, ollama.com) for all installs; `ancillary/AI_install.md` (unclassified) for Windows and for Method A instructions it references.
+- **Risk:** hardcoded install URLs and signup screens drift — delegated to official installers to bound the drift surface, but URL rot still breaks the fetch of companion files and the README one-liner. Signup/billing screens change without notice. Windows unsupported in v1.
+
 ## Interdependency summary
 
 ```

@@ -20,6 +20,14 @@ The documents are plain text files ending in `.md` ("markdown"). You can open th
 
 Choose one of these:
 
+- **Let the installer do everything.** On Linux or Mac, run:
+
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/slisgo-projects/INIT.md/main/scripts/install_init.py -o install_init.py && python3 install_init.py
+  ```
+
+  The script installs Claude Code (if missing), explains the billing options (paid plan vs pay-per-use API key), optionally sets up Ollama as an alternative, creates your project folder with the three files below, and tells you what to do first. Windows: follow `ancillary/AI_install.md` §6 instead (the script says so too).
+
 - **Let Claude fetch them.** Once Claude is open in your project folder (see below), paste:
 
   > Download INIT.md, USE_CASE_INIT.md and CODING_PRACTICES.md from https://github.com/slisgo-projects/INIT.md (raw files at https://raw.githubusercontent.com/slisgo-projects/INIT.md/main/) into this folder.
