@@ -191,6 +191,16 @@
   - T03: implicit model-only (5/5 both arms), ineffective in both harnesses (agents commit the PDF). The model-only probe does not exercise git.
   - P02: ineffective in both harnesses (A1 1/5 Claude Code, 0/5 OpenCode).
 
+**Batch 3 (2026-11-13, 18:15–18:35 MST).** Claude Code on Anthropic, Opus 5.5, `--effort medium`, 3 workers; probes ordered removal candidates first. Started at 91 % of the weekly Claude allowance; 98 % after 77 runs; stopped when the 5-hour block ran out. INIT.md version 2026-11-09 in A1 (earlier batches: 2026-11-06; §"Plan files" changed between them). Unaudited.
+- 96 valid runs, 16 errors (usage limit: I07 10, I01b A1 4, F05 A0 2). Not run: F05 (rest), T01, E05, I04, F03. The runner resumes from the error rows.
+- `python3 study/analyze.py study/results/runs.csv --pivot --effort medium` reads batch 3 alone.
+- Implicit (both arms ≥ 4/5): K04, F01, X03, O02, F06, I02, T03, P02.
+- F04 0/5 in both arms: the scorer fault seen on Sonnet; audit pending.
+- I01b: A0 3/5, A1 1/1; unreadable.
+- P02: A0 4/5, A1 5/5 under INIT.md 2026-11-09, against Sonnet A1 1/5 under 2026-11-06. Model and INIT.md version both changed; the version change cannot be credited without a same-model rerun.
+- Cost: about 11 Opus runs per 1 % of the weekly allowance at medium effort (watcher readings; arithmetic not scripted).
+- Next Claude batch: end of the week of 2026-11-16, if quota allows; resume the remaining probes first.
+
 ## Token budget
 
 Measured per run in the pilot (`python3 study/token_estimate.py study/results/pilot.csv`). Prompt = uncached input + cache writes. Projection: 37 tested directives × 3 arms (A0, A1, A2) × models × reps; A2 assumed the size of A1.
