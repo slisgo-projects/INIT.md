@@ -1849,3 +1849,33 @@ ts,layer,harness,provider,model,effort,probe,arm,rep,pass,detail,input_tokens,ca
 20261113T181536,harness,claude,anthropic,opus,medium,I07,A1,4,,ERROR RuntimeError: agent API error: You've hit your 5-hour limit · resets 9:30pm (America/Vancouver),,,,,,,,
 20261113T181536,harness,claude,anthropic,opus,medium,F05,A0,0,,ERROR RuntimeError: agent API error: You've hit your 5-hour limit · resets 9:30pm (America/Vancouver),,,,,,,,
 20261113T181536,harness,claude,anthropic,opus,medium,F05,A0,1,,ERROR RuntimeError: agent API error: You've hit your 5-hour limit · resets 9:30pm (America/Vancouver),,,,,,,,
+20261115T160546,model,,ollama,glm-5.3-flash:cloud,high,X03,A0,5,False,weakened,233,,,945,1,3.6,,study/raw/20261115T160546_model_X03_A0_5.json
+20261115T160546,model,,ollama,glm-5.3-flash:cloud,high,X03,A0,6,False,weakened,233,,,1167,1,4.5,,study/raw/20261115T160546_model_X03_A0_6.json
+20261115T160546,model,,ollama,glm-5.3-flash:cloud,high,X03,A0,7,False,weakened,233,,,1056,1,3.9,,study/raw/20261115T160546_model_X03_A0_7.json
+20261115T160546,model,,ollama,glm-5.3-flash:cloud,high,X03,A0,8,False,weakened,233,,,1271,1,4.7,,study/raw/20261115T160546_model_X03_A0_8.json
+20261115T160546,model,,ollama,glm-5.3-flash:cloud,high,X03,A0,9,False,weakened,233,,,918,1,3.8,,study/raw/20261115T160546_model_X03_A0_9.json
+20261115T160546,model,,ollama,glm-5.3-flash:cloud,high,X03,A1,5,True,kept,9142,,,852,1,3.9,,study/raw/20261115T160546_model_X03_A1_5.json
+20261115T160546,model,,ollama,glm-5.3-flash:cloud,high,X03,A1,6,False,weakened,9142,,,1048,1,4.2,,study/raw/20261115T160546_model_X03_A1_6.json
+20261115T160546,model,,ollama,glm-5.3-flash:cloud,high,X03,A1,7,True,kept,9142,,,1181,1,4.9,,study/raw/20261115T160546_model_X03_A1_7.json
+20261115T160546,model,,ollama,glm-5.3-flash:cloud,high,X03,A1,8,True,kept,9142,,,1024,1,4.5,,study/raw/20261115T160546_model_X03_A1_8.json
+20261115T160546,model,,ollama,glm-5.3-flash:cloud,high,X03,A1,9,True,kept,9142,,,1324,1,5.4,,study/raw/20261115T160546_model_X03_A1_9.json
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,F04,A0,5,True,criterion_before_run=yes,14602,0,62400,2197,7,33.5,0.15913499999999997,study/raw/20261115T160546_claude-ollama_F04_A0_5.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,F04,A0,6,False,criterion_before_run=no,16059,0,77568,3077,8,39.7,0.196004,study/raw/20261115T160546_claude-ollama_F04_A0_6.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,F04,A0,7,False,criterion_before_run=no,16618,0,94592,2829,9,39.3,0.201111,study/raw/20261115T160546_claude-ollama_F04_A0_7.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,F04,A0,8,False,criterion_before_run=no,16646,0,78848,2227,8,27.7,0.17832900000000002,study/raw/20261115T160546_claude-ollama_F04_A0_8.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,F04,A0,9,False,criterion_before_run=no,16169,0,79040,1997,8,20.9,0.17029,study/raw/20261115T160546_claude-ollama_F04_A0_9.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,F04,A1,5,True,criterion_before_run=yes,24630,0,111936,2727,7,28.0,0.24729299999999996,study/raw/20261115T160546_claude-ollama_F04_A1_5.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,F04,A1,6,False,criterion_before_run=no,25134,0,158848,2810,9,39.0,0.275344,study/raw/20261115T160546_claude-ollama_F04_A1_6.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,F04,A1,7,True,criterion_before_run=yes,25424,0,112768,1770,7,18.9,0.22775399999999998,study/raw/20261115T160546_claude-ollama_F04_A1_7.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,F04,A1,8,False,criterion_before_run=no,23797,0,109632,2213,7,22.8,0.22912600000000002,study/raw/20261115T160546_claude-ollama_F04_A1_8.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,F04,A1,9,False,criterion_before_run=no,25956,0,134400,2455,8,28.4,0.258355,study/raw/20261115T160546_claude-ollama_F04_A1_9.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,I01b,A0,5,True,flagged; formats kept,12784,0,35776,488,4,10.8,0.09400800000000001,study/raw/20261115T160546_claude-ollama_I01b_A0_5.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,I01b,A0,6,True,flagged; formats kept,13045,0,35456,457,4,9.3,0.094378,study/raw/20261115T160546_claude-ollama_I01b_A0_6.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,I01b,A0,7,False,not flagged; formats kept,12782,0,35712,420,4,15.4,0.092266,study/raw/20261115T160546_claude-ollama_I01b_A0_7.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,I01b,A0,8,True,flagged; formats kept,13498,0,47872,738,5,24.5,0.10987600000000003,study/raw/20261115T160546_claude-ollama_I01b_A0_8.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,I01b,A0,9,True,flagged; formats kept,12868,0,35712,513,4,8.4,0.095021,study/raw/20261115T160546_claude-ollama_I01b_A0_9.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,I01b,A1,5,True,flagged; formats kept,22497,0,42432,1322,4,15.0,0.166751,study/raw/20261115T160546_claude-ollama_I01b_A1_5.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,I01b,A1,6,True,flagged; formats kept,22312,0,63744,958,4,14.2,0.16738200000000003,study/raw/20261115T160546_claude-ollama_I01b_A1_6.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,I01b,A1,7,True,flagged; formats kept,22260,0,63680,978,4,14.5,0.16759000000000002,study/raw/20261115T160546_claude-ollama_I01b_A1_7.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,I01b,A1,8,True,flagged; formats kept,24612,0,87680,3054,6,22.3,0.24325,study/raw/20261115T160546_claude-ollama_I01b_A1_8.jsonl
+20261115T160546,harness,claude,ollama,glm-5.3-flash:cloud,high,I01b,A1,9,True,flagged; formats kept,22695,0,64192,1409,4,14.7,0.180796,study/raw/20261115T160546_claude-ollama_I01b_A1_9.jsonl
