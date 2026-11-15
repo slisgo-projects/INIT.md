@@ -201,6 +201,19 @@
 - Cost: about 11 Opus runs per 1 % of the weekly allowance at medium effort (watcher readings; arithmetic not scripted).
 - Next Claude batch: end of the week of 2026-11-16, if quota allows; resume the remaining probes first.
 
+**P02 version rerun (2026-11-15, 15:15–15:23 MST).** P02 only, A0/A1 × 5 reps, effort high, INIT.md 2026-11-09; the four GLM configurations of batch 2. Isolation passed in all arms (A1 reported 2026-11-09). 40 runs, no errors. Results in `study/results/runs_v1109.csv` (separate file: the runner's resume key has no INIT.md version). Unaudited.
+
+| Config | Model | Batch 2 (2026-11-06) A0 / A1 | Rerun (2026-11-09) A0 / A1 |
+|---|---|---|---|
+| Model only | GLM-5.3-flash | 3/5 / 4/5 | 1/5 / 5/5 |
+| Model only | GLM-5.3 | 3/5 / 4/5 | 3/5 / 5/5 |
+| Claude Code (Ollama) | GLM-5.3-flash | 1/5 / 1/5 | 0/5 / 1/5 |
+| OpenCode (Ollama) | GLM-5.3-flash | 1/5 / 0/5 | 1/5 / 2/5 |
+
+- `python3 study/analyze.py study/results/runs_v1109.csv --pivot`.
+- Harness failures are all `pushed=yes`: GLM-5.3-flash agents push against the repo rule under both INIT.md versions.
+- The 2026-11-09 version does not fix P02 in the harnesses for GLM-5.3-flash. Opus A1 5/5 (batch 3) is therefore more likely a model difference than a version effect; not closed (n = 5, unaudited).
+
 ## Token budget
 
 Measured per run in the pilot (`python3 study/token_estimate.py study/results/pilot.csv`). Prompt = uncached input + cache writes. Projection: 37 tested directives × 3 arms (A0, A1, A2) × models × reps; A2 assumed the size of A1.
