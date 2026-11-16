@@ -368,6 +368,8 @@ Overlap:
 | C10 | CODING_PRACTICES §4 | Turn tasks into verifiable goals; reproduce bugs with a test first | B | unsure | M | — |
 | C11 | CODING_PRACTICES §4 | State a brief plan with verify steps for multi-step tasks | B | unsure | L | — |
 
+Vendor guidance on C-rows (2026-11-16): some directives may be counterproductive on current models, not just redundant; see `reports/coding_practices_model_currency.md` §"Directive-by-directive assessment".
+
 ### Inventory summary
 
 Computed by `scripts/inventory_counts.py` against this file:
