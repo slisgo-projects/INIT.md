@@ -41,6 +41,7 @@ open(sys.argv[2],"w").write(" ".join(out))
 
 - `HTTP Error 400: Precondition check failed` / `Only images are available` → yt-dlp too old; update via pip.
 - `The following content is not available on this app` / `This video is unavailable` on some player clients → yt-dlp too old; switching `player_client` (android) lists only translated tracks and needs a PO token. Update rather than chase clients.
+- `HTTP Error 429: Too Many Requests` with `--sub-langs "en.*"` → the glob pulls dozens of auto-translated tracks. Retry with `--sub-langs en-orig` only (2026-11-16: fixed it).
 - Control before declaring a video caption-less: run `--list-subs` on a known captioned video (e.g. `dQw4w9WgXcQ`) to separate tool failure from video-specific failure.
 - Auto-captions misspell proper names; flag them when quoting.
 - Do not clean the scratchpad with bare-glob `rm`; use a fresh directory per fetch.
