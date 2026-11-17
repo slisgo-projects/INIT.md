@@ -6,16 +6,14 @@ Behavioral guidelines to reduce common LLM coding mistakes. Adapted from https:/
 
 Imported into each coding project's CLAUDE.md with an `@CODING_PRACTICES.md` line; for AI tools that do not expand `@` imports, add this file to the tool's auto-load configuration or paste its contents. Put project-specific guidance in CLAUDE.md beside the import.
 
-**Tradeoff:** these guidelines bias toward caution over speed. For trivial tasks, use judgment.
-
 ## 1. Think Before Coding
 
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
+**Decide routine calls. Surface tradeoffs. Ask only when it matters.**
 
 Before implementing:
-- State your assumptions explicitly. If something is unclear, stop, name what's confusing, and ask.
-- If multiple interpretations exist, present them — don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
+- Make routine judgment calls yourself. State each assumption in one sentence and continue.
+- Ask only when different readings of the request would lead to materially different work.
+- If the request seems mistaken or a simpler approach exists, say so in a sentence and continue with the task as asked.
 
 ## 2. Simplicity First
 
@@ -47,12 +45,11 @@ Test: every changed line traces directly to the user's request.
 
 ## 4. Goal-Driven Execution
 
-**Define success criteria. Loop until verified.**
+**Define success criteria up front.**
 
 Transform tasks into verifiable goals:
 - "Add validation" → "Write tests for invalid inputs, then make them pass"
 - "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
 
 For multi-step tasks, state a brief plan:
 ```

@@ -7,7 +7,8 @@
 
 ## Disposition
 
-- DECISIONS.md, 2026-11-16: logged `open`. No edit to CODING_PRACTICES.md or INIT.md yet.
+- DECISIONS.md, 2026-11-16: logged `open`.
+- DECISIONS.md, 2026-11-17: operator applied the header, §1 and §4 edits to CODING_PRACTICES.md and relaxed INIT.md §"Entry Protocol", §"Inconsistency Handling" and §"Writing Style" (INIT.md 2026-11-17), ahead of probes. §2–§3, §"Skills" retirement and adversarial review remain open.
 
 ## Question
 
@@ -78,6 +79,16 @@ Row IDs from `reports/schema_redundancy_ablation.md` §"Directive inventory". Ve
 - **Corroborated:** checkpoint reviews in a non-authoring context (§"Inconsistency Handling"); "Checks must be independent" and source locators (§"Findings and Checks", §"Report Files"); per-work-area `handover/` files; the "Schema longevity is an experiment" guidepost (VISION.md).
 - **Tension, not contradiction:** §"Context Refresh" selects files up front; the interview favours full access with documented tools. The CLAUDE.md hierarchy stub already works as such an index.
 
+### 6. Video: "Anthropic Just Released the New Rules of Claude Code" (added 2026-11-17)
+
+YouTube `8Pg6G5h05hk`; third-party summary of a talk by a Claude Code team member (auto-captions "Lydia Hi"; name unverified). Line numbers refer to the local transcript. Figures and command names are second-hand and unverified.
+
+- **Emphatic rules hurt on Opus 5.5.** "important" / "never" lines "can actually make the model go off track … more tool calls and overall a worse results" (l. 5–6). CLAUDE.md keeps only what Claude cannot see from the code (l. 6–7).
+- **Reversibility test.** "if Claude gets this wrong once, can I take it back?" (l. 22). Reversible → let the model handle it; irreversible → hard deny rule in settings, not a prompt rule (l. 22–24).
+- **Auto mode** classifier allows routine commands; stated ~1 in 10 dangerous commands still pass, hence deny rules and sandboxing (l. 12–21, 29–30).
+- **Checks over supervision.** Pass/fail checks along the way (l. 37–39); hooks exiting with code 2 send Claude back to fix (l. 46–47).
+- **Review by a non-authoring session** with fresh context (l. 48–49). Corroborates INIT.md §"Inconsistency Handling" checkpoint rule.
+
 ## Implications
 
 - **Probe before editing.** Per INIT.md §"Findings and Checks", these are `open` priors. The redundancy study's queued rows C01, C02, C07, C08, C10 (priority 22–26) are the vehicle.
@@ -97,6 +108,7 @@ Row IDs from `reports/schema_redundancy_ablation.md` §"Directive inventory". Ve
 Local copies are in `reference/` and are not committed.
 
 - Rieseberg, F. (name per auto-captions "Riesberg"; unverified), interview, "Claude Engineering Lead: 'Stop Using Claude Like It's 2024'", YouTube, accessed 2026-11-16. https://www.youtube.com/watch?v=D-SVFneJ_Nk. Local: `reference/youtube_D-SVFneJ_Nk_transcript_2026-11-16.txt` (auto-captions, folded at 200 chars). Read in full.
+- Unnamed YouTuber, summarising a talk by a Claude Code team member, "Anthropic Just Released the New Rules of Claude Code", YouTube, accessed 2026-11-17. https://www.youtube.com/watch?v=8Pg6G5h05hk. Local: `reference/youtube_8Pg6G5h05hk_transcript_2026-11-17.txt` (auto-captions, folded at 200 chars). Read in full.
 - Anthropic. "Prompting best practices." Claude Platform Docs, retrieved 2026-11-16. https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices. Local: `reference/anthropic_docs_claude-prompting-best-practices_2026-11-16.html`. Searched for relevant sections; those sections read in full.
 - Anthropic. "Prompting Claude Opus 5." Claude Platform Docs, retrieved 2026-11-16. https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5. Local: `reference/anthropic_docs_prompting-claude-opus-5_2026-11-16.html`. Read in full.
 - Anthropic. "Prompting Claude Opus 5.5." Claude Platform Docs, retrieved 2026-11-16. https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5. Local: `reference/anthropic_docs_prompting-claude-opus-5-5_2026-11-16.html`. Read in full.

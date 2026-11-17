@@ -68,7 +68,7 @@ Specs as durable artifact; code is derived. Phased flowdown of definition → pl
 - **What:** Three structured markdown files per feature: `requirements.md` in EARS notation (Easy Approach to Requirements Syntax), `design.md`, `tasks.md`. Generated from natural-language prompt.
 - **Borrow:** Tight phase quality gates (requirements lock before design); EARS notation for unambiguous requirements.
 - **Avoid:** Tool-coupled (only works inside Kiro IDE); EARS adds rigor at the cost of human readability.
-- **Relevance:** Validates INIT.md's Entry Protocol staging ("Advance one sequential file at a time. Confirm satisfaction before proceeding."). spec-kit and Kiro converge on similar staging from independent designs, suggesting the pattern generalizes.
+- **Relevance:** Validates INIT.md's Entry Protocol staging ("During initial setup, advance one sequential file at a time. Confirm satisfaction before proceeding."). spec-kit and Kiro converge on similar staging from independent designs, suggesting the pattern generalizes.
 
 ### OpenSpec
 - **Link:** [github.com/Fission-AI/OpenSpec](https://github.com/Fission-AI/OpenSpec)

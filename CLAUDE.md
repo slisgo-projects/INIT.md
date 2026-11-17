@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-**Initialized against INIT.md version:** 2026-11-09
+**Initialized against INIT.md version:** 2026-11-17
 
 **Auto-loaded every session** (per INIT.md §"CLAUDE.md Bootstrap"):
 
@@ -53,16 +53,14 @@ INIT.md is authoritative for required content per file.
 
 **Edits follow the rules INIT.md itself defines.** Specifically:
 
-- AI-optimized files (everything except MOTIVATION.md): directive voice, bullets over prose, no embedded rationale, no filler. See INIT.md §"Writing Style for AI-Optimized Files."
+- AI-optimized files (everything except MOTIVATION.md): directive voice, bullets over prose, no embedded rationale (absolute rules excepted: scope and one-clause reason inline), no filler. See INIT.md §"Writing Style for AI-Optimized Files."
 - `ancillary/HUMAN.md` is prose for a human reader and exempt from the AI-optimization rules, except for the "Human Responsibilities" list near its top.
 
 **File Updates rule** (INIT.md §"File Updates"): when changing one file, propagate logically related updates to other files. Cap propagation at one hop. Report what was propagated. Full consistency sweeps are a separate deliberate act.
 
-**Inconsistency Handling** (INIT.md §"Inconsistency Handling"): flag contradictions, do not silently resolve.
+**Inconsistency Handling** (INIT.md §"Inconsistency Handling"): fix where one reading clearly wins and report the fix; ask when the fix changes scope, intent, a recorded decision, or a human-owned record.
 
 **Scaffolding files** are not read on context refresh, are preserved in `scaffolding/integrated/` after phase completion (not deleted), and supplement DECISIONS.md rather than replace it.
-
-Git repository; commit only on request.
 
 ## Coding behavioral guidelines
 

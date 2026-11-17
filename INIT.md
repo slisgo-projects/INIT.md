@@ -2,7 +2,7 @@
 
 **Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5, Fable 5.1, Opus 5.5
 
-**Version:** 2026-11-09 (date of last substantive change; see §"Versioning")
+**Version:** 2026-11-17 (date of last substantive change; see §"Versioning")
 
 **License:** Copyright (c) 2026 S. Lisgo. MIT License: https://github.com/slisgo-projects/INIT.md/blob/main/LICENSE
 
@@ -25,17 +25,19 @@ On first invocation ("Let's set up a project"), the user provides:
 
 **Interview variant.** When the user arrives without VISION.md: read any `reference/` seed documents, then elicit VISION.md by structured interview before drafting anything. Ask open-ended questions derived from the VISION.md required content (north star, guideposts, objectives) and the MOTIVATION.md per-strand structure (problem, approach, limits), one question at a time, each building on prior answers. Draft only from the user's answers. Interview output seeds MOTIVATION.md; it does not complete it.
 
-Elicit before drafting judgment-heavy content anywhere in the flowdown (guideposts, objectives, strategic decomposition). Do not propose answers or ghost-write.
+Elicit before drafting VISION.md guideposts and objectives and MOTIVATION.md strands. Do not propose answers or ghost-write there: the operator's own judgment is the content.
+
+Elsewhere in the flowdown (e.g., strategic decomposition), draft judgment-heavy content and mark it `proposed` for user review.
 
 First move: read VISION.md and the user's suggestions. Populate CLAUDE.md per §"CLAUDE.md Bootstrap." Create empty placeholder files for all cross-cutting files (GLOSSARY.md, CONSTRAINTS.md, INTERFACES.md, DECISIONS.md), to be populated as the project progresses. Create an empty placeholder for MOTIVATION.md, to be developed iteratively as the user works through their reasons for the project. Then propose a draft of the first sequential file (INSPIRATIONS.md) for review.
 
 MOTIVATION.md is drafted iteratively across sessions, not in a single pass. Capture motivation material whenever the user surfaces it, regardless of which sequential file is currently in focus.
 
-Advance one sequential file at a time. Confirm satisfaction before proceeding.
+During initial setup, advance one sequential file at a time. Confirm satisfaction before proceeding. After setup, edits follow §"File Updates" with no confirmation gate.
 
 # Inconsistency Handling
 
-During drafting: if inconsistencies surface between files, flag them and iterate with the user. Do not silently resolve them.
+During drafting: when files disagree and one reading clearly wins (stale cross-reference, count drift, wording that lags a settled decision), fix it and report the fix. Ask the user when the resolution would change scope, intent, a recorded decision, or a human-owned record (VALIDATION.md criteria, specification records below). Report every fix; none is silent.
 
 Status records (phase states, status lines, "not yet run" caveats) are claims, not evidence. Before asserting what is done, collected, or available, check the artifact itself: file presence, contents, checksums, the built or deployed thing. On divergence, correct the record and log the correction in DECISIONS.md.
 
@@ -141,7 +143,7 @@ MOTIVATION.md is prose for the human and exempt from these rules. All other file
 
 - **Directive, not explanatory.** Write what is, not what the section is about. No section preambles ("This file captures..."), no recaps ("As described above...").
 - **Bullets over prose.** One concept per bullet. If a point needs a paragraph, it belongs in MOTIVATION.md (why) or DECISIONS.md (rationale), not here.
-- **No embedded rationale.** AI-optimized files state the choice; rationale lives in DECISIONS.md. Do not justify entries inline.
+- **No embedded rationale.** AI-optimized files state the choice; rationale lives in DECISIONS.md. Do not justify entries inline. Exception: an absolute rule ("do not", "never", "always") carries its scope and a one-clause reason inline, so it is applied where it was meant to apply.
 - **No filler.** Cut "in order to," "it is important to note," "the following," and similar scaffolding. If a sentence still parses without a phrase, the phrase was filler.
 - **Terse definitions.** Glossary-style: term — definition. Not "Term refers to the concept of..."
 
