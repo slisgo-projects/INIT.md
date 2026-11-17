@@ -24,7 +24,7 @@ On formulating a use case (new inline in `USE_CASES.md`, or extracting an existi
 
 Advance one stage at a time; each stage starts only once the previous stage's gate is met.
 - Charter, Validation and Commitment gates: confirm with the user before proceeding. These gates are the user's judgment (problem framing, external review, go decision).
-- Foundation, Inventory, Analysis and Specification gates: check the gate yourself, record the result in the changelog, and continue. Stop and ask only when the gate fails in a way the use case's sources cannot resolve.
+- Foundation, Inventory, Analysis and Specification gates: check the gate yourself, record the result in the changelog, and continue. On a failed gate, close the gap (returning to the previous stage when the gap lies there) and log it. Stop and ask only when the use case's sources cannot close it.
 
 **Multi-category handling:** the use case inherits the primary category's structure and pulls specific elements from the secondary category as needed. The hybrid is declared in the header so future sessions know to consult both category sections.
 
@@ -213,7 +213,7 @@ What the community or system already has.
 | Financial | Grants, endowments, revenue, investment capacity |
 | Institutional | Tenure rights, regulatory authority, partnerships, political support |
 
-Tag each asset: **confirmed**, **inferred**, or **assumed**.
+Tag each asset with its epistemic status: **Confirmed**, **Estimated**, **Assumed**, or **Missing**.
 
 ### Challenges / Risks
 
@@ -312,7 +312,7 @@ Detailed criteria for each stage gate. A stage is not complete until all checkbo
 - [ ] *Category-specific:* inventory of relevant resources contains at least one entry per category-specific subdivision.
 - [ ] *Category-specific:* challenge/risk inventory contains at least two coupled entries.
 - [ ] Action/work-item list contains a baseline ("do nothing" or "status quo").
-- [ ] Every action has a champion or lead identified.
+- [ ] Every action has an owner (champion, lead) identified.
 
 ### Gate 3: Inventory Plausibility
 - [ ] *Category-specific:* cost or resource estimates do not exceed identified funding or supply by an order of magnitude without explicit note.
@@ -321,7 +321,7 @@ Detailed criteria for each stage gate. A stage is not complete until all checkbo
 
 ### Gate 4: Analysis Consistency
 - [ ] Dependency map contains no orphaned actions without explanation.
-- [ ] Every "depends_on" link traces to an earlier or higher-priority action.
+- [ ] Every dependency link (e.g., `depends_on`) traces to an earlier or higher-priority action.
 - [ ] Cross-cutting frameworks produce at least one pass/fail/rank per applicable action.
 
 ### Gate 5: Specification Quality
@@ -358,8 +358,6 @@ When the user requests a change to an existing element:
 - Propagate logically related updates to other elements to maintain self-consistency.
 - Report what was propagated.
 - Archive dropped elements rather than deleting them: move them to a "Deferred / Archived" section with the reason, so a later stage can reinstate them.
-
-When advancing stages: do not advance until the current stage's quality gate is met.
 
 ---
 

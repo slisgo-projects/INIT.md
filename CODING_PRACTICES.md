@@ -4,7 +4,7 @@
 
 Behavioral guidelines to reduce common LLM coding mistakes. Adapted from https://github.com/multica-ai/andrej-karpathy-skills (forrestchang; MIT), derived from Andrej Karpathy's observations on LLM coding pitfalls.
 
-Imported into each coding project's CLAUDE.md with an `@CODING_PRACTICES.md` line; for AI tools that do not expand `@` imports, add this file to the tool's auto-load configuration or paste its contents. Put project-specific guidance in CLAUDE.md beside the import.
+Imported into each project's CLAUDE.md with an `@CODING_PRACTICES.md` line; for AI tools that do not expand `@` imports, add this file to the tool's auto-load configuration or paste its contents. Put project-specific guidance in CLAUDE.md beside the import.
 
 ## 1. Think Before Coding
 
@@ -58,4 +58,4 @@ For multi-step tasks, state a brief plan:
 3. [Step] → verify: [check]
 ```
 
-Strong success criteria enable independent looping. Weak criteria ("make it work") require constant clarification.
+Strong success criteria let work proceed without check-ins. Weak criteria ("make it work") require constant clarification.

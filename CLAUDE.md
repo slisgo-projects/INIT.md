@@ -39,7 +39,7 @@ INIT.md is authoritative for required content per file.
 
 **Deliverable files** (the spec being authored):
 - **INIT.md** — authoritative spec for the project markdown hierarchy. Read first.
-- **HUMAN.md** — optional companion to INIT.md (lives in `ancillary/HUMAN.md`). Human side of the collaboration and sustainability rationale. Not referenced by INIT.md; not a required part of the flowdown.
+- **HUMAN.md** — optional companion to INIT.md (lives in `ancillary/HUMAN.md`). Human side of the collaboration and sustainability rationale. Not a required part of the flowdown.
 - **CODING_PRACTICES.md** — behavioral guidelines imported into downstream projects' CLAUDE.md per INIT.md §"CLAUDE.md Bootstrap."
 - **USE_CASE_INIT.md** — universal use-case formulation protocol. Governs every use case specification: formulated inline in `USE_CASES.md` by default; extracted to its own `USE_CASE_<identifier>.md` only when an individual case grows unwieldy (length-triggered; protocol identical either way). Defines universal foundational elements plus a section per category (A–F); AI selects primary and optional secondary category from the user's description and applies the corresponding structure.
 
@@ -60,10 +60,10 @@ INIT.md is authoritative for required content per file.
 
 **Inconsistency Handling** (INIT.md §"Inconsistency Handling"): fix where one reading clearly wins and report the fix; ask when the fix changes scope, intent, a recorded decision, or a human-owned record.
 
-**Scaffolding files** are not read on context refresh, are preserved in `scaffolding/integrated/` after phase completion (not deleted), and supplement DECISIONS.md rather than replace it.
+**Scaffolding files** are not read on context refresh, are moved to `scaffolding/integrated/` once their phase's implementation begins (not deleted), and supplement DECISIONS.md rather than replace it.
 
 ## Coding behavioral guidelines
 
-This is a no-code meta-spec; CODING_PRACTICES.md applies to spec edits by analogy (surface tradeoffs before writing; minimal change; surgical edits; goal-driven verification). Imported per INIT.md §"CLAUDE.md Bootstrap":
+This is a no-code meta-spec; CODING_PRACTICES.md applies to spec edits by analogy (surface tradeoffs before writing; minimal change; surgical edits; success criteria defined up front). Imported per INIT.md §"CLAUDE.md Bootstrap":
 
 @CODING_PRACTICES.md
