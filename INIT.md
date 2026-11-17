@@ -530,7 +530,7 @@ Rules:
 - Repeatable procedures (→ a skill, per §"Skills").
 - Pre-implementation design and code templates (→ `scaffolding/`).
 
-### Plan files
+# Plan files
 
 `interlinked/` at the repository root carries work between the project and Interlinked, the outside coordinator. `interlinked/inbox/` holds work from the coordinator awaiting a project session; `interlinked/outbox/` holds the project's requests and proposals to the coordinator. Each keeps its record in its own `done/`.
 
