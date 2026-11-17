@@ -8,7 +8,7 @@ Universal use-case formulation protocol. Governs every use case specification, f
 
 **Primary reader:** an AI in future sessions. When refreshing context, the user requests `USE_CASES.md` or the relevant extracted `USE_CASE_<identifier>.md` file. Favor structured, explicit content over narrative prose.
 
-**Scope of application:** all use case formulation. Inline is the default home; daughter-file extraction is length-triggered only, per INIT.md §"Stopping Criteria." Do not subdivide unilaterally — wait for user direction.
+**Scope of application:** all use case formulation. Inline is the default home; daughter-file extraction is length-triggered only, per INIT.md §"Stopping Criteria." Extract only on user direction: file layout is the user's call.
 
 ---
 
@@ -22,7 +22,9 @@ On formulating a use case (new inline in `USE_CASES.md`, or extracting an existi
 
 **Header / changelog / maturity placement:** inline in `USE_CASES.md` — per use-case block; extracted to `USE_CASE_<identifier>.md` — per file. Content is otherwise identical.
 
-Advance one stage at a time. Confirm satisfaction before proceeding. Do not generate all stages at once.
+Advance one stage at a time; each stage starts only once the previous stage's gate is met.
+- Charter, Validation and Commitment gates: confirm with the user before proceeding. These gates are the user's judgment (problem framing, external review, go decision).
+- Foundation, Inventory, Analysis and Specification gates: check the gate yourself, record the result in the changelog, and continue. Stop and ask only when the gate fails in a way the use case's sources cannot resolve.
 
 **Multi-category handling:** the use case inherits the primary category's structure and pulls specific elements from the secondary category as needed. The hybrid is declared in the header so future sessions know to consult both category sections.
 
@@ -355,7 +357,7 @@ When the user requests a change to an existing element:
 - Touch the requested element.
 - Propagate logically related updates to other elements to maintain self-consistency.
 - Report what was propagated.
-- Never delete; archive. Move dropped items to a "Deferred / Archived" section with the reason.
+- Archive dropped elements rather than deleting them: move them to a "Deferred / Archived" section with the reason, so a later stage can reinstate them.
 
 When advancing stages: do not advance until the current stage's quality gate is met.
 

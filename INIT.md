@@ -41,7 +41,7 @@ During drafting: when files disagree and one reading clearly wins (stale cross-r
 
 Status records (phase states, status lines, "not yet run" caveats) are claims, not evidence. Before asserting what is done, collected, or available, check the artifact itself: file presence, contents, checksums, the built or deployed thing. On divergence, correct the record and log the correction in DECISIONS.md.
 
-Specification records (INTERFACES.md contracts, OPERATIONS.md entries) are the reverse: when observed or intended behavior diverges from one, surface the divergence as a contradiction. Do not rewrite the record to match.
+Specification records (INTERFACES.md contracts, OPERATIONS.md entries) are the reverse: when observed or intended behavior diverges from one, surface the divergence as a contradiction. Do not rewrite the record to match: the record states intent, so the divergence is the finding.
 
 During review: the user will request thorough reviews at checkpoints. Surface any inconsistencies for resolution. Run checkpoint reviews in a context that did not author the changes under review. Checkpoint reviews also ask what can be removed: unnecessary content, requirements, phases, recurring records. Removed items follow the owning file's archive rule, if any.
 
@@ -108,17 +108,17 @@ When the user asks for a re-read to refresh context, also re-read by default:
 
 **Load IMPLEMENTATION.md** whenever the session's work touches an implementation phase — building, changing, verifying, or reporting on a phase deliverable — whether or not the user asked for a re-read. Load it before writing state-of-progress per §"File Updates."
 
-**Do NOT** read scaffolding files on context refresh. They are working artifacts. Read them only when implementing the relevant phase. After a phase completes, the scaffolding file is moved to `scaffolding/integrated/` per §"Scaffolding Files," not deleted.
+Do not read scaffolding files on context refresh. They are working artifacts. Read them only when implementing the relevant phase. After a phase completes, the scaffolding file is moved to `scaffolding/integrated/` per §"Scaffolding Files," not deleted.
 
-**Do NOT** read reference or report files on context refresh. Load a seed document or topic report only when the session touches its topic (see §"Reference Files" and §"Report Files").
+Do not read reference or report files on context refresh: they are long and topic-specific. Load a seed document or topic report only when the session touches its topic (see §"Reference Files" and §"Report Files").
 
-**Do NOT** read continuity files on context refresh. The user pulls the `handover/` file for the work area being resumed into context; loading every area's file defeats the group's purpose (see §"Continuity Files").
+Do not read continuity files on context refresh. The user pulls the `handover/` file for the work area being resumed into context; loading every area's file defeats the group's purpose (see §"Continuity Files").
 
 # Stopping Criteria
 
 No hard length criterion per file. Length is project-specific.
 
-If a file appears to be growing unwieldy, mention it and ask whether to subdivide. Do not subdivide unilaterally.
+If a file appears to be growing unwieldy, mention it and ask whether to subdivide. Subdivide only on user direction: file layout is the user's call.
 
 Subdivided files use the naming pattern USE_CASE_<identifier>.md, RISK_<identifier>.md, etc.
 
@@ -334,7 +334,7 @@ Created when the project acquires its first deployed host, device, or account �
 - **Runtime environments.** Interpreter, environment, and service-manager units per resource, where they differ across resources.
 - **Change path.** The write point, how a change propagates to each resource, what restarts it, how it is rolled back.
 - **Physical facts that bind a session.** Exclusive devices, power and thermal limits, throttling, storage that cannot be relied on.
-- **Credential locations.** Paths and key names only. Never values.
+- **Credential locations.** Paths and key names only. Never values: every session that reads the file would see them.
 - **Prohibitions.** Actions a session must not take against a resource, and why.
 
 Rules:
@@ -451,7 +451,7 @@ Rationale and implications.
 
 ### Integration with IMPLEMENTATION.md
 
-IMPLEMENTATION.md describes **what** each phase delivers, **why**, and **verification**. It does NOT contain code or detailed technical concepts.
+IMPLEMENTATION.md describes **what** each phase delivers, **why**, and **verification**. It does not contain code or detailed technical concepts.
 
 When a scaffolding file exists for a phase:
 
@@ -465,7 +465,7 @@ When a scaffolding file exists for a phase:
 
 This keeps IMPLEMENTATION.md readable as a project management document while moving implementation detail to the scaffolding files.
 
-### What does NOT go in scaffolding files
+### What does not go in scaffolding files
 
 - Design rationale that belongs in DECISIONS.md (decisions made, alternatives considered, project-wide implications) — scaffolding files contain working rationale; decisions that should be preserved go to DECISIONS.md
 - Architectural patterns or high-level choices (→ ARCHITECTURE.md)
@@ -485,7 +485,7 @@ Files in `reference/` holding externally generated background material, consulte
 Rules:
 - Not read on context refresh; load when the session touches the file's topic.
 - Reference files persist; they do not move or integrate. Stored as-is, not rewritten into AI-optimized style.
-- Do not commit report-source copies to a public repository.
+- Do not commit report-source copies to a public repository: they are third-party copyright.
 
 ## Report Files
 
@@ -503,7 +503,7 @@ Rules:
 - Where a reference can be downloaded, save a copy to `reference/` and add its local path to the entry.
 - Cite each topic report, path-qualified, from the flowdown file where its findings are load-bearing.
 - Not read on context refresh; load when the session touches the file's topic.
-- Report files persist; they do not move or integrate. When findings are overturned, mark the report superseded with a pointer — do not delete.
+- Report files persist; they do not move or integrate. When findings are overturned, mark the report superseded with a pointer rather than deleting it, so decisions that cited it stay traceable.
 - Durable decisions arising from a report go to DECISIONS.md. The report supplements DECISIONS.md, does not replace it.
 
 ## Continuity Files
@@ -527,7 +527,7 @@ Rules:
 - **Retirement.** When the area closes, drain, then move the file to `handover/closed/` and prepend: `→ historical: continuity record for a closed work area; current truth is the governed files and the code.` Not deleted.
 - AI-optimized per §"Writing Style for AI-Optimized Files," with one bounded exception: session-log entries may carry the narrative needed to reconstruct a state — what was tried, what it looked like, why it was wrong. A wrong diagnosis that cost a session is content here, not rationale in the wrong file.
 
-### What does NOT go in continuity files
+### What does not go in continuity files
 
 - Decisions with alternatives worth preserving (→ DECISIONS.md).
 - Standing topology, access, and deploy facts (→ OPERATIONS.md).
