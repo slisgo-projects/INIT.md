@@ -2,7 +2,7 @@
 
 **Authors:** S. Lisgo, Opus 4.7, Fable 5, Opus 5, Fable 5.1, Opus 5.5
 
-**Version:** 2026-11-17 (date of last substantive change; see §"Versioning")
+**Version:** 2026-11-18 (date of last substantive change; see §"Versioning")
 
 **License:** Copyright (c) 2026 S. Lisgo. MIT License: https://github.com/slisgo-projects/INIT.md/blob/main/LICENSE
 
@@ -246,6 +246,8 @@ Per entry:
 Logical breakdown of project elements and their interdependencies.
 
 - **Element inventory.** Each element with its interdependencies and any element-specific risks.
+- **Granularity.** Elements at the level a reader outside the project needs (Interlinked, a checkpoint reviewer, a new session). Do not mirror structure the code already shows.
+- **Cross-project dependencies.** Other projects, shared code, external services, and people the project relies on.
 
 **Not in ARCHITECTURE.md:**
 - Strategic decomposition rationale (why these elements, why this granularity, alternatives considered) → DECISIONS.md.

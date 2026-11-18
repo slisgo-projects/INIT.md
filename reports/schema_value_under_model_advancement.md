@@ -42,6 +42,7 @@
 ### 5. Process ceremony likely over-weighted (inference)
 
 - Sequential drafting of the flowdown files assumes expensive work. Once code exists, ARCHITECTURE.md for software is largely derivable on demand.
+  - Withdrawn 2026-11-18: derivation serves only an in-repo reader. Interlinked's daily `job-scan` reads pushed flowdown files across the matrix, and code does not show intent, planned or non-code elements. ARCHITECTURE.md stays recorded; INIT.md now sets its granularity to an outside reader and adds cross-project dependencies. See DECISIONS.md 2026-11-18.
 - §"File Updates" propagation checklist: a strong model needs the one-hop cap more than the list.
 - §"Scaffolding Files" naming example and file-structure template: 62 lines (INIT.md 2026-11-17, from `### Naming and Organization` to `### Integration with IMPLEMENTATION.md`, counted by awk) for what is essentially a field list.
 
@@ -58,7 +59,7 @@
   3. Tells the model how to do something it already does well → delete, or measure first via the redundancy study.
   4. Gates a reversible step on human approval → remove.
 - **Instrument:** the redundancy study (`study/`), paused 2026-11-17, resumes as tokens allow. Add a cost/side-effect measure (unnecessary questions, redundant re-checks, tokens) per `reports/coding_practices_model_currency.md` §"Implications".
-- **Candidate future edits (not applied):** make ARCHITECTURE.md derivable-on-demand for software projects with code; shorten the propagation checklist and scaffolding template; add the four-way test to the checkpoint "what can be removed" question.
+- **Candidate future edits (not applied):** ~~make ARCHITECTURE.md derivable-on-demand for software projects with code~~ (withdrawn 2026-11-18, see §5); shorten the propagation checklist and scaffolding template; add the four-way test to the checkpoint "what can be removed" question.
 
 ## Reassessment checklist (2027-11)
 

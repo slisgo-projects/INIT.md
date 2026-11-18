@@ -78,4 +78,10 @@ Novice onboarding for downstream beta users: installs git and Claude Code, prese
 
 (1), (4), (6) are the deepest dependencies — changes here propagate through the schema. (2), (3), (5), (7) are derived and absorb upstream change without forcing redesign.
 
+## Cross-project dependencies
+
+- **Interlinked** (`../interlinked/`) — consumer. `job-propagate` compares each matrix project's schema companions against this repo's canonical files daily and proposes sync and re-bootstrap edits; `job-scan` reads matrix projects' flowdown files, so per-file specifications (2) shape what it can see.
+  - Risk: a schema change here reaches every matrix project as a proposal; a spec edit that breaks `job-scan`'s reading surfaces there, not here.
+- **Matrix projects** (`slisgo-projects` organization) — consumers of the companion files via Interlinked or the installer (8).
+
 Decomposition rationale, alternatives considered, and out-of-scope items live in DECISIONS.md.
