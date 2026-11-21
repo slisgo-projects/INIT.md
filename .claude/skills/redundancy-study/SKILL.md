@@ -23,7 +23,7 @@ Design and status: `reports/schema_redundancy_ablation.md`.
 ## Pause
 
 - Stop the background task, then `pkill -f study/run_pilot.py; pkill -f 'opencode run'`. Confirm with `pgrep -af run_pilot`.
-- Completed rows stay in `study/results/runs.csv`. The runner does not skip completed runs yet.
+- Completed rows stay in `study/results/runs.csv`. On rerun the runner skips runs already recorded without error for the same layer, harness, provider, model and effort; error rows are retried.
 
 ## Failure modes
 
