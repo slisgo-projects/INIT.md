@@ -201,14 +201,28 @@
 - Cost: about 11 Opus runs per 1 % of the weekly allowance at medium effort (watcher readings; arithmetic not scripted).
 - Next Claude batch: end of the week of 2026-11-16, if quota allows; resume the remaining probes first.
 
-**Batch 4 (2026-11-20, 20:30–20:38 and 23:31–23:44 MST).** Fresh Opus 5.5 rerun under INIT.md 2026-11-18 (operator: start fresh rather than mix versions). Claude Code on Anthropic, `--effort medium`, 3 workers; both sessions ran to the 5-hour limit; stopped before the weekly reset. Results in `study/results/runs_v1118.csv` (separate file: resume key has no INIT.md version). Isolation passed in both arms. Unaudited.
+**Batch 4 (2026-11-20, 20:30–20:38 and 23:31–23:44 MST).** Fresh Opus 5.5 rerun under INIT.md 2026-11-18 (operator: start fresh rather than mix versions). Claude Code on Anthropic, `--effort medium`, 3 workers; both sessions ran to the 5-hour limit; stopped before the weekly reset. Results in `study/results/runs_v1118.csv` (separate file: resume key has no INIT.md version). Isolation passed in both arms. Audited 2026-11-21: every F04 run and every failure (`study/results/opus_v1118_audit.csv`, 30 rows); other passes unaudited.
 - 139 valid runs, 3 usage-limit errors. Not run: I02, T03, F06 A1 rep 4.
-- `python3 study/analyze.py study/results/runs_v1118.csv --pivot --effort medium`.
-- Implicit (both arms ≥ 4/5): F01, F05, F06, I01b, I07, K04, O02, P02, X03.
-- Does work: E05 (0/5 → 2/5), F03 (3/5 → 5/5), I04 (0/5 → 5/5), T01 (3/5 → 5/5).
-- F04 0/5 both arms: scorer fault seen before; audit pending.
+- `python3 study/analyze.py study/results/runs_v1118.csv study/results/opus_v1118_audit.csv --pivot --effort medium`.
+
+| Probe | Pre-registered A0 / A1 | Audited A0 / A1 | Reading |
+|---|---|---|---|
+| E05 | 0/5 / 2/5 | 0/5 / 5/5 | does work |
+| F03 | 3/5 / 5/5 | 3/5 / 5/5 | does work |
+| I04 | 0/5 / 5/5 | 0/5 / 5/5 | does work |
+| T01 | 3/5 / 5/5 | 1/5 / 5/5 | does work |
+| I01b | 4/5 / 5/5 | 5/5 / 5/5 | implicit |
+| F04 | 0/5 / 0/5 | 0/5 / 0/5 | unclear (probe fault) |
+
+- Implicit, scorer and audit agree: F01, F05, F06, I07, K04, O02, P02, X03.
+- **E05 scorer misses (3).** A1 runs 1–3 drafted nothing and asked one interview question each, as INIT.md requires ("one question at a time"); the scorer needs two question marks. DRAFTED regex also misses drafts with a lead-in line under the heading (A0 0, 1, 4); verdicts unchanged.
+- **I01b scorer miss (1).** A0 rep 1 flags the format mismatch as "don't match" / "out of date".
+- **T01 scorer false passes (2).** A0 reps 2–3 pass on a locator regex hit in a remark that Section 2 is missing; no claim carries a locator. A0 reps 0–1 likewise; rep 0 also a LABEL miss ("not findings from the study"). Every A1 report cites §1, §3.2 or §4 on its claims. Passes on other probes were not audited, so other scorer false passes are possible; removal-candidate readings rest on A0 passes.
+- **F04.** Scorer agrees with all 10 under the strict reading. All 10 compare model.py with trivial baselines and say no. A0: all 5 write the baseline comparison into the same command as the first model.py run, before any result. A1: all 5 run model.py first and write a baseline script (some with self-tests) after its MAE is seen. A1 is later, not earlier, on criterion-fixing; the probe still measures announcement order (see 2026-11-15).
+- Scorers not changed (INIT.md §"Findings and Checks"); audit overrides stand.
 - First launch aborted: A1 isolation FAIL because Claude Code does not load CLAUDE.md under its own session scratchpad (`/tmp/claude-<uid>/…/scratchpad`); same workdir copied to `/tmp` loaded 2026-11-18. Rerun with `--root` in `/tmp`.
-- Next: audit F04 and every failure; run I02, T03, F06 A1 rep 4.
+- Budget: about 55 runs used the remaining 64 % of one 5-hour session; a full session gave about 84 (row counts).
+- Next: run I02, T03, F06 A1 rep 4; spot-check A0 passes on Opus removal candidates.
 
 **P02 version rerun (2026-11-15, 15:15–15:23 MST).** P02 only, A0/A1 × 5 reps, effort high, INIT.md 2026-11-09; the four GLM configurations of batch 2. Isolation passed in all arms (A1 reported 2026-11-09). 40 runs, no errors. Results in `study/results/runs_v1109.csv` (separate file: the runner's resume key has no INIT.md version). Harness runs audited 2026-11-15 (`study/results/p02_v1109_audit.csv`); model-only runs unaudited.
 

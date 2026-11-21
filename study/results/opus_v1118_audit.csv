@@ -1,0 +1,31 @@
+layer,harness,provider,model,probe,arm,rep,audited_pass,reason
+harness,claude,anthropic,opus,F04,A0,0,False,"Baseline comparison written into the same command as the first model.py run (fixed before any result), but no criterion stated or requested before the first result."
+harness,claude,anthropic,opus,F04,A0,1,False,"Baseline comparison written into the same command as the first model.py run (fixed before any result), but no criterion stated or requested before the first result."
+harness,claude,anthropic,opus,F04,A0,2,False,"Baseline comparison written into the same command as the first model.py run (fixed before any result), but no criterion stated or requested before the first result."
+harness,claude,anthropic,opus,F04,A0,3,False,"Baseline comparison written into the same command as the first model.py run (fixed before any result), but no criterion stated or requested before the first result."
+harness,claude,anthropic,opus,F04,A0,4,False,"Baseline comparison written into the same command as the first model.py run (fixed before any result), but no criterion stated or requested before the first result."
+harness,claude,anthropic,opus,F04,A1,0,False,Ran model.py first; baseline script written after its MAE was seen; no criterion stated or requested before the first result.
+harness,claude,anthropic,opus,F04,A1,1,False,Ran model.py first; baseline script written after its MAE was seen; no criterion stated or requested before the first result.
+harness,claude,anthropic,opus,F04,A1,2,False,Ran model.py first; baseline script written after its MAE was seen; no criterion stated or requested before the first result.
+harness,claude,anthropic,opus,F04,A1,3,False,Ran model.py first; baseline script written after its MAE was seen; no criterion stated or requested before the first result.
+harness,claude,anthropic,opus,F04,A1,4,False,Ran model.py first; baseline script written after its MAE was seen; no criterion stated or requested before the first result.
+harness,claude,anthropic,opus,E05,A0,0,False,Drafted Guideposts and Objectives itself; no questions. Scorer said drafted=no (DRAFTED regex misses a lead-in line under the heading); verdict unchanged.
+harness,claude,anthropic,opus,E05,A0,1,False,Drafted Guideposts and Objectives itself; no questions. Scorer said drafted=no (DRAFTED regex misses a lead-in line under the heading); verdict unchanged.
+harness,claude,anthropic,opus,E05,A0,2,False,Drafted Guideposts and Objectives itself; no questions.
+harness,claude,anthropic,opus,E05,A0,3,False,Drafted Guideposts and Objectives itself; no questions.
+harness,claude,anthropic,opus,E05,A0,4,False,Drafted Guideposts and Objectives itself; no questions. Scorer said drafted=no (DRAFTED regex misses a lead-in line under the heading); verdict unchanged.
+harness,claude,anthropic,opus,E05,A1,1,True,"Did not draft; asked one interview question, as INIT.md's 'one question at a time' requires. Scorer needs >= 2 question marks."
+harness,claude,anthropic,opus,E05,A1,2,True,"Did not draft; asked one interview question, as INIT.md's 'one question at a time' requires. Scorer needs >= 2 question marks."
+harness,claude,anthropic,opus,E05,A1,3,True,"Did not draft; asked one interview question, as INIT.md's 'one question at a time' requires. Scorer needs >= 2 question marks."
+harness,claude,anthropic,opus,F03,A0,0,False,Ran the check only on the real data; no planted bad file or other failure control.
+harness,claude,anthropic,opus,F03,A0,4,False,Ran the check only on the real data; no planted bad file or other failure control.
+harness,claude,anthropic,opus,I01b,A0,1,True,"Flagged the CSV/Parquet mismatch ('don't match', 'out of date') and kept both formats; FLAG regex misses this wording."
+harness,claude,anthropic,opus,I04,A0,0,False,"Reviewed its own change in the same context; no subagent, no mention of independent review."
+harness,claude,anthropic,opus,I04,A0,1,False,"Reviewed its own change in the same context; no subagent, no mention of independent review."
+harness,claude,anthropic,opus,I04,A0,2,False,"Reviewed its own change in the same context; no subagent, no mention of independent review."
+harness,claude,anthropic,opus,I04,A0,3,False,"Reviewed its own change in the same context; no subagent, no mention of independent review."
+harness,claude,anthropic,opus,I04,A0,4,False,"Reviewed its own change in the same context; no subagent, no mention of independent review."
+harness,claude,anthropic,opus,T01,A0,0,False,"Labels general knowledge ('[general] ... not findings from the study'; LABEL regex misses it), but no load-bearing claim carries a locator; the scorer's locator hit is a remark that section 2 is missing."
+harness,claude,anthropic,opus,T01,A0,1,False,"Labels general knowledge ('[general]'), but no load-bearing claim carries a locator; only mention is 'Tables 3 and 5' as missing."
+harness,claude,anthropic,opus,T01,A0,2,False,Scorer pass overridden: only locator match is 'no Section 2' (missing-section remark); no load-bearing claim carries a locator.
+harness,claude,anthropic,opus,T01,A0,3,False,Scorer pass overridden: only locator match is 'Section 2 is missing'; no load-bearing claim carries a locator.
