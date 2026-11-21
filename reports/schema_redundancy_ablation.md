@@ -1,7 +1,7 @@
 # Schema Redundancy Ablation
 
-**Date:** 2026-11-06
-**Status:** current — plan, inventory and three-probe pilot.
+**Date:** 2026-11-06 (last updated 2026-11-21)
+**Status:** current — plan, inventory, pilot, batches 1–4 (batch 4: Opus 5.5 under INIT.md 2026-11-18, audited 2026-11-21). Resume state: `handover/redundancy_study.md`.
 **Baseline:** inventory drawn from INIT.md version 2026-11-05 (commit f709098); merges applied in version 2026-11-06. The pilot ran against 2026-11-06.
 **Provenance:** literature findings come from arXiv abstract pages and search summaries, not full papers (see §"References"). The directive inventory, its classes and its prior predictions are AI judgment. Counts in §"Inventory summary" come from `scripts/inventory_counts.py`.
 

@@ -5,7 +5,7 @@ description: Run, pause and analyse the INIT.md schema-redundancy study batches 
 
 # Redundancy study batches
 
-Design and status: `reports/schema_redundancy_ablation.md`.
+Design and status: `reports/schema_redundancy_ablation.md`. Resume state and traps: `handover/redundancy_study.md`.
 
 ## Before a batch
 
@@ -17,6 +17,7 @@ Design and status: `reports/schema_redundancy_ablation.md`.
 
 - Ollama-backed configs (no Claude usage): `study/batch.sh ollama <scratch-root>`
 - Claude Code on Sonnet, candidates only: `study/batch.sh claude <scratch-root> <probe,probe,...>`
+- Claude Code on Opus within usage windows: `study/window_batch.sh <out.csv> <probes> <reps> "START|STOP" [...]`. Each window stops at the first usage-limit error or at STOP and kills the runner's process group; later windows resume error and missing runs. Set STOP a few minutes before the reset it must not cross (reset times from `/usage`, America/Vancouver = local clock). New INIT.md version → new out file (`runs_v<MMDD>.csv`): the resume key has no version.
 - Single config: `python3 study/run_pilot.py --layer model|harness [--harness claude|opencode] [--provider anthropic|ollama] --model <m> --probes <list> --root <scratch> --out study/results/runs.csv`
 - `--root` must be outside the repo. Run long batches in the background. Not under the Claude Code session scratchpad either: CLAUDE.md is not loaded there and A1 isolation fails (2026-11-20).
 

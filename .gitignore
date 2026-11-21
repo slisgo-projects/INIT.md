@@ -12,6 +12,10 @@
 !reports/
 !reports/*.md
 
+# Allow the handover/ directory and its markdown files
+!handover/
+!handover/*.md
+
 # Allow project skills; other .claude/ local config stays ignored
 !.claude/
 !.claude/skills/
