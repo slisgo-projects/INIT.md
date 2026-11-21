@@ -18,7 +18,7 @@ Design and status: `reports/schema_redundancy_ablation.md`.
 - Ollama-backed configs (no Claude usage): `study/batch.sh ollama <scratch-root>`
 - Claude Code on Sonnet, candidates only: `study/batch.sh claude <scratch-root> <probe,probe,...>`
 - Single config: `python3 study/run_pilot.py --layer model|harness [--harness claude|opencode] [--provider anthropic|ollama] --model <m> --probes <list> --root <scratch> --out study/results/runs.csv`
-- `--root` must be outside the repo. Run long batches in the background.
+- `--root` must be outside the repo. Run long batches in the background. Not under the Claude Code session scratchpad either: CLAUDE.md is not loaded there and A1 isolation fails (2026-11-20).
 
 ## Pause
 
